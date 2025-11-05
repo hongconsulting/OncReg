@@ -17,7 +17,7 @@ OR.dmy.to.dmY <- function(input, century, pivot) {
   return(output)
 }
 
-#' Convert mixed dates to Microsoft Excel serial dates
+#' Convert mixed format dates to Microsoft Excel serial dates
 #'
 #' Converts string dates that may be in serial (using the Microsoft Excel
 #' offset), "d/m/y" (e.g., "01/01/00"), or "d/m/Y" format (e.g., "01/01/2000")
@@ -41,11 +41,22 @@ OR.dmyY.to.Excel <- function(input, century, pivot) {
   return(suppressWarnings(as.numeric(output)))
 }
 
+#' Convert missing values to zero
+#'
+#' Converts all `NA` elements in a vector or matrix to `0`.
+#' @param x Numeric vector or matrix.
+#' @return The input object with all `NA` values replaced by `0`.
+#' @export
+OR.NA.to.0 <- function(x) {
+  x[is.na(x)] <- 0
+  return(x)
+}
+
 #' Row-wise leftmost non-missing value
 #'
 #' Returns the leftmost non-missing value in each row of a matrix or data frame.
-#' If an entire row is missing, returns `NA`.
-#'
+#' Returns `NA` if an entire row is missing.
+#' @details
 #' An example use case is single imputation where column order defines the
 #' hierarchy of preference, such as prioritizing pathological stage over
 #' clinical stage.
@@ -63,7 +74,7 @@ OR.rowleft <- function(input) {
 #'
 #' Computes the maximum value of each row in a matrix or data frame, ignoring
 #' `NA`s. Returns `NA` if an entire row is missing.
-#'
+#' @details
 #' An example use case in survival analysis is determining the date of last
 #' follow-up from several dates when the patient was observed.
 #' @param input A numeric matrix or data frame.
@@ -80,7 +91,7 @@ OR.rowmax <- function(input) {
 #'
 #' Computes the minimum value of each row in a matrix or data frame, ignoring
 #' `NA`s. Returns `NA` if an entire row is missing.
-#'
+#' @details
 #' An example use case in survival analysis is determining the event date for
 #' progression-free survival based on the dates of progression and death.
 #' @param input A numeric matrix or data frame.

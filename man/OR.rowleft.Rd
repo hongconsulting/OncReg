@@ -14,7 +14,7 @@ A vector of the leftmost non-missing values by row.
 }
 \description{
 Returns the leftmost non-missing value in each row of a matrix or data frame.
-If an entire row is missing, returns \code{NA}.
+Returns \code{NA} if an entire row is missing.
 }
 \details{
 An example use case is single imputation where column order defines the

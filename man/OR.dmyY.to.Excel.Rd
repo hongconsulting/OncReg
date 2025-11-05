@@ -2,7 +2,7 @@
 % Please edit documentation in R/OncReg.R
 \name{OR.dmyY.to.Excel}
 \alias{OR.dmyY.to.Excel}
-\title{Convert mixed dates to Microsoft Excel serial dates}
+\title{Convert mixed format dates to Microsoft Excel serial dates}
 \usage{
 OR.dmyY.to.Excel(input, century, pivot)
 }
