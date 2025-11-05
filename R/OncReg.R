@@ -58,8 +58,9 @@ OR.NA.to.0 <- function(x) {
 #' Returns `NA` if an entire row is missing.
 #' @details
 #' An example use case is single imputation where column order defines the
-#' hierarchy of preference, such as prioritizing pathological stage over
-#' clinical stage.
+#' hierarchy of preference, such as prioritizing tumor grade from the surgical
+#' resection specimen and falling back to the core biopsy result if this is
+#' missing.
 #' @param input A matrix or data frame.
 #' @return A vector of the leftmost non-missing values by row.
 #' @export
