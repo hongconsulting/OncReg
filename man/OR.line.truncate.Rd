@@ -26,6 +26,5 @@ not exceed a specified number of days after its start date.
 \details{
 An example use case is with oxaliplatin-containing chemotherapy regimens such
 as FOLFOX where the oxaliplatin component is usually limited to no more than
-24 weeks and extended dates reflect maintenance therapy with 5-fluorouracil
-only.
+24 weeks and time beyond this represents treatment with 5-fluorouracil only.
 }
