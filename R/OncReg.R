@@ -52,6 +52,17 @@ OR.NA.to.0 <- function(x) {
   return(x)
 }
 
+#' Convert missing values to FALSE
+#'
+#' Converts all `NA` elements in a vector or matrix to `FALSE`.
+#' @param x Numeric vector or matrix.
+#' @return The input object with all `NA` values replaced by `FALSE`.
+#' @export
+OR.NA.to.F <- function (x) {
+  x[is.na(x)] <- FALSE
+  return(x)
+}
+
 #' Row-wise leftmost non-missing value
 #'
 #' Returns the leftmost non-missing value in each row of a matrix or data frame.
