@@ -55,7 +55,7 @@ OR.NA.to.0 <- function(x) {
 #' Convert missing values to FALSE
 #'
 #' Converts all `NA` elements in a vector or matrix to `FALSE`.
-#' @param x Numeric vector or matrix.
+#' @param x Logical vector or matrix.
 #' @return The input object with all `NA` values replaced by `FALSE`.
 #' @export
 OR.NA.to.F <- function (x) {

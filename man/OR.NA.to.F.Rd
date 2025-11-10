@@ -7,7 +7,7 @@
 OR.NA.to.F(x)
 }
 \arguments{
-\item{x}{Numeric vector or matrix.}
+\item{x}{Logical vector or matrix.}
 }
 \value{
 The input object with all \code{NA} values replaced by \code{FALSE}.
