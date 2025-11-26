@@ -4,7 +4,7 @@
 \alias{OR.delim.contains}
 \title{Detect delimited string elements (case- and whitespace-insensitive)}
 \usage{
-OR.delim.contains(x, match, delimiter = ",")
+OR.delim.contains(x, match, delimiter = ",", partial = FALSE)
 }
 \arguments{
 \item{x}{String vector, matrix, or data frame containing delimited strings.}
@@ -13,6 +13,10 @@ OR.delim.contains(x, match, delimiter = ",")
 whitespace-insensitive).}
 
 \item{delimiter}{String delimiter. Default = \code{","}.}
+
+\item{partial}{Logical. If \code{TRUE}, each delimited element is tested for
+substring matches against the provided \code{match} strings. If \code{FALSE} (default),
+matches must be exact.}
 }
 \value{
 A logical vector or matrix indicating whether each string contains a

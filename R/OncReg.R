@@ -41,6 +41,16 @@ OR.dmyY.to.Excel <- function(input, century, pivot) {
   return(suppressWarnings(as.numeric(output)))
 }
 
+#' Remove missing values
+#'
+#' Removes `NA` elements in a vector.
+#' @param x Numeric vector.
+#' @return `x` with all `NA` entries removed.
+#' @export
+OR.NA.rm <- function(x) {
+  return(x[!is.na(x)])
+}
+
 #' Convert missing values to zero
 #'
 #' Converts all `NA` elements in a vector or matrix to `0`.

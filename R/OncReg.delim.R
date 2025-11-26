@@ -7,13 +7,26 @@
 #' @param match String vector of elements to match (case- and
 #' whitespace-insensitive).
 #' @param delimiter String delimiter. Default = `","`.
+#' @param partial Logical. If `TRUE`, each delimited element is tested for
+#' substring matches against the provided `match` strings. If `FALSE` (default),
+#' matches must be exact.
 #' @return A logical vector or matrix indicating whether each string contains a
 #' delimited element matching any of the specified strings.
 #' @export
-OR.delim.contains <- function(x, match, delimiter = ",") {
+OR.delim.contains <- function(x, match, delimiter = ",", partial = FALSE) {
   f <- function(t) {
     parts <- tolower(trimws(unlist(strsplit(t, delimiter, fixed = TRUE))))
-    return(any(parts %in% tolower(trimws(match))))
+    match_ <- tolower(trimws(match))
+    if (partial) {
+      for (p in parts) {
+        for (m in match_) {
+          if (grepl(m, p, fixed = TRUE)) return(TRUE)
+        }
+      }
+      return(FALSE)
+    } else {
+      return(any(parts %in% match_))
+    }
   }
   if (is.data.frame(x)) x <- as.matrix(x)
   output <- sapply(x, f)
