@@ -38,3 +38,7 @@ according to a chosen \code{method}. The output data frame contains one row per
 unique ID and one column per matched variable. Non-matching variables are
 ignored.
 }
+\details{
+An example use case is when working with REDCap exports, where the
+measurements for one patient are distributed across multiple event rows.
+}

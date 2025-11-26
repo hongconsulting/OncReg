@@ -21,6 +21,9 @@
 #'   \item `"single"` (default): Returns the mean of non-missing values and prints
 #'   a message if more than one unique non-missing value is found.
 #' }
+#' @details
+#' An example use case is when working with REDCap exports, where the
+#' measurements for one patient are distributed across multiple event rows.
 #' @return A data frame with one row per unique ID and one column for each
 #' variable matching `pattern`, summarized according to `method`.
 #' @export
