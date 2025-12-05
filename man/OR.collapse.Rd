@@ -25,6 +25,7 @@ should be collapsed. Options include:
 \item \code{"min"}: Returns the minimum of non-missing values.
 \item \code{"single"} (default): Returns the mean of non-missing values and prints
 a message if more than one unique non-missing value is found.
+\item \code{"sum"}: Returns the sum of non-missing values.
 }}
 }
 \value{

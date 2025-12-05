@@ -20,6 +20,7 @@
 #'   \item `"min"`: Returns the minimum of non-missing values.
 #'   \item `"single"` (default): Returns the mean of non-missing values and prints
 #'   a message if more than one unique non-missing value is found.
+#'   \item `"sum"`: Returns the sum of non-missing values.
 #' }
 #' @details
 #' An example use case is when working with REDCap exports, where the
@@ -55,6 +56,8 @@ OR.collapse <- function(data, ID_varname, pattern, method = "single") {
         output[[varname]][j] <- mean(subdata_na_omit)
       } else if (method == "min") {
         output[[varname]][j] <- min(subdata_unique)
+      } else if (method == "sum") {
+        output[[varname]][j] <- sum(subdata_na_omit)
       } else {
         stop(paste0("[OR.collapse] method ", method, " not implemented"))
       }
