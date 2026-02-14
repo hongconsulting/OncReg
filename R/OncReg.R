@@ -1,3 +1,13 @@
+#' Remove zero elements
+#'
+#' Removes elements equal to `0` from a numeric vector.
+#' @param x Numeric vector.
+#' @return `x` with all elements equao to `0` removed.
+#' @export
+OR.0.rm <- function(x) {
+  return(x[x != 0])
+}
+
 OR.dmy.to.dmY <- function(input, century, pivot) {
   output <- input
   s <- strsplit(input, "/", fixed = TRUE)
