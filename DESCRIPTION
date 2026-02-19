@@ -1,6 +1,6 @@
 Package: OncReg
 Title: Cancer Registry Tools
-Version: 0.9.0
+Version: 0.11.0
 Authors@R: 
     person("Wei", "Hong", , "wei.hong@hongconsulting.ai", role = c("aut", "cre"))
 Description: Tools for working with cancer registry data.
