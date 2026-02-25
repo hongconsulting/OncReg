@@ -43,10 +43,10 @@ OR.nMAD <- function(n, p = 0.05) {
   } else if (p == 0.025) {
     col <- 2
   } else {
-    stop(paste0("[OR.nMAD] not implemented: p =", n))
+    stop(paste0("[OR.nMAD] not implemented: p = ", p))
   }
   if (n < 3 || n > nrow(.OR.nMAD_mat))
-    stop(paste0("[OR.nMAD] not implemented: n =", n))
+    stop(paste0("[OR.nMAD] not implemented: n = ", n))
   return(.OR.nMAD_mat[n, col])
 }
 
@@ -63,10 +63,76 @@ OR.nMAD <- function(n, p = 0.05) {
 #' @export
 OR.outliers <- function(x, p = 0.05) {
   med <- stats::median(x)
-  mad <- stats::mad(x)
-  return(abs(x - med) > OR.nMAD(n = length(x), p = p) * mad)
+  MAD <- stats::mad(x)
+  return(abs(x - med) > OR.nMAD(n = length(x), p = p) * MAD)
 }
 
-# OR.outliers.rlm <- function(y, x, order = 3, p = 0.05) {
-#
-# }
+#' Polynomial linear outlier detection
+#'
+#' Fits a univariable polynomial regression using Huber M-estimation with
+#' degree selected by robust AIC (AICR), then flags observations whose
+#' residuals exceed a small-sample–adjusted multiple of the median absolute
+#' deviation.
+#' @param x Numeric predictor vector.
+#' @param y Numeric response vector.
+#' @param maxdegree Maximum polynomial degree considered. Default = `3`.
+#' @param p Target two-sided exclusion proportion under normality for the
+#' residual-based modified Z-score rule. Default = `0.05`.
+#' @return Logical vector of the same length as `y` where `TRUE` indicates an
+#' outlying observation relative to the AICR-selected robust polynomial fit.
+#' @export
+OR.outliers.rlm <- function(x, y, maxdegree = 3, p = 0.05) {
+  fit <- rlm.Huber.univarpoly.AICR(x = x, y = y, maxdegree = maxdegree, p = p)
+  return(OR.outliers(x = fit$resid, p = p))
+}
+
+OR.outliers.rlm.plot <- function(x, y, maxdegree = 3, p = 0.05,
+                                 x.breaks = NA, x.labels = NA,
+                                 y.min = NA, y.max = NA) {
+  n <- length(y)
+  fit <- rlm.Huber.univarpoly.AICR(x = x, y = y, maxdegree = maxdegree, p = p)
+  fitted <- fit$fitted
+  resid <- fit$resid
+  MAD <- stats::mad(resid)
+  upper <- fitted + OR.nMAD(n, p) * MAD
+  lower <- fitted - OR.nMAD(n, p) * MAD
+  out <- OR.outliers(x = resid, p = p)
+  df <- data.frame("x" = x, "y" = y, "fitted" = fitted,
+                   "lower" = lower, "upper" = upper, "out" = out)
+  ymin <- min(c(df$y, df$lower, y.min), na.rm = T)
+  ymax <- max(c(df$y, df$upper, y.max), na.rm = T)
+
+  if (length(x.breaks) == 1) if (is.na(x.breaks)) x.breaks <- x
+  if (length(x.labels) == 1) if (is.na(x.labels)) x.labels <- x
+  g <- ggplot2::ggplot(df, ggplot2::aes(x = x)) +
+    ggplot2::geom_ribbon(
+      ggplot2::aes(ymin = lower, ymax = upper),
+      fill = "blue", alpha = 0.2
+    ) +
+    ggplot2::geom_line(
+      ggplot2::aes(y = fitted),
+      colour = "blue"
+    ) +
+    ggplot2::geom_point(
+      data = df[!df$out, ],
+      ggplot2::aes(y = y),
+      colour = "blue"
+    ) +
+    ggplot2::geom_point(
+      data = df[df$out, ],
+      ggplot2::aes(y = y),
+      colour = "red"
+    ) +
+    ggplot2::theme_classic() +
+    ggplot2::scale_x_continuous(breaks = x.breaks, labels = x.labels) +
+    ggplot2::scale_y_continuous(expand = c(0, 0),
+                              limits = c(floor(ymin), ceiling(ymax)))
+  print(df)
+  return(g)
+}
+
+# resid <- fit$resid
+# fitted <- fit$fitted
+# MAD <- stats::mad(resid)
+# upper <- fitted +
+#   out <- OR.outliers(x = resid, p = p)

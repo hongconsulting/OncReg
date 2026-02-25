@@ -4,17 +4,17 @@
 \alias{AICR.Huber}
 \title{Robust Akaike information criterion for Huber M-estimation}
 \usage{
-AICR.Huber(y, X, beta, scale, k2 = 1.345)
+AICR.Huber(X, y, beta, scale, k2 = 1.345)
 }
 \arguments{
-\item{y}{numeric response vector.}
-
 \item{X}{numeric design matrix.}
+
+\item{y}{numeric response vector.}
 
 \item{beta}{numeric vector of regression coefficients from a Huber
 M-estimation fit.}
 
-\item{scale}{scale estimate from the fit from a Huber M-estimation fit.}
+\item{scale}{scale estimate from a Huber M-estimation fit.}
 
 \item{k2}{tuning constant for the Huber \ifelse{latex}{\out{$\mathit{\psi}$}}{\ifelse{html}{\out{<i>&psi;</i>}}{*psi*}}-function. Default = \code{1.345}.}
 }

@@ -1,3 +1,44 @@
+#' Robust Akaike information criterion for Huber M-estimation
+#'
+#' Computes Ronchetti's robust analogue¹ of the Akaike information criterion²
+#' (AICR) for a linear model fitted by Huber M-estimation³.
+#' @param X numeric design matrix.
+#' @param y numeric response vector.
+#' @param beta numeric vector of regression coefficients from a Huber
+#' M-estimation fit.
+#' @param scale scale estimate from a Huber M-estimation fit.
+#' @param k2 tuning constant for the Huber \ifelse{latex}{\out{$\mathit{\psi}$}}{\ifelse{html}{\out{<i>&psi;</i>}}{*psi*}}-function. Default = `1.345`.
+#' @return The robust AIC value.
+#' @references
+#' 1. Ronchetti, E., 1985. Robust model selection in regression. *Statistics &
+#' Probability Letters*, 3(1), pp. 21–23.
+#' 2. Akaike, H., 1974. A new look at the statistical model identification.
+#' *IEEE Transactions on Automatic Control*, 19(6), pp. 716–723.
+#' 3. Huber, P.J., 1973. Robust regression: asymptotics, conjectures and Monte
+#' Carlo. *The Annals of Statistics*, pp. 799–821.
+#' @export
+AICR.Huber <- function(X, y, beta, scale, k2 = 1.345) {
+  X <- as.matrix(X)
+  beta <- as.numeric(beta)
+  y <- as.numeric(y)
+  n <- length(y)
+  r <- (y - drop(X %*% beta)) / scale
+  dpsi  <- dscore.Huber(r, k2)
+  psisq <- score.Huber(r, k2)^2
+  X_dpsi  <- X * dpsi
+  X_psisq <- X * psisq
+  J <- crossprod(X_dpsi, X)  / (n * scale^2)
+  K <- crossprod(X_psisq, X) / (n * scale^2)
+  return(2 * n * log(scale) + 2 * sum(diag(qr.solve(J, K))))
+  #return(2 * n * log(scale) + 2 * sum(diag(invJ %*% K)))
+}
+
+dscore.Huber <- function(x, k2) {
+  output <- numeric(length(x))
+  output[abs(x) <= k2] <- 2
+  return(output)
+}
+
 #' Robust linear regression using Huber M-estimation
 #'
 #' Fits a linear regression model using Huber M-estimation¹ via iteratively
@@ -57,39 +98,23 @@ rlm.Huber <- function(X, y, k2 = 1.345, maxit = 100, tol = 0.0001) {
   return(output)
 }
 
-#' Robust Akaike information criterion for Huber M-estimation
-#'
-#' Computes Ronchetti's robust analogue¹ of the Akaike information criterion²
-#' (AICR) for a linear model fitted by Huber M-estimation³.
-#' @param X numeric design matrix.
-#' @param y numeric response vector.
-#' @param beta numeric vector of regression coefficients from a Huber
-#' M-estimation fit.
-#' @param scale scale estimate from the fit from a Huber M-estimation fit.
-#' @param k2 tuning constant for the Huber \ifelse{latex}{\out{$\mathit{\psi}$}}{\ifelse{html}{\out{<i>&psi;</i>}}{*psi*}}-function. Default = `1.345`.
-#' @return The robust AIC value.
-#' @references
-#' 1. Ronchetti, E., 1985. Robust model selection in regression. *Statistics &
-#' Probability Letters*, 3(1), pp. 21–23.
-#' 2. Akaike, H., 1974. A new look at the statistical model identification.
-#' *IEEE Transactions on Automatic Control*, 19(6), pp. 716–723.
-#' 3. Huber, P.J., 1973. Robust regression: asymptotics, conjectures and Monte
-#' Carlo. *The Annals of Statistics*, pp. 799–821.
-#' @export
-AICR.Huber <- function(y, X, beta, scale, k2 = 1.345) {
-  X <- as.matrix(X)
-  beta <- as.numeric(beta)
-  y <- as.numeric(y)
+rlm.Huber.univarpoly.AICR <- function(x, y, maxdegree = 3, p = 0.05) {
   n <- length(y)
-  r <- (y - drop(X %*% beta)) / scale
-  dpsi  <- dscore.Huber(r, k2)
-  psisq <- score.Huber(r, k2)^2
-  X_dpsi  <- X * dpsi
-  X_psisq <- X * psisq
-  J <- crossprod(X_dpsi, X)  / (n * scale^2)
-  K <- crossprod(X_psisq, X) / (n * scale^2)
-  invJ <- solve(J)
-  return(2 * n * log(scale) + 2 * sum(diag(invJ %*% K)))
+  maxdegree <- min(n - 1, maxdegree)
+  X <- outer(x, 0:maxdegree, "^")
+  X0 <- as.matrix(X[, 1])
+  fit <- rlm.Huber(X = X0, y = y)
+  AICR <- AICR.Huber(X = X0, y = y, beta = fit$coefficients, scale = fit$s)
+  for (i in 1:maxdegree) {
+    X1 <- as.matrix(X[, 1:(i + 1)])
+    fit1 <- rlm.Huber(X = X1, y = y)
+    AICR1 <- AICR.Huber(X = X1, y = y, beta = fit1$coefficients, scale = fit1$s)
+    if (AICR1 < AICR) {
+      fit <- fit1
+      AICR <- AICR1
+    }
+  }
+  return(fit)
 }
 
 score.Huber <- function(x, k2) {
@@ -99,8 +124,3 @@ score.Huber <- function(x, k2) {
   return(output)
 }
 
-dscore.Huber <- function(x, k2) {
-  output <- numeric(length(x))
-  output[abs(x) <= k2] <- 2
-  return(output)
-}
