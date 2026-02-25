@@ -4,24 +4,30 @@
 \alias{rlm.Huber}
 \title{Robust linear regression using Huber M-estimation}
 \usage{
-rlm.Huber(X, y, k2 = 1.345, maxit = 20, tol = 1e-04)
+rlm.Huber(X, y, k2 = 1.345, maxit = 100, tol = 1e-04)
 }
 \arguments{
 \item{X}{numeric design matrix.}
 
 \item{y}{numeric response vector.}
 
-\item{k2}{tuning constant for Huber psi. Default = \code{1.345}.}
+\item{k2}{tuning constant for Huber \ifelse{latex}{\out{$\mathit{\psi}$}}{\ifelse{html}{\out{<i>&psi;</i>}}{*psi*}}-function. Default = \code{1.345}.}
 
-\item{maxit}{maximum number of iterations. Default = \code{20}.}
+\item{maxit}{maximum number of iterations. Default = \code{100}.}
 
 \item{tol}{convergence tolerance. Default = \code{0.0001}.}
 }
 \value{
-An object of class \code{"rlm"} and \code{"lm"}, broadly compatible with objects
+An object of classes \code{"lm"} and \code{"rlm"}, broadly compatible with objects
 returned by \code{MASS::rlm()} with minor differences due to rounding.
 }
 \description{
-Fits a linear regression model using Huber M-estimation via iteratively
+Fits a linear regression model using Huber M-estimation¹ via iteratively
 reweighted least squares.
+}
+\references{
+\enumerate{
+\item Huber, P.J., 1973. Robust regression: asymptotics, conjectures and Monte
+Carlo. \emph{The Annals of Statistics}, pp. 799–821.
+}
 }

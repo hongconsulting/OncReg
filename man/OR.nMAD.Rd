@@ -7,20 +7,20 @@
 OR.nMAD(n, p = 0.05)
 }
 \arguments{
-\item{n}{Integer sample size, where \code{3} ≤ \code{n} ≤ \code{20}.}
+\item{n}{Integer sample size, where \code{3} ≤ \code{n} ≤ \code{100}.}
 
-\item{p}{Target two-sided exclusion probability. Only \code{0.05} is currently
-implemented.}
+\item{p}{Target two-sided exclusion probability. Only \code{0.05} and \code{0.025} are
+currently implemented.}
 }
 \value{
-Numeric scalar giving the cutoff in unscaled MAD units.
+The cutoff in unscaled MAD units.
 }
 \description{
 Returns the number of unscaled median absolute deviations from the median
 required to exclude a proportion \code{p} of observations under normality, used in
 the modified Z-score method for non-parametric outlier detection¹. Values
-were obtained via Monte Carlo root-finding using 10 million replicates per
-iteration and rounded to two decimal places.
+were pre-calculated via Monte Carlo root-finding using 10 million replicates
+per iteration and rounded to two decimal places.
 }
 \references{
 \enumerate{
