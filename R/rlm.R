@@ -30,7 +30,6 @@ AICR.Huber <- function(X, y, beta, scale, k2 = 1.345) {
   J <- crossprod(X_dpsi, X)  / (n * scale^2)
   K <- crossprod(X_psisq, X) / (n * scale^2)
   return(2 * n * log(scale) + 2 * sum(diag(qr.solve(J, K))))
-  #return(2 * n * log(scale) + 2 * sum(diag(invJ %*% K)))
 }
 
 dscore.Huber <- function(x, k2) {
