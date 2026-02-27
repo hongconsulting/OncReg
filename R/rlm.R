@@ -8,7 +8,7 @@
 #' M-estimation fit.
 #' @param scale scale estimate from a Huber M-estimation fit.
 #' @param k2 tuning constant for the Huber \ifelse{latex}{\out{$\mathit{\psi}$}}{\ifelse{html}{\out{<i>&psi;</i>}}{*psi*}}-function. Default = `1.345`.
-#' @return The robust AIC value.
+#' @return The AICR value.
 #' @references
 #' 1. Ronchetti, E., 1985. Robust model selection in regression. *Statistics &
 #' Probability Letters*, 3(1), pp. 21–23.

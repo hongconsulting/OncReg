@@ -19,7 +19,7 @@ M-estimation fit.}
 \item{k2}{tuning constant for the Huber \ifelse{latex}{\out{$\mathit{\psi}$}}{\ifelse{html}{\out{<i>&psi;</i>}}{*psi*}}-function. Default = \code{1.345}.}
 }
 \value{
-The robust AIC value.
+The AICR value.
 }
 \description{
 Computes Ronchetti's robust analogue¹ of the Akaike information criterion²

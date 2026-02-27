@@ -2,7 +2,7 @@
 % Please edit documentation in R/OncReg.outliers.R
 \name{OR.outliers}
 \alias{OR.outliers}
-\title{Single sample outlier detection using the modified Z-score method}
+\title{Single sample non-parametric outlier detection using the modified Z-score method}
 \usage{
 OR.outliers(x, p = 0.05)
 }

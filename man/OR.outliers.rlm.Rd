@@ -2,7 +2,7 @@
 % Please edit documentation in R/OncReg.outliers.R
 \name{OR.outliers.rlm}
 \alias{OR.outliers.rlm}
-\title{Polynomial linear outlier detection}
+\title{Polynomial linear non-parametric outlier detection}
 \usage{
 OR.outliers.rlm(x, y, maxdegree = 3, p = 0.05)
 }

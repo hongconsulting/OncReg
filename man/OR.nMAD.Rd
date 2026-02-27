@@ -9,8 +9,8 @@ OR.nMAD(n, p = 0.05)
 \arguments{
 \item{n}{Integer sample size, where \code{3} ≤ \code{n} ≤ \code{100}.}
 
-\item{p}{Target two-sided exclusion probability. Only \code{0.05} and \code{0.025} are
-currently implemented.}
+\item{p}{Target two-sided exclusion probability. Only \code{0.05}, \code{0.025}, \code{0.01},
+and \code{0.005} are currently implemented.}
 }
 \value{
 The cutoff in unscaled MAD units.

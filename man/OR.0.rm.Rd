@@ -10,7 +10,7 @@ OR.0.rm(x)
 \item{x}{Numeric vector.}
 }
 \value{
-\code{x} with all elements equao to \code{0} removed.
+\code{x} with all elements equal to \code{0} removed.
 }
 \description{
 Removes elements equal to \code{0} from a numeric vector.
