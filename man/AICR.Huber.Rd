@@ -23,7 +23,15 @@ The AICR value.
 }
 \description{
 Computes Ronchetti's robust analogue¹ of the Akaike information criterion²
-(AICR) for a linear model fitted by Huber M-estimation³.
+(AICR) for a linear model fitted by Huber M-estimation³ via the Moore–Penrose
+pseudoinverse⁴.
+}
+\examples{
+y <- c(36.3, 47.9, 47.2, 43.9, 47.6, 49.6, 53.2, 59.3, 63.2, 70.8, 75.9, 88.5,
+       97.3, 103.6, 6.1, 120.2, 135.8, 139.4)
+x <- as.matrix(1:length(y) - 1)
+fit <- rlm.Huber(X = x, y = y)
+print(AICR.Huber(x, y, fit$coefficients, fit$s))
 }
 \references{
 \enumerate{
@@ -33,5 +41,8 @@ Probability Letters}, 3(1), pp. 21–23.
 \emph{IEEE Transactions on Automatic Control}, 19(6), pp. 716–723.
 \item Huber, P.J., 1973. Robust regression: asymptotics, conjectures and Monte
 Carlo. \emph{The Annals of Statistics}, pp. 799–821.
+\item Penrose, R., 1955. A generalized inverse for matrices. In: \emph{Mathematical
+Proceedings of the Cambridge Philosophical Society}, 51(3), pp. 406–413.
+Cambridge: Cambridge University Press.
 }
 }

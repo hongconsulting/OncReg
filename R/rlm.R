@@ -1,7 +1,8 @@
 #' Robust Akaike information criterion for Huber M-estimation
 #'
 #' Computes Ronchetti's robust analogue¹ of the Akaike information criterion²
-#' (AICR) for a linear model fitted by Huber M-estimation³.
+#' (AICR) for a linear model fitted by Huber M-estimation³ via the Moore–Penrose
+#' pseudoinverse⁴.
 #' @param X numeric design matrix.
 #' @param y numeric response vector.
 #' @param beta numeric vector of regression coefficients from a Huber
@@ -16,6 +17,15 @@
 #' *IEEE Transactions on Automatic Control*, 19(6), pp. 716–723.
 #' 3. Huber, P.J., 1973. Robust regression: asymptotics, conjectures and Monte
 #' Carlo. *The Annals of Statistics*, pp. 799–821.
+#' 4. Penrose, R., 1955. A generalized inverse for matrices. In: *Mathematical
+#' Proceedings of the Cambridge Philosophical Society*, 51(3), pp. 406–413.
+#' Cambridge: Cambridge University Press.
+#' @examples
+#' y <- c(36.3, 47.9, 47.2, 43.9, 47.6, 49.6, 53.2, 59.3, 63.2, 70.8, 75.9, 88.5,
+#'        97.3, 103.6, 6.1, 120.2, 135.8, 139.4)
+#' x <- as.matrix(1:length(y) - 1)
+#' fit <- rlm.Huber(X = x, y = y)
+#' print(AICR.Huber(x, y, fit$coefficients, fit$s))
 #' @export
 AICR.Huber <- function(X, y, beta, scale, k2 = 1.345) {
   X <- as.matrix(X)
@@ -29,8 +39,15 @@ AICR.Huber <- function(X, y, beta, scale, k2 = 1.345) {
   X_psisq <- X * psisq
   J <- crossprod(X_dpsi, X)  / (n * scale^2)
   K <- crossprod(X_psisq, X) / (n * scale^2)
-  return(2 * n * log(scale) + 2 * sum(diag(qr.solve(J, K))))
+  S <- svd(J)
+  tol <- max(dim(J)) * max(S$d) * .Machine$double.eps
+  d_inv <- rep(0, length(S$d))
+  i <- S$d > tol
+  d_inv[i] <- 1 / S$d[i]
+  J_pseudoinv <- S$v %*% (d_inv * t(S$u))
+  return(2 * n * log(scale) + 2 * sum(diag(J_pseudoinv %*% K)))
 }
+
 
 dscore.Huber <- function(x, k2) {
   output <- numeric(length(x))
@@ -97,14 +114,14 @@ rlm.Huber <- function(X, y, k2 = 1.345, maxit = 100, tol = 0.0001) {
   return(output)
 }
 
-rlm.Huber.univarpoly.AICR <- function(x, y, maxdegree = 3, p = 0.05) {
+rlm.Huber.univarpoly.AICR <- function(x, y, max.degree = 3, p = 0.05) {
   n <- length(y)
-  maxdegree <- min(n - 1, maxdegree)
-  X <- outer(x, 0:maxdegree, "^")
+  max.degree <- min(n - 1, max.degree)
+  X <- outer(x, 0:max.degree, "^")
   X0 <- as.matrix(X[, 1])
   fit <- rlm.Huber(X = X0, y = y)
   AICR <- AICR.Huber(X = X0, y = y, beta = fit$coefficients, scale = fit$s)
-  for (i in 1:maxdegree) {
+  for (i in 1:max.degree) {
     X1 <- as.matrix(X[, 1:(i + 1)])
     fit1 <- rlm.Huber(X = X1, y = y)
     AICR1 <- AICR.Huber(X = X1, y = y, beta = fit1$coefficients, scale = fit1$s)
