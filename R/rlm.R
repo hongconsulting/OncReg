@@ -74,6 +74,7 @@ dscore.Huber <- function(x, k2) {
 rlm.Huber <- function(X, y, k2 = 1.345, maxit = 100, tol = 0.0001) {
   if (qr(X)$rank < ncol(X)) stop("[rlm.Huber] singularity detected")
   init <- stats::lm.fit(X, y)
+  fit <- init
   coef <- init$coef
   resid <- init$resid
   scale <- stats::mad(resid, 0)
