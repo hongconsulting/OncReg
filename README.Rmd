@@ -28,7 +28,7 @@ You can install the development version of OncReg from [GitHub](https://github.c
 remotes::install_github("hongconsulting/OncReg")
 ```
 
-### Example: data cleaning and survival analysis
+## Example: data cleaning and survival analysis
 ```{r example_1}
 library(OncReg)
 options(width = 120)
@@ -70,7 +70,7 @@ data1$OSstatus <- OR.survoutcome(data1$diagnosis, data1$death, data1$lastreview)
 print(data1)
 ```
 
-### Example: outlier detection
+## Example: outlier detection
 ```{r example_2}
 y <- c(36.3, 47.9, 47.2, 43.9, 47.6, 49.6, 53.2, 59.3, 63.2, 70.8, 75.9, 88.5,
        97.3, 103.6, 6.1, 120.2, 135.8, 139.4)
