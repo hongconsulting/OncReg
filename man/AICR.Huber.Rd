@@ -23,8 +23,9 @@ The AICR value.
 }
 \description{
 Computes Ronchetti's robust analogue¹ of the Akaike information criterion²
-(AICR) for a linear model fitted by Huber M-estimation³ via the Moore–Penrose
-pseudoinverse⁴.
+(AICR) for a linear model fitted by Huber M-estimation³. The effective
+degrees of freedom term is evaluated using the the Moore–Penrose
+pseudoinverse⁴ for numerical stability under rank deficiency.
 }
 \examples{
 y <- c(36.3, 47.9, 47.2, 43.9, 47.6, 49.6, 53.2, 59.3, 63.2, 70.8, 75.9, 88.5,

@@ -1,8 +1,9 @@
 #' Robust Akaike information criterion for Huber M-estimation
 #'
 #' Computes Ronchetti's robust analogue¹ of the Akaike information criterion²
-#' (AICR) for a linear model fitted by Huber M-estimation³ via the Moore–Penrose
-#' pseudoinverse⁴.
+#' (AICR) for a linear model fitted by Huber M-estimation³. The effective
+#' degrees of freedom term is evaluated using the the Moore–Penrose
+#' pseudoinverse⁴ for numerical stability under rank deficiency.
 #' @param X numeric design matrix.
 #' @param y numeric response vector.
 #' @param beta numeric vector of regression coefficients from a Huber
@@ -34,11 +35,11 @@ AICR.Huber <- function(X, y, beta, scale, k2 = 1.345) {
   n <- length(y)
   r <- (y - drop(X %*% beta)) / scale
   dpsi  <- dscore.Huber(r, k2)
-  psisq <- score.Huber(r, k2)^2
+  psi_sq <- score.Huber(r, k2)^2
   X_dpsi  <- X * dpsi
-  X_psisq <- X * psisq
+  X_psi_sq <- X * psi_sq
   J <- crossprod(X_dpsi, X)  / (n * scale^2)
-  K <- crossprod(X_psisq, X) / (n * scale^2)
+  K <- crossprod(X_psi_sq, X) / (n * scale^2)
   S <- svd(J)
   tol <- max(dim(J)) * max(S$d) * .Machine$double.eps
   d_inv <- rep(0, length(S$d))
@@ -47,7 +48,6 @@ AICR.Huber <- function(X, y, beta, scale, k2 = 1.345) {
   J_pseudoinv <- S$v %*% (d_inv * t(S$u))
   return(2 * n * log(scale) + 2 * sum(diag(J_pseudoinv %*% K)))
 }
-
 
 dscore.Huber <- function(x, k2) {
   output <- numeric(length(x))
