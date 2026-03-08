@@ -26,3 +26,6 @@ degree selected by robust AIC (AICR), then flags observations whose
 residuals exceed a small-sample–adjusted multiple of the median absolute
 deviation.
 }
+\details{
+For numerical stability, \code{x} and \code{y} are standardized before fitting.
+}

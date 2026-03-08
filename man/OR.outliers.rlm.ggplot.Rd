@@ -57,6 +57,10 @@ degree selected by robust AIC (AICR), then flags observations whose
 residuals exceed a small-sample–adjusted multiple (\emph{k}) of the median absolute
 deviation (MAD).
 }
+\details{
+For numerical stability, \code{x} and \code{y} are standardized before fitting and
+back-transformed for plotting.
+}
 \examples{
 y <- c(36.3, 47.9, 47.2, 43.9, 47.6, 49.6, 53.2, 59.3, 63.2, 70.8, 75.9, 88.5,
        97.3, 103.6, 6.1, 120.2, 135.8, 139.4)

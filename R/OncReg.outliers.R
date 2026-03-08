@@ -104,6 +104,8 @@ OR.outliers <- function(x, p = 0.05) {
 #' residual-based modified *z*-score rule. Default = `0.05`.
 #' @return Logical vector of the same length as `y` where `TRUE` indicates an
 #' outlying observation relative to the AICR-selected robust polynomial fit.
+#' @details
+#' For numerical stability, `x` and `y` are standardized before fitting.
 #' @export
 OR.outliers.rlm <- function(x, y, max.degree = 3, p = 0.05) {
   mx <- mean(x, na.rm = TRUE)
@@ -141,6 +143,9 @@ OR.outliers.rlm <- function(x, y, max.degree = 3, p = 0.05) {
 #' @param y.breaks Numeric vector specifying y-axis tick locations. Horizontal
 #' gridlines are drawn at these values.
 #' @param y.title Title for the y-axis.
+#' @details
+#' For numerical stability, `x` and `y` are standardized before fitting and
+#' back-transformed for plotting.
 #' @examples
 #' y <- c(36.3, 47.9, 47.2, 43.9, 47.6, 49.6, 53.2, 59.3, 63.2, 70.8, 75.9, 88.5,
 #'        97.3, 103.6, 6.1, 120.2, 135.8, 139.4)
