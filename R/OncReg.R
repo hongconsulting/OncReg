@@ -8,6 +8,20 @@ OR.0.rm <- function(x) {
   return(x[x != 0])
 }
 
+# #' Standardize a numeric vector
+# #'
+# #' #' Returns *z*-scores by subtracting the sample mean and dividing by the
+# #' sample standard deviation. Missing values are preserved in the output.
+# #' @param x Numeric vector.
+# #' @return Numeric vector of the same length as `x` containing the standardized
+# #' values.
+# #' @export
+# OR.standardize <- function(x) {
+#   mu <- mean(x, na.rm = TRUE)
+#   sd <- stats::sd(x, na.rm = TRUE)
+#   return((x - mu) / sd)
+# }
+
 OR.y.to.Y <- function(input, century, pivot) {
   output <- input
   s <- strsplit(input, "/", fixed = TRUE)

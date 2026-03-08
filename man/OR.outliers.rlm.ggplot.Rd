@@ -27,7 +27,7 @@ OR.outliers.rlm.ggplot(
 \item{max.degree}{Maximum polynomial degree considered. Default = \code{3}.}
 
 \item{p}{Target two-sided exclusion proportion under normality for the
-residual-based modified Z-score rule. Default = \code{0.05}.}
+residual-based modified \emph{z}-score rule. Default = \code{0.05}.}
 
 \item{col.in}{Colour used for the fitted curve, ribbon band, and observations
 not flagged as outliers. Default = \code{"#0072B5FF"}.}
@@ -54,7 +54,7 @@ gridlines are drawn at these values.}
 \description{
 Fits a univariable polynomial regression using Huber M-estimation with
 degree selected by robust AIC (AICR), then flags observations whose
-residuals exceed a small-sample–adjusted multiple of (\emph{k}) the median absolute
+residuals exceed a small-sample–adjusted multiple (\emph{k}) of the median absolute
 deviation (MAD).
 }
 \examples{

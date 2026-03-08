@@ -14,7 +14,7 @@ OR.outliers.rlm(x, y, max.degree = 3, p = 0.05)
 \item{max.degree}{Maximum polynomial degree considered. Default = \code{3}.}
 
 \item{p}{Target two-sided exclusion proportion under normality for the
-residual-based modified Z-score rule. Default = \code{0.05}.}
+residual-based modified \emph{z}-score rule. Default = \code{0.05}.}
 }
 \value{
 Logical vector of the same length as \code{y} where \code{TRUE} indicates an

@@ -18,7 +18,7 @@ The cutoff in unscaled MAD units.
 \description{
 Returns the number of unscaled median absolute deviations from the median
 required to exclude a proportion \code{p} of observations under normality, used in
-the modified Z-score method for non-parametric outlier detection¹. Values
+the modified \emph{z}-score method for non-parametric outlier detection¹. Values
 were pre-calculated via Monte Carlo root-finding using 10 million replicates
 per iteration and rounded to two decimal places.
 }

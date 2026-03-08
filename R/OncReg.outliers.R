@@ -45,7 +45,7 @@ utils::globalVariables(".OR.kMAD.mat")
 #'
 #' Returns the number of unscaled median absolute deviations from the median
 #' required to exclude a proportion `p` of observations under normality, used in
-#' the modified Z-score method for non-parametric outlier detection¹. Values
+#' the modified *z*-score method for non-parametric outlier detection¹. Values
 #' were pre-calculated via Monte Carlo root-finding using 10 million replicates
 #' per iteration and rounded to two decimal places.
 #' @param n Integer sample size, where `3` ≤ `n` ≤ `100`.
@@ -74,7 +74,7 @@ OR.kMAD <- function(n, p = 0.05) {
   return(.OR.kMAD.mat[n, col])
 }
 
-#' Single sample non-parametric outlier detection using the modified Z-score method
+#' Non-parametric outlier detection using the modified *z*-score method
 #'
 #' Flags observations whose absolute deviation from the sample median
 #' exceeds a sample-size–adjusted multiple of the median absolute deviation.
@@ -101,12 +101,18 @@ OR.outliers <- function(x, p = 0.05) {
 #' @param y Numeric response vector.
 #' @param max.degree Maximum polynomial degree considered. Default = `3`.
 #' @param p Target two-sided exclusion proportion under normality for the
-#' residual-based modified Z-score rule. Default = `0.05`.
+#' residual-based modified *z*-score rule. Default = `0.05`.
 #' @return Logical vector of the same length as `y` where `TRUE` indicates an
 #' outlying observation relative to the AICR-selected robust polynomial fit.
 #' @export
 OR.outliers.rlm <- function(x, y, max.degree = 3, p = 0.05) {
-  fit <- rlm.Huber.univarpoly.AICR(x = x, y = y, max.degree = max.degree, p = p)
+  mx <- mean(x, na.rm = TRUE)
+  sx <- stats::sd(x, na.rm = TRUE)
+  my <- mean(y, na.rm = TRUE)
+  sy <- stats::sd(y, na.rm = TRUE)
+  x_z <- (x - mx) / sx
+  y_z <- (y - my) / sy
+  fit <- rlm.Huber.univarpoly.AICR(x = x_z, y = y_z, max.degree = max.degree, p = p)
   return(OR.outliers(x = fit$resid, p = p))
 }
 
@@ -114,13 +120,13 @@ OR.outliers.rlm <- function(x, y, max.degree = 3, p = 0.05) {
 #'
 #' Fits a univariable polynomial regression using Huber M-estimation with
 #' degree selected by robust AIC (AICR), then flags observations whose
-#' residuals exceed a small-sample–adjusted multiple of (*k*) the median absolute
+#' residuals exceed a small-sample–adjusted multiple (*k*) of the median absolute
 #' deviation (MAD).
 #' @param x Numeric predictor vector.
 #' @param y Numeric response vector.
 #' @param max.degree Maximum polynomial degree considered. Default = `3`.
 #' @param p Target two-sided exclusion proportion under normality for the
-#' residual-based modified Z-score rule. Default = `0.05`.
+#' residual-based modified *z*-score rule. Default = `0.05`.
 #' @param col.in Colour used for the fitted curve, ribbon band, and observations
 #' not flagged as outliers. Default = `"#0072B5FF"`.
 #' @param col.out Colour used for observations flagged as outliers. Default =
@@ -147,9 +153,15 @@ OR.outliers.rlm.ggplot <- function(x, y, max.degree = 3, p = 0.05,
                                  x.breaks = NA, x.labels = NA, x.title = "",
                                  y.breaks = NA, y.title = "") {
   n <- length(y)
-  fit <- rlm.Huber.univarpoly.AICR(x = x, y = y, max.degree = max.degree, p = p)
-  fitted <- fit$fitted
-  resid <- fit$resid
+  mx <- mean(x, na.rm = TRUE)
+  sx <- stats::sd(x, na.rm = TRUE)
+  my <- mean(y, na.rm = TRUE)
+  sy <- stats::sd(y, na.rm = TRUE)
+  x_z <- (x - mx) / sx
+  y_z <- (y - my) / sy
+  fit <- rlm.Huber.univarpoly.AICR(x = x_z, y = y_z, max.degree = max.degree, p = p)
+  fitted <- my + sy * fit$fitted
+  resid  <- sy * fit$resid
   MAD <- stats::mad(resid)
   upper <- fitted + OR.kMAD(n, p) * MAD
   lower <- fitted - OR.kMAD(n, p) * MAD
