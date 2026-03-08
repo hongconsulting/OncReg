@@ -150,13 +150,13 @@ OR.outliers.rlm <- function(x, y, max.degree = 3, p = 0.05) {
 #' y <- c(36.3, 47.9, 47.2, 43.9, 47.6, 49.6, 53.2, 59.3, 63.2, 70.8, 75.9, 88.5,
 #'        97.3, 103.6, 6.1, 120.2, 135.8, 139.4)
 #' x <- 1:length(y) - 1
-#' OR.outliers.rlm.ggplot(x, y, max.degree = 5, p = 0.01, x.title = "X",
+#' OR.outliers.rlm.ggplot(x, y, max.degree = 4, p = 0.01, x.title = "X",
 #'                        y.breaks = seq(0, 150, 50), y.title = "Y")
 #' @export
 OR.outliers.rlm.ggplot <- function(x, y, max.degree = 3, p = 0.05,
-                                 col.in =  "#0072B5FF", col.out = "#BC3C29FF", echo = FALSE,
-                                 x.breaks = NA, x.labels = NA, x.title = "",
-                                 y.breaks = NA, y.title = "") {
+                                 col.in =  "#0072B5FF", col.out = "#BC3C29FF",
+                                 echo = FALSE, x.breaks = NA, x.labels = NA,
+                                 x.title = "", y.breaks = NA, y.title = "") {
   n <- length(y)
   mx <- mean(x, na.rm = TRUE)
   sx <- stats::sd(x, na.rm = TRUE)
