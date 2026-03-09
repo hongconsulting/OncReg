@@ -132,7 +132,7 @@ rlm.Huber.univarpoly.AICR <- function(x, y, max.degree = 3, p = 0.05, tol = 0.00
   AICR <- AICR.Huber(X = X0, y = y, beta = fit$coefficients, scale = fit$s)
   for (i in 1:max.degree) {
     X1 <- as.matrix(X[, 1:(i + 1)])
-    fit1 <- rlm.Huber(X = X1, y = y)
+    fit1 <- rlm.Huber(X = X1, y = y, tol = tol)
     AICR1 <- AICR.Huber(X = X1, y = y, beta = fit1$coefficients, scale = fit1$s)
     if (AICR1 < AICR) {
       fit <- fit1
