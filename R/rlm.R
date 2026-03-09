@@ -63,7 +63,8 @@ dscore.Huber <- function(x, k2) {
 #' @param y numeric response vector.
 #' @param k2 tuning constant for Huber \ifelse{latex}{\out{$\mathit{\psi}$}}{\ifelse{html}{\out{<i>&psi;</i>}}{*psi*}}-function. Default = `1.345`.
 #' @param maxit maximum number of iterations. Default = `100`.
-#' @param tol convergence tolerance. Default = `0.0001`.
+#' @param tol.min minimum convergence tolerance. Default = `0.0001`.
+#' @param tol.target target convergence tolerance. Default = `0.0001`.
 #' @return
 #' An object of classes `"lm"` and `"rlm"`, broadly compatible with objects
 #' returned by `MASS::rlm()` with minor differences due to rounding.
@@ -71,7 +72,7 @@ dscore.Huber <- function(x, k2) {
 #' 1. Huber, P.J., 1973. Robust regression: asymptotics, conjectures and Monte
 #' Carlo. *The Annals of Statistics*, pp. 799–821.
 #' @export
-rlm.Huber <- function(X, y, k2 = 1.345, maxit = 100, tol = 0.0001) {
+rlm.Huber <- function(X, y, k2 = 1.345, maxit = 100, tol.min = 0.0001, tol.target = 0.0001) {
   if (qr(X)$rank < ncol(X)) stop("[rlm.Huber] singularity detected")
   init <- stats::lm.fit(X, y)
   coef <- init$coefficients
@@ -80,6 +81,7 @@ rlm.Huber <- function(X, y, k2 = 1.345, maxit = 100, tol = 0.0001) {
   w <- rep(1, length(y))
   trace <- NULL
   done <- FALSE
+  delta <- Inf
   for (i in 1:maxit) {
     resid0 <- resid
     scale <- stats::median(abs(resid)) / 0.6744897501960817054467
@@ -93,12 +95,12 @@ rlm.Huber <- function(X, y, k2 = 1.345, maxit = 100, tol = 0.0001) {
     resid <- fit$residuals
     delta <- sqrt(sum((resid0 - resid)^2) / max(1e-20, sum(resid0^2)))
     trace <- c(trace, delta)
-    if (delta <= tol) {
+    if (delta <= tol.target) {
       done <- TRUE
       break
     }
   }
-  if (!done) {
+  if (!done & delta > tol.min) {
     message("[rlm.Huber]")
     message("resid0:")
     print(resid0)
@@ -123,16 +125,17 @@ rlm.Huber <- function(X, y, k2 = 1.345, maxit = 100, tol = 0.0001) {
   return(output)
 }
 
-rlm.Huber.univarpoly.AICR <- function(x, y, max.degree = 3, p = 0.05, tol = 0.0001) {
+rlm.Huber.univarpoly.AICR <- function(x, y, max.degree = 3, p = 0.05,
+                                      tol.min = 0.0001, tol.target = 0.0001) {
   n <- length(y)
   max.degree <- min(n - 2, max.degree)
   X <- outer(x, 0:max.degree, "^")
   X0 <- as.matrix(X[, 1])
-  fit <- rlm.Huber(X = X0, y = y, tol = tol)
+  fit <- rlm.Huber(X = X0, y = y, tol.min = tol.min, tol.target = tol.target)
   AICR <- AICR.Huber(X = X0, y = y, beta = fit$coefficients, scale = fit$s)
   for (i in 1:max.degree) {
     X1 <- as.matrix(X[, 1:(i + 1)])
-    fit1 <- rlm.Huber(X = X1, y = y, tol = tol)
+    fit1 <- rlm.Huber(X = X1, y = y, tol.min = tol.min, tol.target = tol.target)
     AICR1 <- AICR.Huber(X = X1, y = y, beta = fit1$coefficients, scale = fit1$s)
     if (AICR1 < AICR) {
       fit <- fit1

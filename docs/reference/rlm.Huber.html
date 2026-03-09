@@ -41,7 +41,7 @@ reweighted least squares.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rlm.Huber</span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, k2 <span class="op">=</span> <span class="fl">1.345</span>, maxit <span class="op">=</span> <span class="fl">100</span>, tol <span class="op">=</span> <span class="fl">1e-04</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rlm.Huber</span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, k2 <span class="op">=</span> <span class="fl">1.345</span>, maxit <span class="op">=</span> <span class="fl">100</span>, tol.min <span class="op">=</span> <span class="fl">1e-04</span>, tol.target <span class="op">=</span> <span class="fl">1e-04</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -64,8 +64,12 @@ reweighted least squares.</p>
 <dd><p>maximum number of iterations. Default = <code>100</code>.</p></dd>
 
 
-<dt id="arg-tol">tol<a class="anchor" aria-label="anchor" href="#arg-tol"></a></dt>
-<dd><p>convergence tolerance. Default = <code>0.0001</code>.</p></dd>
+<dt id="arg-tol-min">tol.min<a class="anchor" aria-label="anchor" href="#arg-tol-min"></a></dt>
+<dd><p>minimum convergence tolerance. Default = <code>0.0001</code>.</p></dd>
+
+
+<dt id="arg-tol-target">tol.target<a class="anchor" aria-label="anchor" href="#arg-tol-target"></a></dt>
+<dd><p>target convergence tolerance. Default = <code>0.0001</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

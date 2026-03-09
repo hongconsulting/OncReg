@@ -4,7 +4,7 @@
 \alias{rlm.Huber}
 \title{Robust linear regression using Huber M-estimation}
 \usage{
-rlm.Huber(X, y, k2 = 1.345, maxit = 100, tol = 1e-04)
+rlm.Huber(X, y, k2 = 1.345, maxit = 100, tol.min = 1e-04, tol.target = 1e-04)
 }
 \arguments{
 \item{X}{numeric design matrix.}
@@ -15,7 +15,9 @@ rlm.Huber(X, y, k2 = 1.345, maxit = 100, tol = 1e-04)
 
 \item{maxit}{maximum number of iterations. Default = \code{100}.}
 
-\item{tol}{convergence tolerance. Default = \code{0.0001}.}
+\item{tol.min}{minimum convergence tolerance. Default = \code{0.0001}.}
+
+\item{tol.target}{target convergence tolerance. Default = \code{0.0001}.}
 }
 \value{
 An object of classes \code{"lm"} and \code{"rlm"}, broadly compatible with objects

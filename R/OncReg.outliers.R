@@ -104,13 +104,16 @@ OR.outliers <- function(x, p = 0.05) {
 #' observations.
 #' @param p Target two-sided exclusion proportion under normality for the
 #' residual-based modified *z*-score rule. Default = `0.05`.
-#' @param tol M-estimation convergence tolerance. Default = `0.0001`.
+#' @param tol.min M-estimation minimum convergence tolerance. Default = `0.0001`.
+#' @param tol.target M-estimation target convergence tolerance. Default =
+#' `0.0001`.
 #' @return Logical vector of the same length as `y` where `TRUE` indicates an
 #' outlying observation relative to the AICR-selected robust polynomial fit.
 #' @details
 #' For numerical stability, `x` and `y` are standardized before fitting.
 #' @export
-OR.outliers.rlm <- function(x, y, max.degree = 3, p = 0.05, tol = 0.0001) {
+OR.outliers.rlm <- function(x, y, max.degree = 3, p = 0.05,
+                            tol.min = 0.0001, tol.target = 0.0001) {
   mx <- mean(x, na.rm = TRUE)
   sx <- stats::sd(x, na.rm = TRUE)
   my <- mean(y, na.rm = TRUE)
@@ -118,7 +121,7 @@ OR.outliers.rlm <- function(x, y, max.degree = 3, p = 0.05, tol = 0.0001) {
   x_z <- (x - mx) / sx
   y_z <- (y - my) / sy
   fit <- rlm.Huber.univarpoly.AICR(x = x_z, y = y_z, max.degree = max.degree,
-                                   p = p, tol = tol)
+                                   p = p, tol.min = tol.min, tol.target = tol.target)
   return(OR.outliers(x = fit$resid, p = p))
 }
 
@@ -135,7 +138,9 @@ OR.outliers.rlm <- function(x, y, max.degree = 3, p = 0.05, tol = 0.0001) {
 #' observations.
 #' @param p Target two-sided exclusion proportion under normality for the
 #' residual-based modified *z*-score rule. Default = `0.05`.
-#' @param tol M-estimation convergence tolerance. Default = `0.0001`.
+#' @param tol.min M-estimation minimum convergence tolerance. Default = `0.0001`.
+#' @param tol.target M-estimation target convergence tolerance. Default =
+#' `0.0001`.
 #' @param col.in Color used for the fitted curve, ribbon band, and observations
 #' not flagged as outliers. Default = `"#0072B5FF"`.
 #' @param col.out Color used for observations flagged as outliers. Default =
@@ -160,10 +165,11 @@ OR.outliers.rlm <- function(x, y, max.degree = 3, p = 0.05, tol = 0.0001) {
 #' OR.outliers.rlm.ggplot(x, y, max.degree = 4, p = 0.01, x.title = "X",
 #'                        y.breaks = seq(0, 150, 50), y.title = "Y")
 #' @export
-OR.outliers.rlm.ggplot <- function(x, y, max.degree = 3, p = 0.05, tol = 0.0001,
-                                 col.in =  "#0072B5FF", col.out = "#BC3C29FF",
-                                 echo = FALSE, x.breaks = NA, x.labels = NA,
-                                 x.title = "", y.breaks = NA, y.title = "") {
+OR.outliers.rlm.ggplot <- function(x, y, max.degree = 3, p = 0.05,
+                                   tol.min = 0.0001, tol.target = 0.0001,
+                                   col.in =  "#0072B5FF", col.out = "#BC3C29FF",
+                                   echo = FALSE, x.breaks = NA, x.labels = NA,
+                                   x.title = "", y.breaks = NA, y.title = "") {
   n <- length(y)
   mx <- mean(x, na.rm = TRUE)
   sx <- stats::sd(x, na.rm = TRUE)
@@ -172,7 +178,7 @@ OR.outliers.rlm.ggplot <- function(x, y, max.degree = 3, p = 0.05, tol = 0.0001,
   x_z <- (x - mx) / sx
   y_z <- (y - my) / sy
   fit <- rlm.Huber.univarpoly.AICR(x = x_z, y = y_z, max.degree = max.degree,
-                                   p = p, tol = tol)
+                                   p = p, tol.min = tol.min, tol.target = tol.target)
   fitted <- my + sy * fit$fitted
   resid  <- sy * fit$resid
   MAD <- stats::mad(resid)

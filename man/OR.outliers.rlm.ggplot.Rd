@@ -9,7 +9,8 @@ OR.outliers.rlm.ggplot(
   y,
   max.degree = 3,
   p = 0.05,
-  tol = 1e-04,
+  tol.min = 1e-04,
+  tol.target = 1e-04,
   col.in = "#0072B5FF",
   col.out = "#BC3C29FF",
   echo = FALSE,
@@ -32,7 +33,10 @@ observations.}
 \item{p}{Target two-sided exclusion proportion under normality for the
 residual-based modified \emph{z}-score rule. Default = \code{0.05}.}
 
-\item{tol}{M-estimation convergence tolerance. Default = \code{0.0001}.}
+\item{tol.min}{M-estimation minimum convergence tolerance. Default = \code{0.0001}.}
+
+\item{tol.target}{M-estimation target convergence tolerance. Default =
+\code{0.0001}.}
 
 \item{col.in}{Color used for the fitted curve, ribbon band, and observations
 not flagged as outliers. Default = \code{"#0072B5FF"}.}
