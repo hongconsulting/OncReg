@@ -52,6 +52,7 @@ deviation (MAD).</p>
 <span>  <span class="va">y</span>,</span>
 <span>  max.degree <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>  p <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  tol <span class="op">=</span> <span class="fl">1e-04</span>,</span>
 <span>  col.in <span class="op">=</span> <span class="st">"#0072B5FF"</span>,</span>
 <span>  col.out <span class="op">=</span> <span class="st">"#BC3C29FF"</span>,</span>
 <span>  echo <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -86,13 +87,17 @@ observations.</p></dd>
 residual-based modified <em>z</em>-score rule. Default = <code>0.05</code>.</p></dd>
 
 
+<dt id="arg-tol">tol<a class="anchor" aria-label="anchor" href="#arg-tol"></a></dt>
+<dd><p>M-estimation convergence tolerance. Default = <code>0.0001</code>.</p></dd>
+
+
 <dt id="arg-col-in">col.in<a class="anchor" aria-label="anchor" href="#arg-col-in"></a></dt>
-<dd><p>Colour used for the fitted curve, ribbon band, and observations
+<dd><p>Color used for the fitted curve, ribbon band, and observations
 not flagged as outliers. Default = <code>"#0072B5FF"</code>.</p></dd>
 
 
 <dt id="arg-col-out">col.out<a class="anchor" aria-label="anchor" href="#arg-col-out"></a></dt>
-<dd><p>Colour used for observations flagged as outliers. Default =
+<dd><p>Color used for observations flagged as outliers. Default =
 <code>"#BC3C29FF"</code>.</p></dd>
 
 

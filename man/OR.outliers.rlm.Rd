@@ -4,7 +4,7 @@
 \alias{OR.outliers.rlm}
 \title{Polynomial linear non-parametric outlier detection}
 \usage{
-OR.outliers.rlm(x, y, max.degree = 3, p = 0.05)
+OR.outliers.rlm(x, y, max.degree = 3, p = 0.05, tol = 1e-04)
 }
 \arguments{
 \item{x}{Numeric predictor vector.}
@@ -17,6 +17,8 @@ observations.}
 
 \item{p}{Target two-sided exclusion proportion under normality for the
 residual-based modified \emph{z}-score rule. Default = \code{0.05}.}
+
+\item{tol}{M-estimation convergence tolerance. Default = \code{0.0001}.}
 }
 \value{
 Logical vector of the same length as \code{y} where \code{TRUE} indicates an
