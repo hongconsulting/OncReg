@@ -4,7 +4,7 @@
 \alias{rlm.Huber}
 \title{Robust linear regression using Huber M-estimation}
 \usage{
-rlm.Huber(X, y, k2 = 1.345, maxit = 100, tol = 1e-04)
+rlm.Huber(X, y, k2 = 1.345, maxit = 500, tol = 1e-04)
 }
 \arguments{
 \item{X}{numeric design matrix.}

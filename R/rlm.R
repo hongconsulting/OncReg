@@ -71,7 +71,7 @@ dscore.Huber <- function(x, k2) {
 #' 1. Huber, P.J., 1973. Robust regression: asymptotics, conjectures and Monte
 #' Carlo. *The Annals of Statistics*, pp. 799–821.
 #' @export
-rlm.Huber <- function(X, y, k2 = 1.345, maxit = 100, tol = 0.0001) {
+rlm.Huber <- function(X, y, k2 = 1.345, maxit = 500, tol = 0.0001) {
   if (qr(X)$rank < ncol(X)) stop("[rlm.Huber] singularity detected")
   init <- stats::lm.fit(X, y)
   coef <- init$coefficients
@@ -98,7 +98,16 @@ rlm.Huber <- function(X, y, k2 = 1.345, maxit = 100, tol = 0.0001) {
       break
     }
   }
-  if (!done) stop("[rlm.Huber] non-convergence")
+  if (!done) {
+    message("[rlm.Huber]")
+    message("resid0:")
+    print(resid0)
+    message("resid:")
+    print(resid)
+    message("delta:")
+    print(delta)
+    stop("[rlm.Huber] non-convergence")
+  }
   fitted <- drop(X %*% coef)
   weight.Huber <- function(x, k = k2) {
     return(pmin(1, k / abs(x)))
