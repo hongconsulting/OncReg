@@ -116,7 +116,7 @@ rlm.Huber <- function(X, y, k2 = 1.345, maxit = 100, tol = 0.0001) {
 
 rlm.Huber.univarpoly.AICR <- function(x, y, max.degree = 3, p = 0.05) {
   n <- length(y)
-  max.degree <- min(n - 1, max.degree)
+  max.degree <- min(n - 2, max.degree)
   X <- outer(x, 0:max.degree, "^")
   X0 <- as.matrix(X[, 1])
   fit <- rlm.Huber(X = X0, y = y)

@@ -100,6 +100,8 @@ OR.outliers <- function(x, p = 0.05) {
 #' @param x Numeric predictor vector.
 #' @param y Numeric response vector.
 #' @param max.degree Maximum polynomial degree considered. Default = `3`.
+#' Internally capped at `n - 2`, where `n` is the number of non-missing
+#' observations.
 #' @param p Target two-sided exclusion proportion under normality for the
 #' residual-based modified *z*-score rule. Default = `0.05`.
 #' @return Logical vector of the same length as `y` where `TRUE` indicates an
@@ -127,6 +129,8 @@ OR.outliers.rlm <- function(x, y, max.degree = 3, p = 0.05) {
 #' @param x Numeric predictor vector.
 #' @param y Numeric response vector.
 #' @param max.degree Maximum polynomial degree considered. Default = `3`.
+#' Internally capped at `n - 2`, where `n` is the number of non-missing
+#' observations.
 #' @param p Target two-sided exclusion proportion under normality for the
 #' residual-based modified *z*-score rule. Default = `0.05`.
 #' @param col.in Colour used for the fitted curve, ribbon band, and observations

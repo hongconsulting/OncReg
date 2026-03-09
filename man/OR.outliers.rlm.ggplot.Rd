@@ -24,7 +24,9 @@ OR.outliers.rlm.ggplot(
 
 \item{y}{Numeric response vector.}
 
-\item{max.degree}{Maximum polynomial degree considered. Default = \code{3}.}
+\item{max.degree}{Maximum polynomial degree considered. Default = \code{3}.
+Internally capped at \code{n - 2}, where \code{n} is the number of non-missing
+observations.}
 
 \item{p}{Target two-sided exclusion proportion under normality for the
 residual-based modified \emph{z}-score rule. Default = \code{0.05}.}
