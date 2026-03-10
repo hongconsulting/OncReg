@@ -22,25 +22,6 @@ OR.0.rm <- function(x) {
 #   return((x - mu) / sd)
 # }
 
-OR.y.to.Y <- function(input, century, pivot) {
-  output <- input
-  s <- strsplit(input, "/", fixed = TRUE)
-  for (i in 1:length(s)) {
-    if (length(s[[i]]) == 3) {
-      if (nchar(s[[i]][3]) == 2) {
-        y <- s[[i]][3]
-        if (as.numeric(y) <= pivot) {
-          s[[i]][3] <- paste0(century, y)
-        } else {
-          s[[i]][3] <- paste0(century - 1, y)
-        }
-      }
-      output[i] <- paste0(s[[i]], collapse = "/")
-    }
-  }
-  return(output)
-}
-
 #' Convert mixed format dates to Microsoft Excel serial dates
 #'
 #' Converts string dates that may be in serial (using the Microsoft Excel
@@ -107,6 +88,17 @@ OR.NA.rm <- function(x) {
 #' @export
 OR.NA.to.0 <- function(x) {
   x[is.na(x)] <- 0
+  return(x)
+}
+
+#' Convert missing values to empty strings
+#'
+#' Converts all `NA` elements in a vector or matrix to `""`.
+#' @param x String vector or matrix.
+#' @return The input object with all `NA` values replaced by `""`.
+#' @export
+OR.NA.to.empty <- function(x) {
+  x[is.na(x)] <- ""
   return(x)
 }
 
@@ -230,6 +222,25 @@ OR.survoutcome <- function(date_start, date_event, date_follow, divisor = 365.24
         output[i, 1] <- (date_follow[i] - date_start[i])/divisor
         output[i, 2] <- 0
       }
+    }
+  }
+  return(output)
+}
+
+OR.y.to.Y <- function(input, century, pivot) {
+  output <- input
+  s <- strsplit(input, "/", fixed = TRUE)
+  for (i in 1:length(s)) {
+    if (length(s[[i]]) == 3) {
+      if (nchar(s[[i]][3]) == 2) {
+        y <- s[[i]][3]
+        if (as.numeric(y) <= pivot) {
+          s[[i]][3] <- paste0(century, y)
+        } else {
+          s[[i]][3] <- paste0(century - 1, y)
+        }
+      }
+      output[i] <- paste0(s[[i]], collapse = "/")
     }
   }
   return(output)
