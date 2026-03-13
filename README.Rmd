@@ -28,7 +28,7 @@ You can install the development version of OncReg from [GitHub](https://github.c
 remotes::install_github("hongconsulting/OncReg")
 ```
 
-### Example: delimited strings, Microsoft Excel dates, and survival analysis
+### Example: comma-separated free text, Microsoft Excel dates, and survival analysis
 ```{r example_1}
 library(OncReg)
 options(width = 120)
