@@ -46,6 +46,17 @@ OR.dmyY.to.Excel <- function(input, century, pivot) {
   return(suppressWarnings(as.numeric(output)))
 }
 
+#' Convert FALSE values to NA
+#'
+#' Converts all `FALSE` elements in a vector or matrix to `NA`.
+#' @param x Logical vector or matrix.
+#' @return The input object with all `FALSE` values replaced by `NA`.
+#' @export
+OR.F.to.NA <- function(x) {
+  x[x == FALSE] <- NA
+  return(x)
+}
+
 #' Convert mixed format dates to Microsoft Excel serial dates
 #'
 #' Converts string dates that may be in serial (using the Microsoft Excel

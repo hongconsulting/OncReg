@@ -1,13 +1,23 @@
-OR.regimen.restart.single <- function(date_start, date_stop, reason_stop, date_prog, t_min) {
+OR.regimen.restart.single <- function (date_start, date_stop, reason_stop,
+                                       date_prog, t_min, echo = FALSE) {
   t_duration <- date_stop - date_start
   t_interval <- rep(NA, length(date_start))
   for (i in 1:length(date_start)) {
     if (is.na(date_start[i])) next
-    last_date_stop <- suppressWarnings(max(date_stop[date_stop < date_start[i]], na.rm = TRUE))
+    last_date_stop <- suppressWarnings(max(date_stop[date_stop < date_start[i]],
+                                           na.rm = TRUE))
     last_date_stop[is.infinite(last_date_stop)] <- NA
     t_interval[i] <- date_start[i] - last_date_stop
   }
-  restart_line <- as.numeric(which.min(date_start[t_interval >= t_min]))
+  # OR.F.to.NA() needed for which.min()
+  restart_line <- as.numeric(which.min(date_start[OR.F.to.NA(t_interval >= t_min)]))
+  if (echo) {
+    cat("[OR.regimen.restart] date_start =", date_start, "\n")
+    cat("[OR.regimen.restart] date_stop =", date_stop, "\n")
+    cat("[OR.regimen.restart] t_duration =", t_duration, "\n")
+    cat("[OR.regimen.restart] t_interval =", t_interval, "\n")
+    cat("[OR.regimen.restart] OR.F.to.NA(t_interval >= t_min) =", OR.F.to.NA(t_interval >= t_min), "\n")
+  }
   if (length(restart_line) == 0) {
     prev_time <- sum(t_duration, na.rm = TRUE)
     stop_reason <- suppressWarnings(max(reason_stop, na.rm = TRUE))
@@ -20,7 +30,12 @@ OR.regimen.restart.single <- function(date_start, date_stop, reason_stop, date_p
   if (is.infinite(stop_reason)) stop_reason <- 0
   reprog_date <- suppressWarnings(min(date_prog[date_prog > restart_date], na.rm = TRUE))
   if (is.infinite(reprog_date)) reprog_date <- NA
-  return(c(prev_time, stop_reason, t_interval[restart_line], restart_line, restart_date, reprog_date))
+  if (echo) {
+    cat("[OR.regimen.restart] date_stop < restart_date =", date_stop < restart_date, "\n")
+    cat("[OR.regimen.restart] date_prog > restart_date =", date_prog > restart_date, "\n")
+  }
+  return(c(prev_time, stop_reason, t_interval[restart_line],
+           restart_line, restart_date, reprog_date))
 }
 
 #' Identify treatment restart after a minimum treatment-free interval
