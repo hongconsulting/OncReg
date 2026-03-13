@@ -4,9 +4,7 @@ OR.regimen.restart.single <- function (date_start, date_stop, reason_stop,
   t_interval <- rep(NA, length(date_start))
   for (i in 1:length(date_start)) {
     if (is.na(date_start[i])) next
-    last_date_stop <- suppressWarnings(max(date_stop[date_stop < date_start[i]],
-                                           na.rm = TRUE))
-    last_date_stop[is.infinite(last_date_stop)] <- NA
+    last_date_stop <- OR.max(date_stop[date_stop < date_start[i]])
     t_interval[i] <- date_start[i] - last_date_stop
   }
   # OR.F.to.NA() needed for which.min()
@@ -20,17 +18,14 @@ OR.regimen.restart.single <- function (date_start, date_stop, reason_stop,
     cat("[OR.regimen.restart] OR.F.to.NA(t_interval >= t_min) =", OR.F.to.NA(t_interval >= t_min), "\n")
   }
   if (length(restart_line) == 0) {
-    prev_time <- sum(t_duration, na.rm = TRUE)
-    stop_reason <- suppressWarnings(max(reason_stop, na.rm = TRUE))
-    if (is.infinite(stop_reason)) stop_reason <- 0
+    prev_time <- OR.sum(t_duration)
+    stop_reason <- OR.max(reason_stop)
     return(c(prev_time, stop_reason, rep(NA, 4)))
   }
   restart_date <- as.numeric(date_start[restart_line])
-  prev_time <- sum(t_duration[date_stop < restart_date], na.rm = TRUE)
-  stop_reason <- suppressWarnings(max(reason_stop[date_stop < restart_date], na.rm = TRUE))
-  if (is.infinite(stop_reason)) stop_reason <- 0
-  reprog_date <- suppressWarnings(min(date_prog[date_prog > restart_date], na.rm = TRUE))
-  if (is.infinite(reprog_date)) reprog_date <- NA
+  prev_time <- OR.sum(t_duration[date_stop < restart_date])
+  stop_reason <- OR.max(reason_stop[date_stop < restart_date])
+  reprog_date <- OR.min(date_prog[date_prog > restart_date])
   if (echo) {
     cat("[OR.regimen.restart] date_stop < restart_date =", date_stop < restart_date, "\n")
     cat("[OR.regimen.restart] date_prog > restart_date =", date_prog > restart_date, "\n")

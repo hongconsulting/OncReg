@@ -19,7 +19,9 @@
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.kMAD.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.line.restart.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.line.truncate.html</loc></url>
+<url><loc>https://hongconsulting.github.io/OncReg/reference/OR.max.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.mdyY.to.Excel.html</loc></url>
+<url><loc>https://hongconsulting.github.io/OncReg/reference/OR.min.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.nMAD.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.outliers.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.outliers.rlm.ggplot.html</loc></url>
@@ -31,6 +33,7 @@
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.rowmax.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.rowmin.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.string.to.binary.html</loc></url>
+<url><loc>https://hongconsulting.github.io/OncReg/reference/OR.sum.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.survoutcome.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/index.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/rlm.Huber.html</loc></url>

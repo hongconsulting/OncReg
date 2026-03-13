@@ -57,6 +57,19 @@ OR.F.to.NA <- function(x) {
   return(x)
 }
 
+#' Maximum with NA removal or NA if no valid entries
+#'
+#' Equivalent to `max(x, na.rm = TRUE)` except returns `NA` if all elements are
+#' `NA`.
+#' @param x Numeric vector.
+#' @return Maximum of non-`NA` elements or `NA` if none exist.
+#' @export
+OR.max <- function(x) {
+  x <- x[!is.na(x)]
+  if (length(x) == 0) return(NA)
+  return(max(x))
+}
+
 #' Convert mixed format dates to Microsoft Excel serial dates
 #'
 #' Converts string dates that may be in serial (using the Microsoft Excel
@@ -79,6 +92,19 @@ OR.mdyY.to.Excel <- function (input, century, pivot) {
   output[!is.na(mask_n)] <- mask_n[!is.na(mask_n)]
   output[!is.na(mask_d)] <- mask_d[!is.na(mask_d)]
   return(suppressWarnings(as.numeric(output)))
+}
+
+#' Minimum with NA removal or NA if no valid entries
+#'
+#' Equivalent to `min(x, na.rm = TRUE)` except returns `NA` if all elements are
+#' `NA`.
+#' @param x Numeric vector.
+#' @return Minimum of non-`NA` elements or `NA` if none exist.
+#' @export
+OR.min <- function(x) {
+  x <- x[!is.na(x)]
+  if (length(x) == 0) return(NA)
+  return(min(x))
 }
 
 #' Remove missing values
@@ -203,6 +229,19 @@ OR.string.to.binary <- function(input, pattern, missing) {
     }
   }
   return(output)
+}
+
+#' Sum with NA removal or NA if no valid entries
+#'
+#' Equivalent to `sum(x, na.rm = TRUE)` except returns `NA` if all elements are
+#' `NA`.
+#' @param x Numeric vector.
+#' @return Sum of non-`NA` elements or `NA` if none exist.
+#' @export
+OR.sum <- function(x) {
+  x <- x[!is.na(x)]
+  if (length(x) == 0) return(NA)
+  return(sum(x))
 }
 
 #' Survival outcomes
