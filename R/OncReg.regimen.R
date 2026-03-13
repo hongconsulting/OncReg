@@ -13,8 +13,9 @@ OR.regimen.restart.single <- function (date_start, date_stop, reason_stop,
   restart_line <- as.numeric(which.min(date_start[OR.F.to.NA(t_interval >= t_min)]))
   if (echo) {
     cat("[OR.regimen.restart] date_start =", date_start, "\n")
-    cat("[OR.regimen.restart] date_stop =", date_stop, "\n")
     cat("[OR.regimen.restart] t_duration =", t_duration, "\n")
+    cat("[OR.regimen.restart] date_stop =", date_stop, "\n")
+    cat("[OR.regimen.restart] reason_stop =", reason_stop, "\n")
     cat("[OR.regimen.restart] t_interval =", t_interval, "\n")
     cat("[OR.regimen.restart] OR.F.to.NA(t_interval >= t_min) =", OR.F.to.NA(t_interval >= t_min), "\n")
   }
