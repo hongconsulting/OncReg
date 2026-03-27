@@ -10,7 +10,7 @@ OR.kMAD(n, p = 0.05)
 \item{n}{Integer sample size, where \code{3} ≤ \code{n} ≤ \code{100}.}
 
 \item{p}{Target two-sided exclusion probability. Only \code{0.05}, \code{0.025}, \code{0.01},
-and \code{0.005} are currently implemented.}
+\code{0.005}, and \code{0.0027} (3-sigma)² are currently implemented.}
 }
 \value{
 The cutoff in unscaled MAD units.
@@ -27,5 +27,8 @@ per iteration and rounded to two decimal places.
 \item Iglewicz, B. and Hoaglin, D.C., 1993. Chapter 3.3 Modified Z-scores.
 In: \emph{How to Detect and Handle Outliers}, pp. 11–13. Milwaukee: ASQC Quality
 Press.
+\item Nelson, L.S., 2003. When should the limits on a Shewhart control chart be
+other than a center line ±3-sigma?. \emph{Journal of Quality Technology}, 35(4), pp.
+424–425.
 }
 }

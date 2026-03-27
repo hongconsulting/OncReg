@@ -38,6 +38,60 @@ OR.delim.contains <- function(x, match, delimiter = ",", partial = FALSE) {
   return(output)
 }
 
+
+#' Merge delimited string elements pairwise (case- and whitespace-insensitive)
+#'
+#' For each pair of corresponding strings in `x1` and `x2`, splits the strings by
+#' a specified delimiter, trims whitespace, converts to lowercase, takes the
+#' union of the delimited elements, removes duplicate elements, sorts elements
+#' alphabetically, and rejoins the elements using the same delimiter.
+#' @param x1 String vector, matrix, or data frame.
+#' @param x2 String vector, matrix, or data frame of the same shape as `x1`.
+#' @param delimiter String delimiter. Default = `","`.
+#' @return A string vector or matrix with merged delimited elements.
+#' @export
+OR.delim.merge <- function(x1, x2, delimiter = ",") {
+  if (is.data.frame(x1)) x1 <- as.matrix(x1)
+  if (is.data.frame(x2)) x2 <- as.matrix(x2)
+  if (is.null(dim(x1)) && is.null(dim(x2))) {
+    if (length(x1) != length(x2)) stop("[OR.delim.merge] x1 and x2 must have the same length")
+  } else {
+    if (!identical(dim(x1), dim(x2))) stop("[OR.delim.merge] x1 and x2 must have the same shape")
+  }
+  f <- function(a, b) {
+    p1 <- tolower(trimws(unlist(strsplit(a, delimiter, fixed = TRUE))))
+    p2 <- tolower(trimws(unlist(strsplit(b, delimiter, fixed = TRUE))))
+    parts <- c(p1, p2)
+    parts <- parts[parts != ""]
+    parts <- sort(unique(parts))
+    return(paste(parts, collapse = paste0(delimiter, " ")))
+  }
+
+  output <- mapply(f, x1, x2, USE.NAMES = FALSE)
+
+  if (is.matrix(x1)) {
+    dim(output) <- dim(x1)
+  } else {
+    output <- unname(output)
+  }
+
+  return(output)
+
+  if (length(x2) == 1L) {
+    output <- sapply(x1, function(a) f(a, x2))
+  } else {
+    output <- mapply(f, x1, x2, SIMPLIFY = TRUE, USE.NAMES = FALSE)
+  }
+
+  if (is.matrix(x1)) {
+    dim(output) <- dim(x1)
+  } else {
+    output <- unname(output)
+  }
+
+  return(output)
+}
+
 #' Replace delimited string elements (case- and whitespace-insensitive)
 #'
 #' Splits each string in a vector, matrix, or data frame by a specified
@@ -71,6 +125,7 @@ OR.delim.replace <- function(x, match, replacement, delimiter = ",") {
       parts[parts %in% tolower(trimws(match))] <- tolower(trimws(replacement))
     }
     parts <- sort(unique(parts))
+    parts <- parts[parts != ""]
     return(paste(parts, collapse = paste0(delimiter, " ")))
   }
   if (is.data.frame(x)) x <- as.matrix(x)

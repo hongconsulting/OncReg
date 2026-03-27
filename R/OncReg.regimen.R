@@ -1,5 +1,43 @@
-OR.regimen.restart.single <- function (date_start, date_stop, reason_stop,
-                                       date_prog, t_min, echo = FALSE) {
+
+#' Consolidate overlapping regimens at event boundaries
+#'
+#' For each unique date among `start_dates` and `stop_dates`, determines the set
+#' of active regimens by checking which regimen periods [`start_dates[i]`,
+#' `stop_dates[i]`) contain the date, and merges the corresponding delimited
+#' strings representing the treatments that comprise each regimen.
+#' @param start_dates Vector of start dates.
+#' @param stop_dates Vector of stop dates.
+#' @param sets Vector of delimited regimen strings.
+#' @return A data frame with:
+#' \describe{
+#'   \item{date}{Sorted unique dates from `start_dates` and `stop_dates`.}
+#'   \item{set}{Delimited string of treatments active at each date.}
+#' }e
+#' @export
+OR.regimen.consolidate <- function(start_dates, stop_dates, sets) {
+  n <- length(start_dates)
+  output <- data.frame("date" = sort(unique(c(start_dates, stop_dates))))
+  output$set <- ""
+  for (i in 1:nrow(output)) {
+    current_date <- output$date[i]
+    for (j in 1:n) {
+      if (OR.NA.to.empty(sets[j]) == "") next
+      if (is.na(start_dates[j])) {
+        cat("[OR.regimen.consolidate] i = ", i, ", j = ", j, sep = "")
+        next
+      }
+
+      if (current_date >= start_dates[j] & current_date < stop_dates[j]) {
+        output$set[i] <- OR.delim.merge(output$set[i], sets[j])
+      }
+
+    }
+  }
+  return(output)
+}
+
+.OR.regimen.restart.single <- function (date_start, date_stop, reason_stop,
+                                        date_prog, t_min, echo = FALSE) {
   t_duration <- date_stop - date_start
   t_interval <- rep(NA, length(date_start))
   for (i in 1:length(date_start)) {
@@ -66,7 +104,7 @@ OR.regimen.restart <- function(date_start, date_stop, reason_stop, date_prog,
   n <- nrow(date_start)
   output <- matrix(NA, n, 6)
   for (i in 1:n) {
-    output[i, ] <- OR.regimen.restart.single(
+    output[i, ] <- .OR.regimen.restart.single(
       date_start[i, ],
       date_stop[i, ],
       reason_stop[i, ],

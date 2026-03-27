@@ -59,8 +59,10 @@ data1$review1 <- OR.dmyY.to.Excel(data0$review1, 20, 25)
 data1$review2 <- OR.dmyY.to.Excel(data0$review2, 20, 25)
 data1$death <- OR.dmyY.to.Excel(data0$death, 20, 25)
 
-# progression-free survival and overall survival
-data1$PFS <- OR.rowmin(cbind(data1$progression, data1$death))
+# progression-free survival and overall survival:
+# - PFS date is the date of progression or death, whichever is earlier
+data1$PFS <- OR.rowmin(cbind(data1$progression, data1$death)) 
+# - last review date is the latest date patient was observed alive
 data1$lastreview <- OR.rowmax(cbind(data1$review1, data1$review2))
 data1$PFSmonths <- OR.survoutcome(data1$diagnosis, data1$PFS, data1$lastreview)[, 1]
 data1$PFSstatus <- OR.survoutcome(data1$diagnosis, data1$PFS, data1$lastreview)[, 2]

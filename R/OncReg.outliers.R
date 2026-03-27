@@ -1,5 +1,5 @@
 utils::globalVariables(".OR.kMAD.mat")
-.OR.kMAD.mat <- matrix(NA, nrow = 100, ncol = 4)
+.OR.kMAD.mat <- matrix(NA, nrow = 100, ncol = 5)
 .OR.kMAD.mat[3:100, 1] <- c(
   10.5, 4.72, 5.4,  4.19, 4.36, 3.86, 3.93, 3.66, 3.69, 3.52, 3.55, 3.43, 3.45,
   3.36, 3.37, 3.31, 3.32, 3.27, 3.27, 3.23, 3.24, 3.2,  3.21, 3.18, 3.18, 3.16,
@@ -40,6 +40,16 @@ utils::globalVariables(".OR.kMAD.mat")
   4.45, 4.44, 4.44, 4.43, 4.43, 4.43, 4.43, 4.42, 4.42, 4.41, 4.42, 4.41, 4.41,
   4.4,  4.4,  4.4,  4.4,  4.39, 4.39, 4.39
 )
+.OR.kMAD.mat[3:100, 5] <- c(
+  203.78,22.77,26.28,13.22,13.81,10,  10.2, 8.46, 8.55, 7.57, 7.61,    7, 7.03,
+  6.6 , 6.62, 6.31, 6.32, 6.09, 6.1,  5.91, 5.92, 5.77, 5.78, 5.65, 5.66, 5.55,
+  5.56, 5.47, 5.47, 5.4,  5.4,  5.34, 5.34, 5.28, 5.28, 5.23, 5.24, 5.19, 5.19,
+  5.15, 5.15, 5.12, 5.12, 5.09, 5.09, 5.06, 5.06, 5.03, 5.03, 5.01, 5.01, 4.98,
+  4.98, 4.96, 4.96, 4.94, 4.95, 4.93, 4.93, 4.91, 4.91, 4.9,  4.9,  4.88, 4.88,
+  4.87, 4.87, 4.85, 4.86, 4.84, 4.84, 4.83, 4.83, 4.82, 4.82, 4.81, 4.81, 4.8,
+  4.8,  4.79, 4.79, 4.78, 4.78, 4.78, 4.78, 4.77, 4.77, 4.76, 4.76, 4.75, 4.75,
+  4.75, 4.75, 4.74, 4.74, 4.73, 4.73, 4.73
+)
 
 #' Small-sample MAD cutoff under normality
 #'
@@ -50,12 +60,15 @@ utils::globalVariables(".OR.kMAD.mat")
 #' per iteration and rounded to two decimal places.
 #' @param n Integer sample size, where `3` ≤ `n` ≤ `100`.
 #' @param p Target two-sided exclusion probability. Only `0.05`, `0.025`, `0.01`,
-#' and `0.005` are currently implemented.
+#' `0.005`, and `0.0027` (3-sigma)² are currently implemented.
 #' @return The cutoff in unscaled MAD units.
 #' @references
 #' 1. Iglewicz, B. and Hoaglin, D.C., 1993. Chapter 3.3 Modified Z-scores.
 #' In: *How to Detect and Handle Outliers*, pp. 11–13. Milwaukee: ASQC Quality
 #' Press.
+#' 2. Nelson, L.S., 2003. When should the limits on a Shewhart control chart be
+#' other than a center line ±3-sigma?. *Journal of Quality Technology*, 35(4), pp.
+#' 424–425.
 #' @export
 OR.kMAD <- function(n, p = 0.05) {
   if (p == 0.05) {
@@ -66,6 +79,8 @@ OR.kMAD <- function(n, p = 0.05) {
     col <- 3
   } else if (p == 0.005) {
     col <- 4
+  } else if (p == 0.0027) {
+    col <- 5
   } else {
     stop(paste0("[OR.kMAD] not implemented: p = ", p))
   }
