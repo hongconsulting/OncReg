@@ -67,7 +67,7 @@ utils::globalVariables(".OR.kMAD.mat")
 #' In: *How to Detect and Handle Outliers*, pp. 11–13. Milwaukee: ASQC Quality
 #' Press.
 #' 2. Nelson, L.S., 2003. When should the limits on a Shewhart control chart be
-#' other than a center line ±3-sigma?. *Journal of Quality Technology*, 35(4), pp.
+#' other than a center line ±3-sigma? *Journal of Quality Technology*, 35(4), pp.
 #' 424–425.
 #' @export
 OR.kMAD <- function(n, p = 0.05) {

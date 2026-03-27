@@ -28,7 +28,7 @@ per iteration and rounded to two decimal places.
 In: \emph{How to Detect and Handle Outliers}, pp. 11–13. Milwaukee: ASQC Quality
 Press.
 \item Nelson, L.S., 2003. When should the limits on a Shewhart control chart be
-other than a center line ±3-sigma?. \emph{Journal of Quality Technology}, 35(4), pp.
+other than a center line ±3-sigma? \emph{Journal of Quality Technology}, 35(4), pp.
 424–425.
 }
 }
