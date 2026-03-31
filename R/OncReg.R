@@ -8,6 +8,18 @@ OR.0.rm <- function(x) {
   return(x[x != 0])
 }
 
+#' Convert strings to numeric after stripping non-numeric characters
+#'
+#' Removes all characters except digits, decimal point, and minus sign, then
+#' converts the result to numeric. Non-convertible values return `NA` with
+#' warnings suppressed.
+#' @param x A string vector.
+#' @return A numeric vector.
+OR.as.numeric <- function(x) {
+  x <- gsub("[^0-9.\\-]", "", x)
+  return(suppressWarnings(as.numeric(x)))
+}
+
 # #' Standardize a numeric vector
 # #'
 # #' #' Returns *z*-scores by subtracting the sample mean and dividing by the
