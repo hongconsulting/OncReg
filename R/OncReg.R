@@ -15,6 +15,7 @@ OR.0.rm <- function(x) {
 #' warnings suppressed.
 #' @param x A string vector.
 #' @return A numeric vector.
+#' @export
 OR.as.numeric <- function(x) {
   x <- gsub("[^0-9.\\-]", "", x)
   return(suppressWarnings(as.numeric(x)))
