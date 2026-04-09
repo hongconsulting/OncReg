@@ -13,6 +13,6 @@ OR.max(x)
 Maximum of non-\code{NA} elements or \code{NA} if none exist.
 }
 \description{
-Equivalent to \code{max(x, na.rm = TRUE)} except returns \code{NA} if all elements are
-\code{NA}.
+Equivalent to \code{max(x, na.rm = TRUE)} except returns \code{NA} (rather than \code{-Inf}) if
+all elements are \code{NA}.
 }

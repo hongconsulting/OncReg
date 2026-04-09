@@ -70,10 +70,39 @@ OR.F.to.NA <- function(x) {
   return(x)
 }
 
+#' Last observation carried forward within clusters
+#'
+#' Applies LOCF imputation to `x` within each `id`, assuming observations are
+#' already ordered within each `id`.
+#' @param x Vector of values for LOCF imputation.
+#' @param id Optional vector of cluster identifiers. If `NULL`, all observations
+#' are treated as a single cluster.
+#' @return Vector of same length as `x` with LOCF applied within each `id`.
+#' @export
+OR.LOCF.cluster <- function(x, id = NULL) {
+  if (is.null(id)) id <- rep(0, length(x))
+  output <- rep(NA, length(x))
+  unique_id <- unique(id)
+  for (i in seq_along(unique_id)) {
+    current_indices <- which(id == unique_id[i])
+    current_x <- x[current_indices]
+    last <- NA
+    for (j in seq_along(current_x)) {
+      if (!is.na(current_x[j])) {
+        last <- current_x[j]
+      } else {
+        current_x[j] <- last
+      }
+    }
+    output[current_indices] <- current_x
+  }
+  return(output)
+}
+
 #' Maximum with NA removal or NA if no valid entries
 #'
-#' Equivalent to `max(x, na.rm = TRUE)` except returns `NA` if all elements are
-#' `NA`.
+#' Equivalent to `max(x, na.rm = TRUE)` except returns `NA` (rather than `-Inf`) if
+#' all elements are `NA`.
 #' @param x Numeric vector.
 #' @return Maximum of non-`NA` elements or `NA` if none exist.
 #' @export
@@ -107,10 +136,23 @@ OR.mdyY.to.Excel <- function (input, century, pivot) {
   return(suppressWarnings(as.numeric(output)))
 }
 
+#' Arithmetic mean with NA removal or NA if no valid entries
+#'
+#' Equivalent to `mean(x, na.rm = TRUE)` except returns `NA` (rather than `NaN`)
+#' if all elements are `NA`.
+#' @param x Numeric vector.
+#' @return Maximum of non-`NA` elements or `NA` if none exist.
+#' @export
+OR.mean <- function (x) {
+  x <- x[!is.na(x)]
+  if (length(x) == 0) return(NA)
+  return(mean(x))
+}
+
 #' Minimum with NA removal or NA if no valid entries
 #'
-#' Equivalent to `min(x, na.rm = TRUE)` except returns `NA` if all elements are
-#' `NA`.
+#' Equivalent to `min(x, na.rm = TRUE)` except returns `NA` (rather than `Inf`)
+#' if all elements are `NA`.
 #' @param x Numeric vector.
 #' @return Minimum of non-`NA` elements or `NA` if none exist.
 #' @export
@@ -246,8 +288,8 @@ OR.string.to.binary <- function(input, pattern, missing) {
 
 #' Sum with NA removal or NA if no valid entries
 #'
-#' Equivalent to `sum(x, na.rm = TRUE)` except returns `NA` if all elements are
-#' `NA`.
+#' Equivalent to `sum(x, na.rm = TRUE)` except returns `NA` (rather than `0`) if
+#' all elements are `NA`.
 #' @param x Numeric vector.
 #' @return Sum of non-`NA` elements or `NA` if none exist.
 #' @export

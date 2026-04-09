@@ -13,6 +13,6 @@ OR.sum(x)
 Sum of non-\code{NA} elements or \code{NA} if none exist.
 }
 \description{
-Equivalent to \code{sum(x, na.rm = TRUE)} except returns \code{NA} if all elements are
-\code{NA}.
+Equivalent to \code{sum(x, na.rm = TRUE)} except returns \code{NA} (rather than \code{0}) if
+all elements are \code{NA}.
 }
