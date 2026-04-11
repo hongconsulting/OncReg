@@ -1,3 +1,31 @@
 url: https://hongconsulting.github.io/OncReg
 template:
   bootstrap: 5
+reference:
+  - title: Basic data clearning
+    contents:
+      - starts_with("OR.0.")
+      - starts_with("OR.as.")
+      - starts_with("OR.F.")
+      - starts_with("OR.NA.")
+      - starts_with("OR.string.")
+  - title: Delimited strings
+    contents:
+      - starts_with("OR.delim.")
+  - title: Microsoft Excel serial dates
+    contents:
+      - contains("Excel")
+  - title: Outlier detection
+    contents:
+      - OR.kMAD
+      - starts_with("OR.outliers")
+  - title: Summary statistics
+    contents:
+      - OR.mean
+      - OR.min
+      - OR.max
+      - starts_with("OR.row")
+      - OR.sum      
+  - title: Other
+    contents:
+      - starts_with("")
