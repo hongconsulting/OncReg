@@ -241,5 +241,3 @@ OR.outliers.rlm.ggplot <- function(x, y, max.degree = 3, p = 0.05,
   }
   return(g)
 }
-
-

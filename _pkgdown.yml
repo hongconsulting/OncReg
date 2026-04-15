@@ -2,13 +2,13 @@ url: https://hongconsulting.github.io/OncReg
 template:
   bootstrap: 5
 reference:
-  - title: Basic data clearning
+  - title: Basic data cleaning
     contents:
       - starts_with("OR.0.")
       - starts_with("OR.as.")
       - starts_with("OR.F.")
       - starts_with("OR.NA.")
-      - starts_with("OR.string.")
+      - starts_with("OR.string.to.")
   - title: Delimited strings
     contents:
       - starts_with("OR.delim.")
@@ -26,6 +26,17 @@ reference:
       - OR.max
       - starts_with("OR.row")
       - OR.sum      
+  - title: Treatment dosing
+    contents:
+      - starts_with("OR.dose.")
+  - title: Treatment lines
+    contents:
+      - starts_with("OR.regimen.")
   - title: Other
     contents:
-      - starts_with("")
+      - AICR.Huber
+      - OR.collapse
+      - OR.LOCF.cluster
+      - OR.survoutcome
+      - rlm.Huber
+      
