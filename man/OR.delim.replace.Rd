@@ -2,18 +2,16 @@
 % Please edit documentation in R/OncReg.delim.R
 \name{OR.delim.replace}
 \alias{OR.delim.replace}
-\title{Replace delimited string elements (case- and whitespace-insensitive)}
+\title{Replace delimited string elements (case-insensitive and whitespace-trimmed)}
 \usage{
 OR.delim.replace(x, match, replacement, delimiter = ",")
 }
 \arguments{
 \item{x}{String vector, matrix, or data frame containing delimited strings.}
 
-\item{match}{String vector of elements to match (case- and
-whitespace-insensitive).}
+\item{match}{String vector of elements to match.}
 
-\item{replacement}{String delimited element replacement (case- and
-whitespace-insensitive).}
+\item{replacement}{String delimited element replacement.}
 
 \item{delimiter}{String delimiter. Default = \code{","}.}
 }
@@ -39,3 +37,15 @@ treatment <- OR.delim.replace(treatment, "palbociclib", "cdk46i")
 treatment <- OR.delim.replace(treatment, "ribociclib", "cdk46i")
 print(treatment)
 }
+\seealso{
+Other delim: 
+\code{\link{OR.delim.contains}()},
+\code{\link{OR.delim.merge}()},
+\code{\link{OR.delim.table}()}
+
+Other delim: 
+\code{\link{OR.delim.contains}()},
+\code{\link{OR.delim.merge}()},
+\code{\link{OR.delim.table}()}
+}
+\concept{delim}

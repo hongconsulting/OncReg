@@ -1,4 +1,3 @@
-
 #' Consolidate overlapping regimens at event boundaries
 #'
 #' For each unique date among `start_dates` and `stop_dates`, determines the set
@@ -12,7 +11,8 @@
 #' \describe{
 #'   \item{date}{Sorted unique dates from `start_dates` and `stop_dates`.}
 #'   \item{set}{Delimited string of treatments active at each date.}
-#' }e
+#' }
+#' @family regimen
 #' @export
 OR.regimen.consolidate <- function(start_dates, stop_dates, sets) {
   n <- length(start_dates)
@@ -98,6 +98,7 @@ OR.regimen.consolidate <- function(start_dates, stop_dates, sets) {
 #' If no restart satisfying `t_min` is found, `interval_time`, `restart_line`,
 #' `restart_date`, and `reprog_date` are returned as `NA`, while `prev_time`
 #' and `stop_reason` summarize the full observed treatment history.
+#' @family regimen
 #' @export
 OR.regimen.restart <- function(date_start, date_stop, reason_stop, date_prog,
                                t_min = 182.62125) {
@@ -127,6 +128,7 @@ OR.regimen.restart <- function(date_start, date_stop, reason_stop, date_prog,
 #' @param t_max Maximum allowed duration.
 #' @return Numeric matrix of truncated stop dates where
 #' `date_stop - date_start` does not exceed `t_max`.
+#' @family regimen
 #' @export
 OR.regimen.truncate <- function(date_start, date_stop, t_max) {
   output <- date_stop

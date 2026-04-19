@@ -28,3 +28,14 @@ Converts a string vector to a numeric vector according to the following:
 \examples{
 print(OR.string.to.binary(c("Yes", "Yes*", "No", "Missing"), "Yes", "Missing"))
 }
+\seealso{
+Other basic: 
+\code{\link{OR.0.rm}()},
+\code{\link{OR.F.to.NA}()},
+\code{\link{OR.NA.rm}()},
+\code{\link{OR.NA.to.0}()},
+\code{\link{OR.NA.to.F}()},
+\code{\link{OR.NA.to.empty}()},
+\code{\link{OR.as.numeric}()}
+}
+\concept{basic}

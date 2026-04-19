@@ -33,3 +33,8 @@ reweighted least squares.
 Carlo. \emph{The Annals of Statistics}, pp. 799–821.
 }
 }
+\seealso{
+Other rlm: 
+\code{\link{AICR.Huber}()}
+}
+\concept{rlm}

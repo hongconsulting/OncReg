@@ -43,3 +43,10 @@ deviation.
 \details{
 For numerical stability, \code{x} and \code{y} are standardized before fitting.
 }
+\seealso{
+Other outliers: 
+\code{\link{OR.kMAD}()},
+\code{\link{OR.outliers}()},
+\code{\link{OR.outliers.rlm.ggplot}()}
+}
+\concept{outliers}

@@ -21,3 +21,10 @@ outlier.
 Flags observations whose absolute deviation from the sample median
 exceeds a sample-size–adjusted multiple of the median absolute deviation.
 }
+\seealso{
+Other outliers: 
+\code{\link{OR.kMAD}()},
+\code{\link{OR.outliers.rlm}()},
+\code{\link{OR.outliers.rlm.ggplot}()}
+}
+\concept{outliers}

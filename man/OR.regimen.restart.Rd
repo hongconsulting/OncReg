@@ -46,3 +46,9 @@ before the restart, the maximum stop reason before the restart (for example,
 \code{0} = stopped due to toxicity, \code{1} = stopped due to progressive disease), the
 treatment-free interval, and the earliest progression date after the restart.
 }
+\seealso{
+Other regimen: 
+\code{\link{OR.regimen.consolidate}()},
+\code{\link{OR.regimen.truncate}()}
+}
+\concept{regimen}

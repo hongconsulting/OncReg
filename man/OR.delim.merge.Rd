@@ -2,7 +2,8 @@
 % Please edit documentation in R/OncReg.delim.R
 \name{OR.delim.merge}
 \alias{OR.delim.merge}
-\title{Merge delimited string elements pairwise (case- and whitespace-insensitive)}
+\title{Merge delimited string elements pairwise (case-insensitive and
+whitespace-trimmed)}
 \usage{
 OR.delim.merge(x1, x2, delimiter = ",")
 }
@@ -22,3 +23,10 @@ a specified delimiter, trims whitespace, converts to lowercase, takes the
 union of the delimited elements, removes duplicate elements, sorts elements
 alphabetically, and rejoins the elements using the same delimiter.
 }
+\seealso{
+Other delim: 
+\code{\link{OR.delim.contains}()},
+\code{\link{OR.delim.replace}()},
+\code{\link{OR.delim.table}()}
+}
+\concept{delim}

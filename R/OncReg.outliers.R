@@ -69,6 +69,7 @@ utils::globalVariables(".OR.kMAD.mat")
 #' 2. Nelson, L.S., 2003. When should the limits on a Shewhart control chart be
 #' other than a center line ±3-sigma? *Journal of Quality Technology*, 35(4), pp.
 #' 424–425.
+#' @family outliers
 #' @export
 OR.kMAD <- function(n, p = 0.05) {
   if (p == 0.05) {
@@ -99,6 +100,7 @@ OR.kMAD <- function(n, p = 0.05) {
 #' size `n` from a normal distribution. Default = `0.05`.
 #' @return Logical vector of the same length as `x` where `TRUE` indicates an
 #' outlier.
+#' @family outliers
 #' @export
 OR.outliers <- function(x, p = 0.05) {
   med <- stats::median(x)
@@ -126,6 +128,7 @@ OR.outliers <- function(x, p = 0.05) {
 #' outlying observation relative to the AICR-selected robust polynomial fit.
 #' @details
 #' For numerical stability, `x` and `y` are standardized before fitting.
+#' @family outliers
 #' @export
 OR.outliers.rlm <- function(x, y, max.degree = 3, p = 0.05,
                             tol.min = 0.0001, tol.target = 0.0001) {
@@ -179,6 +182,7 @@ OR.outliers.rlm <- function(x, y, max.degree = 3, p = 0.05,
 #' x <- 1:length(y) - 1
 #' OR.outliers.rlm.ggplot(x, y, max.degree = 4, p = 0.01, x.title = "X",
 #'                        y.breaks = seq(0, 150, 50), y.title = "Y")
+#' @family outliers
 #' @export
 OR.outliers.rlm.ggplot <- function(x, y, max.degree = 3, p = 0.05,
                                    tol.min = 0.0001, tol.target = 0.0001,

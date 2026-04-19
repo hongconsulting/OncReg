@@ -32,3 +32,10 @@ other than a center line ±3-sigma? \emph{Journal of Quality Technology}, 35(4),
 424–425.
 }
 }
+\seealso{
+Other outliers: 
+\code{\link{OR.outliers}()},
+\code{\link{OR.outliers.rlm}()},
+\code{\link{OR.outliers.rlm.ggplot}()}
+}
+\concept{outliers}

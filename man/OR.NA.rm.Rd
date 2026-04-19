@@ -15,3 +15,14 @@ OR.NA.rm(x)
 \description{
 Removes \code{NA} elements in a vector.
 }
+\seealso{
+Other basic: 
+\code{\link{OR.0.rm}()},
+\code{\link{OR.F.to.NA}()},
+\code{\link{OR.NA.to.0}()},
+\code{\link{OR.NA.to.F}()},
+\code{\link{OR.NA.to.empty}()},
+\code{\link{OR.as.numeric}()},
+\code{\link{OR.string.to.binary}()}
+}
+\concept{basic}

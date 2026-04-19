@@ -27,6 +27,7 @@
 #' measurements for one patient are distributed across multiple event rows.
 #' @return A data frame with one row per unique ID and one column for each
 #' variable matching `pattern`, summarized according to `method`.
+#' @family other
 #' @export
 OR.collapse <- function(data, ID_varname, pattern, method = "single") {
   IDs  <- unique(data[[ID_varname]])
@@ -62,6 +63,36 @@ OR.collapse <- function(data, ID_varname, pattern, method = "single") {
         stop(paste0("[OR.collapse] method ", method, " not implemented"))
       }
     }
+  }
+  return(output)
+}
+
+#' Enumerate permutations of k out of n items
+#'
+#' Returns all length-`k` permutations of the integers from 1 to `n`, in
+#' lexicographic order.
+#' @param n Integer size of the set.
+#' @param k Integer number of elements per permutation.
+#' @return Integer matrix with `factorial(n)/factorial(n-k)` rows and `k` columns.
+#' @family other
+#' @export
+OR.permutations <- function(n, k) {
+  if (k > n) stop("k > n")
+  total <- factorial(n) / factorial(n - k)
+  output <- matrix(0, total, k)
+  a <- seq_len(n)
+  output[1, ] <- a[1:k]
+  i <- 1
+  while (TRUE) {
+    j <- n - 1
+    while (j > 0 && a[j] > a[j + 1]) j <- j - 1
+    if (j == 0) break
+    l <- n
+    while (a[j] > a[l]) l <- l - 1
+    temp <- a[j]; a[j] <- a[l]; a[l] <- temp
+    a[(j + 1):n] <- rev(a[(j + 1):n])
+    i <- i + 1
+    output[i, ] <- a[1:k]
   }
   return(output)
 }

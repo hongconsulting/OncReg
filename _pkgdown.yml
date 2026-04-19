@@ -4,39 +4,31 @@ template:
 reference:
   - title: Basic data cleaning
     contents:
-      - starts_with("OR.0.")
-      - starts_with("OR.as.")
-      - starts_with("OR.F.")
-      - starts_with("OR.NA.")
-      - starts_with("OR.string.to.")
+      - has_concept("basic")
   - title: Delimited strings
     contents:
-      - starts_with("OR.delim.")
+      - has_concept("delim")
+  - title: Google Maps Platform
+    contents:
+      - has_concept("GoogleMapsPlatform")
   - title: Microsoft Excel serial dates
     contents:
-      - contains("Excel")
+      - has_concept("Excelserialdates")
   - title: Outlier detection
     contents:
-      - OR.kMAD
-      - starts_with("OR.outliers")
+      - has_concept("outliers")
   - title: Summary statistics
     contents:
-      - OR.mean
-      - OR.min
-      - OR.max
-      - starts_with("OR.row")
-      - OR.sum      
+      - has_concept("summary")
   - title: Treatment dosing
     contents:
-      - starts_with("OR.dose.")
+      - has_concept("dose")
   - title: Treatment lines
     contents:
-      - starts_with("OR.regimen.")
+      - has_concept("regimen")
   - title: Other
     contents:
-      - AICR.Huber
-      - OR.collapse
-      - OR.LOCF.cluster
-      - OR.survoutcome
-      - rlm.Huber
-      
+      - has_concept("imputation")
+      - has_concept("other")
+      - has_concept("rlm")
+      - has_concept("survival")

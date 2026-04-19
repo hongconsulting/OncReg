@@ -21,3 +21,9 @@ Numeric matrix of truncated stop dates where
 Limits the duration between \code{date_start} and \code{date_stop} to \code{t_max} by
 truncating \code{date_stop} where necessary.
 }
+\seealso{
+Other regimen: 
+\code{\link{OR.regimen.consolidate}()},
+\code{\link{OR.regimen.restart}()}
+}
+\concept{regimen}

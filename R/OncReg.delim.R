@@ -1,17 +1,17 @@
-#' Detect delimited string elements (case- and whitespace-insensitive)
+#' Detect delimited string elements (case-insensitive and whitespace-trimmed)
 #'
 #  Splits each string in a vector, matrix, or data frame by a specified
 #' delimiter, trims whitespace, converts to lowercase, and checks whether any
 #' delimited element matches one or more specified strings.
 #' @param x String vector, matrix, or data frame containing delimited strings.
-#' @param match String vector of elements to match (case- and
-#' whitespace-insensitive).
+#' @param match String vector of elements to match.
 #' @param delimiter String delimiter. Default = `","`.
 #' @param partial Logical. If `TRUE`, each delimited element is tested for
 #' substring matches against the provided `match` strings. If `FALSE` (default),
 #' matches must be exact.
 #' @return A logical vector or matrix indicating whether each string contains a
 #' delimited element matching any of the specified strings.
+#' @family delim
 #' @export
 OR.delim.contains <- function(x, match, delimiter = ",", partial = FALSE) {
   f <- function(t) {
@@ -38,8 +38,8 @@ OR.delim.contains <- function(x, match, delimiter = ",", partial = FALSE) {
   return(output)
 }
 
-
-#' Merge delimited string elements pairwise (case- and whitespace-insensitive)
+#' Merge delimited string elements pairwise (case-insensitive and
+#' whitespace-trimmed)
 #'
 #' For each pair of corresponding strings in `x1` and `x2`, splits the strings by
 #' a specified delimiter, trims whitespace, converts to lowercase, takes the
@@ -49,6 +49,7 @@ OR.delim.contains <- function(x, match, delimiter = ",", partial = FALSE) {
 #' @param x2 String vector, matrix, or data frame of the same shape as `x1`.
 #' @param delimiter String delimiter. Default = `","`.
 #' @return A string vector or matrix with merged delimited elements.
+#' @family delim
 #' @export
 OR.delim.merge <- function(x1, x2, delimiter = ",") {
   if (is.data.frame(x1)) x1 <- as.matrix(x1)
@@ -66,33 +67,27 @@ OR.delim.merge <- function(x1, x2, delimiter = ",") {
     parts <- sort(unique(parts))
     return(paste(parts, collapse = paste0(delimiter, " ")))
   }
-
   output <- mapply(f, x1, x2, USE.NAMES = FALSE)
-
   if (is.matrix(x1)) {
     dim(output) <- dim(x1)
   } else {
     output <- unname(output)
   }
-
   return(output)
-
   if (length(x2) == 1L) {
     output <- sapply(x1, function(a) f(a, x2))
   } else {
     output <- mapply(f, x1, x2, SIMPLIFY = TRUE, USE.NAMES = FALSE)
   }
-
   if (is.matrix(x1)) {
     dim(output) <- dim(x1)
   } else {
     output <- unname(output)
   }
-
   return(output)
 }
 
-#' Replace delimited string elements (case- and whitespace-insensitive)
+#' Replace delimited string elements (case-insensitive and whitespace-trimmed)
 #'
 #' Splits each string in a vector, matrix, or data frame by a specified
 #' delimiter, trims whitespace, converts to lowercase, and checks whether any
@@ -100,12 +95,11 @@ OR.delim.merge <- function(x1, x2, delimiter = ",") {
 #' matching elements with a new string, removes duplicate elements, sorts
 #' elements alphabetically, and rejoins the elements using the same delimiter.
 #' @param x String vector, matrix, or data frame containing delimited strings.
-#' @param match String vector of elements to match (case- and
-#' whitespace-insensitive).
-#' @param replacement String delimited element replacement (case- and
-#' whitespace-insensitive).
+#' @param match String vector of elements to match.
+#' @param replacement String delimited element replacement.
 #' @param delimiter String delimiter. Default = `","`.
 #' @return A string vector or matrix with replaced delimited elements.
+#' @family delim
 #' @examples
 #' treatment <- c("capecitabine",
 #'                "LETROZOLE",
@@ -117,6 +111,7 @@ OR.delim.merge <- function(x1, x2, delimiter = ",") {
 #' treatment <- OR.delim.replace(treatment, "palbociclib", "cdk46i")
 #' treatment <- OR.delim.replace(treatment, "ribociclib", "cdk46i")
 #' print(treatment)
+#' @family delim
 #' @export
 OR.delim.replace <- function(x, match, replacement, delimiter = ",") {
   f <- function(t) {
@@ -138,16 +133,15 @@ OR.delim.replace <- function(x, match, replacement, delimiter = ",") {
   return(output)
 }
 
-#' Frequency table of delimited string elements (case- and
-#' whitespace-insensitive)
+#' Frequency table of delimited string elements (case-insensitive and
+#' whitespace-trimmed)
 #'
 #' Splits each string in a string vector, matrix, or data frame by a specified
 #' delimiter, trims whitespace, converts to lowercase, and tabulates the
 #' frequency of all unique delimited elements.
 #' @param x String vector, matrix, or data frame containing delimited strings.
 #' @param delimiter String delimiter. Default = `","`.
-#' @return A table of delimited element frequencies (case- and
-#' whitespace-insensitive).
+#' @return A table of delimited element frequencies.
 #' @examples
 #' treatment <- c("capecitabine",
 #'                "LETROZOLE",
@@ -155,6 +149,7 @@ OR.delim.replace <- function(x, match, replacement, delimiter = ",") {
 #'                "Letrozole,Ribociclib",
 #'                "anastrozole, ribociclib")
 #' print(OR.delim.table(treatment))
+#' @family delim
 #' @export
 OR.delim.table <- function(x, delimiter = ",") {
   if (is.data.frame(x)) x <- as.matrix(x)

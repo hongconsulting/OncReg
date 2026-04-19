@@ -31,3 +31,8 @@ missing, it is initialized to the first non-missing value in that cluster.
 For example, with \code{threshold = 0.1}, changes within ±10\% are ignored:
 \code{c(0, 100, NA, 105, 110)} is replaced with \code{c(100, 100, 100, 100, 110)}.
 }
+\seealso{
+Other dose: 
+\code{\link{OR.dose.vials}()}
+}
+\concept{dose}

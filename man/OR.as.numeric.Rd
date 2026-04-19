@@ -17,3 +17,14 @@ Removes all characters except digits, decimal point, and minus sign, then
 converts the result to numeric. Non-convertible values return \code{NA} with
 warnings suppressed.
 }
+\seealso{
+Other basic: 
+\code{\link{OR.0.rm}()},
+\code{\link{OR.F.to.NA}()},
+\code{\link{OR.NA.rm}()},
+\code{\link{OR.NA.to.0}()},
+\code{\link{OR.NA.to.F}()},
+\code{\link{OR.NA.to.empty}()},
+\code{\link{OR.string.to.binary}()}
+}
+\concept{basic}

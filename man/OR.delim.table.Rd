@@ -2,8 +2,8 @@
 % Please edit documentation in R/OncReg.delim.R
 \name{OR.delim.table}
 \alias{OR.delim.table}
-\title{Frequency table of delimited string elements (case- and
-whitespace-insensitive)}
+\title{Frequency table of delimited string elements (case-insensitive and
+whitespace-trimmed)}
 \usage{
 OR.delim.table(x, delimiter = ",")
 }
@@ -13,8 +13,7 @@ OR.delim.table(x, delimiter = ",")
 \item{delimiter}{String delimiter. Default = \code{","}.}
 }
 \value{
-A table of delimited element frequencies (case- and
-whitespace-insensitive).
+A table of delimited element frequencies.
 }
 \description{
 Splits each string in a string vector, matrix, or data frame by a specified
@@ -29,3 +28,10 @@ treatment <- c("capecitabine",
                "anastrozole, ribociclib")
 print(OR.delim.table(treatment))
 }
+\seealso{
+Other delim: 
+\code{\link{OR.delim.contains}()},
+\code{\link{OR.delim.merge}()},
+\code{\link{OR.delim.replace}()}
+}
+\concept{delim}

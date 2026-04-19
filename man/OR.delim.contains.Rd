@@ -2,15 +2,14 @@
 % Please edit documentation in R/OncReg.delim.R
 \name{OR.delim.contains}
 \alias{OR.delim.contains}
-\title{Detect delimited string elements (case- and whitespace-insensitive)}
+\title{Detect delimited string elements (case-insensitive and whitespace-trimmed)}
 \usage{
 OR.delim.contains(x, match, delimiter = ",", partial = FALSE)
 }
 \arguments{
 \item{x}{String vector, matrix, or data frame containing delimited strings.}
 
-\item{match}{String vector of elements to match (case- and
-whitespace-insensitive).}
+\item{match}{String vector of elements to match.}
 
 \item{delimiter}{String delimiter. Default = \code{","}.}
 
@@ -26,3 +25,10 @@ delimited element matching any of the specified strings.
 delimiter, trims whitespace, converts to lowercase, and checks whether any
 delimited element matches one or more specified strings.
 }
+\seealso{
+Other delim: 
+\code{\link{OR.delim.merge}()},
+\code{\link{OR.delim.replace}()},
+\code{\link{OR.delim.table}()}
+}
+\concept{delim}

@@ -15,6 +15,7 @@
 #'   \item `diff_amount`: excess over target
 #'   \item `sum_cost`: total cost
 #' }
+#' @family dose
 #' @export
 OR.dose.vials <- function(denominations, target, costs = NULL) {
   # if no prices specified, assume 1 unit cost per 1 unit amount:
@@ -63,6 +64,7 @@ OR.dose.vials <- function(denominations, target, costs = NULL) {
 #' Default = `0`.
 #' @return Numeric vector of same length as `x` with stabilized and imputed
 #' weights.
+#' @family dose
 #' @export
 OR.dose.weights <- function(x, id = NULL, threshold = 0) {
   x[x == 0] <- NA # weights == 0 are invalid

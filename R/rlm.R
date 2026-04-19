@@ -27,6 +27,7 @@
 #' x <- as.matrix(1:length(y) - 1)
 #' fit <- rlm.Huber(X = x, y = y)
 #' print(AICR.Huber(x, y, fit$coefficients, fit$s))
+#' @family rlm
 #' @export
 AICR.Huber <- function(X, y, beta, scale, k2 = 1.345) {
   X <- as.matrix(X)
@@ -71,6 +72,7 @@ dscore.Huber <- function(x, k2) {
 #' @references
 #' 1. Huber, P.J., 1973. Robust regression: asymptotics, conjectures and Monte
 #' Carlo. *The Annals of Statistics*, pp. 799–821.
+#' @family rlm
 #' @export
 rlm.Huber <- function(X, y, k2 = 1.345, maxit = 100, tol.min = 0.0001, tol.target = 0.0001) {
   if (qr(X)$rank < ncol(X)) stop("[rlm.Huber] singularity detected")
@@ -151,4 +153,3 @@ score.Huber <- function(x, k2) {
   output[i] <- 2 * x[i]
   return(output)
 }
-

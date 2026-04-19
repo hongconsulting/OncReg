@@ -15,3 +15,14 @@ OR.0.rm(x)
 \description{
 Removes elements equal to \code{0} from a numeric vector.
 }
+\seealso{
+Other basic: 
+\code{\link{OR.F.to.NA}()},
+\code{\link{OR.NA.rm}()},
+\code{\link{OR.NA.to.0}()},
+\code{\link{OR.NA.to.F}()},
+\code{\link{OR.NA.to.empty}()},
+\code{\link{OR.as.numeric}()},
+\code{\link{OR.string.to.binary}()}
+}
+\concept{basic}

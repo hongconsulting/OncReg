@@ -18,7 +18,7 @@ A data frame with:
 \describe{
 \item{date}{Sorted unique dates from \code{start_dates} and \code{stop_dates}.}
 \item{set}{Delimited string of treatments active at each date.}
-}e
+}
 }
 \description{
 For each unique date among \code{start_dates} and \code{stop_dates}, determines the set
@@ -26,3 +26,9 @@ of active regimens by checking which regimen periods [\code{start_dates[i]},
 \code{stop_dates[i]}) contain the date, and merges the corresponding delimited
 strings representing the treatments that comprise each regimen.
 }
+\seealso{
+Other regimen: 
+\code{\link{OR.regimen.restart}()},
+\code{\link{OR.regimen.truncate}()}
+}
+\concept{regimen}

@@ -47,3 +47,8 @@ Proceedings of the Cambridge Philosophical Society}, 51(3), pp. 406–413.
 Cambridge: Cambridge University Press.
 }
 }
+\seealso{
+Other rlm: 
+\code{\link{rlm.Huber}()}
+}
+\concept{rlm}

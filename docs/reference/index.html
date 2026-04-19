@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">OncReg</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.16.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,12 +49,6 @@
         <dd>Remove zero elements</dd>
       </dl><dl><dt>
 
-          <code><a href="OR.as.numeric.html">OR.as.numeric()</a></code>
-
-        </dt>
-        <dd>Convert strings to numeric after stripping non-numeric characters</dd>
-      </dl><dl><dt>
-
           <code><a href="OR.F.to.NA.html">OR.F.to.NA()</a></code>
 
         </dt>
@@ -85,6 +79,12 @@
         <dd>Convert missing values to empty strings</dd>
       </dl><dl><dt>
 
+          <code><a href="OR.as.numeric.html">OR.as.numeric()</a></code>
+
+        </dt>
+        <dd>Convert strings to numeric after stripping non-numeric characters</dd>
+      </dl><dl><dt>
+
           <code><a href="OR.string.to.binary.html">OR.string.to.binary()</a></code>
 
         </dt>
@@ -105,25 +105,54 @@
           <code><a href="OR.delim.contains.html">OR.delim.contains()</a></code>
 
         </dt>
-        <dd>Detect delimited string elements (case- and whitespace-insensitive)</dd>
+        <dd>Detect delimited string elements (case-insensitive and whitespace-trimmed)</dd>
       </dl><dl><dt>
 
           <code><a href="OR.delim.merge.html">OR.delim.merge()</a></code>
 
         </dt>
-        <dd>Merge delimited string elements pairwise (case- and whitespace-insensitive)</dd>
+        <dd>Merge delimited string elements pairwise (case-insensitive and whitespace-trimmed)</dd>
       </dl><dl><dt>
 
           <code><a href="OR.delim.replace.html">OR.delim.replace()</a></code>
 
         </dt>
-        <dd>Replace delimited string elements (case- and whitespace-insensitive)</dd>
+        <dd>Replace delimited string elements (case-insensitive and whitespace-trimmed)</dd>
       </dl><dl><dt>
 
           <code><a href="OR.delim.table.html">OR.delim.table()</a></code>
 
         </dt>
-        <dd>Frequency table of delimited string elements (case- and whitespace-insensitive)</dd>
+        <dd>Frequency table of delimited string elements (case-insensitive and whitespace-trimmed)</dd>
+      </dl></div><div class="section level2">
+      <h2 id="google-maps-platform">Google Maps Platform<a class="anchor" aria-label="anchor" href="#google-maps-platform"></a></h2>
+
+
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="OR.Google.TSP.html">OR.Google.TSP()</a></code>
+
+        </dt>
+        <dd>Travelling salesman distance via Google Routes API</dd>
+      </dl><dl><dt>
+
+          <code><a href="OR.Google.address.html">OR.Google.address()</a></code>
+
+        </dt>
+        <dd>Resolve address using Google Geocoding API</dd>
+      </dl><dl><dt>
+
+          <code><a href="OR.Google.distance.html">OR.Google.distance()</a></code>
+
+        </dt>
+        <dd>Road distance between two addresses using Google Routes API</dd>
       </dl></div><div class="section level2">
       <h2 id="microsoft-excel-serial-dates">Microsoft Excel serial dates<a class="anchor" aria-label="anchor" href="#microsoft-excel-serial-dates"></a></h2>
 
@@ -195,6 +224,12 @@
 
       <dl><dt>
 
+          <code><a href="OR.max.html">OR.max()</a></code>
+
+        </dt>
+        <dd>Maximum with NA removal or NA if no valid entries</dd>
+      </dl><dl><dt>
+
           <code><a href="OR.mean.html">OR.mean()</a></code>
 
         </dt>
@@ -205,12 +240,6 @@
 
         </dt>
         <dd>Minimum with NA removal or NA if no valid entries</dd>
-      </dl><dl><dt>
-
-          <code><a href="OR.max.html">OR.max()</a></code>
-
-        </dt>
-        <dd>Maximum with NA removal or NA if no valid entries</dd>
       </dl><dl><dt>
 
           <code><a href="OR.rowleft.html">OR.rowleft()</a></code>
@@ -300,10 +329,10 @@
 
       <dl><dt>
 
-          <code><a href="AICR.Huber.html">AICR.Huber()</a></code>
+          <code><a href="OR.LOCF.cluster.html">OR.LOCF.cluster()</a></code>
 
         </dt>
-        <dd>Robust Akaike information criterion for Huber M-estimation</dd>
+        <dd>Last observation carried forward within clusters</dd>
       </dl><dl><dt>
 
           <code><a href="OR.collapse.html">OR.collapse()</a></code>
@@ -312,22 +341,28 @@
         <dd>Collapse repeated measurements across IDs</dd>
       </dl><dl><dt>
 
-          <code><a href="OR.LOCF.cluster.html">OR.LOCF.cluster()</a></code>
+          <code><a href="OR.permutations.html">OR.permutations()</a></code>
 
         </dt>
-        <dd>Last observation carried forward within clusters</dd>
+        <dd>Enumerate permutations of k out of n items</dd>
       </dl><dl><dt>
 
-          <code><a href="OR.survoutcome.html">OR.survoutcome()</a></code>
+          <code><a href="AICR.Huber.html">AICR.Huber()</a></code>
 
         </dt>
-        <dd>Survival outcomes</dd>
+        <dd>Robust Akaike information criterion for Huber M-estimation</dd>
       </dl><dl><dt>
 
           <code><a href="rlm.Huber.html">rlm.Huber()</a></code>
 
         </dt>
         <dd>Robust linear regression using Huber M-estimation</dd>
+      </dl><dl><dt>
+
+          <code><a href="OR.survoutcome.html">OR.survoutcome()</a></code>
+
+        </dt>
+        <dd>Survival outcomes</dd>
       </dl></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>

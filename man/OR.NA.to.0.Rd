@@ -15,3 +15,14 @@ The input object with all \code{NA} values replaced by \code{0}.
 \description{
 Converts all \code{NA} elements in a vector or matrix to \code{0}.
 }
+\seealso{
+Other basic: 
+\code{\link{OR.0.rm}()},
+\code{\link{OR.F.to.NA}()},
+\code{\link{OR.NA.rm}()},
+\code{\link{OR.NA.to.F}()},
+\code{\link{OR.NA.to.empty}()},
+\code{\link{OR.as.numeric}()},
+\code{\link{OR.string.to.binary}()}
+}
+\concept{basic}

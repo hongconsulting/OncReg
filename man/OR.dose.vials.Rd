@@ -29,3 +29,8 @@ Solves a minimum-cost unbounded covering knapsack problem by brute-force
 enumeration to find vial combinations of \code{denominations} that achieve at least
 \code{target} dose with minimum total cost, breaking ties by the smallest number of vials.
 }
+\seealso{
+Other dose: 
+\code{\link{OR.dose.weights}()}
+}
+\concept{dose}

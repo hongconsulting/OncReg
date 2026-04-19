@@ -77,3 +77,10 @@ x <- 1:length(y) - 1
 OR.outliers.rlm.ggplot(x, y, max.degree = 4, p = 0.01, x.title = "X",
                        y.breaks = seq(0, 150, 50), y.title = "Y")
 }
+\seealso{
+Other outliers: 
+\code{\link{OR.kMAD}()},
+\code{\link{OR.outliers}()},
+\code{\link{OR.outliers.rlm}()}
+}
+\concept{outliers}
