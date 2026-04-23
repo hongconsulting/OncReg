@@ -10,6 +10,7 @@
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.Google.address.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.Google.distance.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.LOCF.cluster.html</loc></url>
+<url><loc>https://hongconsulting.github.io/OncReg/reference/OR.LOCF.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.NA.rm.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.NA.to.0.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.NA.to.F.html</loc></url>
@@ -50,7 +51,9 @@
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.sum.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.survoutcome.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.txlines.restart.html</loc></url>
+<url><loc>https://hongconsulting.github.io/OncReg/reference/OR.txlines.timeline.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.txlines.truncate.html</loc></url>
+<url><loc>https://hongconsulting.github.io/OncReg/reference/OR.txlines.wide.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/index.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/rlm.Huber.html</loc></url>
 </urlset>

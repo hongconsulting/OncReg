@@ -48,6 +48,8 @@ treatment-free interval, and the earliest progression date after the restart.
 }
 \seealso{
 Other txlines: 
-\code{\link{OR.txlines.truncate}()}
+\code{\link{OR.txlines.timeline}()},
+\code{\link{OR.txlines.truncate}()},
+\code{\link{OR.txlines.wide}()}
 }
 \concept{txlines}

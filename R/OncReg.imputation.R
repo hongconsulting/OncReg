@@ -1,4 +1,4 @@
-#' Last observation carried forward within clusters
+#' Last observation carried forward
 #'
 #' Applies LOCF imputation to `x` within each `id`, assuming observations are
 #' already ordered within each `id`.
@@ -8,7 +8,7 @@
 #' @return Vector of same length as `x` with LOCF applied within each `id`.
 #' @family imputation
 #' @export
-OR.LOCF.cluster <- function(x, id = NULL) {
+OR.LOCF <- function(x, id = NULL) {
   if (is.null(id)) id <- rep(0, length(x))
   output <- rep(NA, length(x))
   unique_id <- unique(id)

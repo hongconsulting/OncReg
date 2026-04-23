@@ -23,6 +23,8 @@ truncating \code{date_stop} where necessary.
 }
 \seealso{
 Other txlines: 
-\code{\link{OR.txlines.restart}()}
+\code{\link{OR.txlines.restart}()},
+\code{\link{OR.txlines.timeline}()},
+\code{\link{OR.txlines.wide}()}
 }
 \concept{txlines}
