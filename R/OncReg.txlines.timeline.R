@@ -10,36 +10,36 @@
   }
   m <- length(eventdates)
   n <- length(startdates)
-  unique_dates <- sort(unique(c(startdates, stopdates, eventdates)))
-  if (length(unique_dates) == 0) {
+  udates <- sort(unique(c(startdates, stopdates, eventdates)))
+  if (length(udates) == 0) {
     return(data.frame("date" = NA, "regimen" = NA, "stopreasons" = NA, "event" = FALSE))
   }
-  output <- data.frame("date" = unique_dates)
+  output <- data.frame("date" = udates)
   output$regimen <- ""
   output$stopreasons <- ""
   output$event <- FALSE
   for (i in 1:nrow(output)) { # loop through all unique dates
-    current_date <- output$date[i]
-    cat("[OR.txlines.timeline] current date =", current_date, "\n")
+    currentdate <- output$date[i]
+    cat("[OR.txlines.timeline] current date =", currentdate, "\n")
     if (!is.null(eventdates)) {
       for (j in 1:m) { # loop through all event dates
-        if (OR.NA.to.F(current_date == eventdates[j])) {
+        if (OR.NA.to.F(currentdate == eventdates[j])) {
           output$event[i] <- TRUE
         }
       }
     }
     for (j in 1:n) { # loop through all lines of treatment
       if (!is.null(stopreasons)) {
-        if (OR.NA.to.F(current_date == stopdates[j])) {
+        if (OR.NA.to.F(currentdate == stopdates[j])) {
           output$stopreasons[i] <- OR.delim.merge(output$stopreasons[i], stopreasons[j])
         }
       }
       if (OR.NA.to.empty(regimens[j]) == "") next
       if (is.na(startdates[j])) next
-      if (current_date >= startdates[j]) {
+      if (currentdate >= startdates[j]) {
         if (echo) cat("[OR.txlines.timeline] i = ", i, ", j = ", j, ": ", sep = "")
         if (!is.na(stopdates[j])) {
-          if (current_date < stopdates[j]) {
+          if (currentdate < stopdates[j]) {
             output$regimen[i] <- OR.delim.merge(output$regimen[i], regimens[j])
             if (echo) cat(regimens[j], " ", sep = "")
           }
@@ -140,11 +140,11 @@ OR.txlines.timeline <- function(id, regimens, startdates, stopdates,
 #' @family txlines
 #' @export
 OR.txlines.wide <- function(id, date, regimen, event, line) {
+  line <- OR.as.numeric(line)
+  ulines <- OR.NA.rm(sort(unique(line)))
   input <- data.frame("id" = id, "date" = date, "regimen" = regimen,
                       "event" = event, "line" = line)
-  input$line <- OR.as.numeric(input$line)
   output <- data.frame("id" = unique(id))
-  ulines <- OR.NA.rm(sort(unique(line)))
   for (line in 1:length(ulines)) {
     output[[paste0("startdateL", ulines[line])]] <- NA
     output[[paste0("regimenL", ulines[line])]] <- ""
