@@ -133,9 +133,9 @@ OR.txlines.timeline <- function(id, regimens, startdates, stopdates,
 #' lines:
 #' \describe{
 #'   \item{id}{Identifier.}
-#'   \item{startdateL<k>}{Start date of line `k`.}
+#'   \item{date.startL<k>}{Start date of line `k`.}
 #'   \item{regimenL<k>}{Regimens in line `k`.}
-#'   \item{eventdateL<k>}{Earliest event date for line `k`.}
+#'   \item{date.eventL<k>}{Earliest event date for line `k`.}
 #' }
 #' @family txlines
 #' @export
@@ -146,17 +146,17 @@ OR.txlines.wide <- function(id, date, regimen, event, line) {
                       "event" = event, "line" = line)
   output <- data.frame("id" = unique(id))
   for (line in 1:length(ulines)) {
-    output[[paste0("startdateL", ulines[line])]] <- NA
+    output[[paste0("date.startL", ulines[line])]] <- NA
     output[[paste0("regimenL", ulines[line])]] <- ""
     # output[[paste0("stopdateL", ulines[line])]] <- NA
-    output[[paste0("eventdateL", ulines[line])]] <- NA
+    output[[paste0("date.eventL", ulines[line])]] <- NA
   }
   for (uid in unique(id)) {
     subset <- input[input$id == uid,]
     subset$line <- OR.LOCF(subset$line)
     for (i in 1:nrow(subset)) {
       if (!is.na(subset$line[i])) {
-        output[[paste0("startdateL", subset$line[i])]][output$id == uid] <- subset$date[i]
+        output[[paste0("date.startL", subset$line[i])]][output$id == uid] <- subset$date[i]
         # if (subset$line[i] > 1) {
         #   output[[paste0("stopdate", subset$line[i] - 1)]][output$id == id] <- subset$date[i]
         # }
@@ -164,8 +164,8 @@ OR.txlines.wide <- function(id, date, regimen, event, line) {
           OR.delim.merge(output[[paste0("regimenL", subset$line[i])]][output$id == uid],
                          subset$regimen[i])
         if (subset$event[i]) {
-          output[[paste0("eventdateL", subset$line[i])]][output$id == uid] <-
-            OR.min(c(output[[paste0("eventdateL", subset$line[i])]][output$id == uid],
+          output[[paste0("date.eventL", subset$line[i])]][output$id == uid] <-
+            OR.min(c(output[[paste0("date.eventL", subset$line[i])]][output$id == uid],
                      subset$date[i]))
         }
       }

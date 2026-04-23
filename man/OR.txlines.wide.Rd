@@ -22,9 +22,9 @@ A data frame in wide format with columns, where \code{k} indexes treatment
 lines:
 \describe{
 \item{id}{Identifier.}
-\item{startdateL\if{html}{\out{<k>}}}{Start date of line \code{k}.}
+\item{date.startL\if{html}{\out{<k>}}}{Start date of line \code{k}.}
 \item{regimenL\if{html}{\out{<k>}}}{Regimens in line \code{k}.}
-\item{eventdateL\if{html}{\out{<k>}}}{Earliest event date for line \code{k}.}
+\item{date.eventL\if{html}{\out{<k>}}}{Earliest event date for line \code{k}.}
 }
 }
 \description{
