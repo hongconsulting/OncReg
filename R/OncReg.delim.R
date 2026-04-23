@@ -245,12 +245,12 @@ OR.delim.txclass <- function(x, delimiter = ",") {
   classes[["endocrine, gnrh"]] <- c("goserelin", "leuprorelin")
   classes[["endocrine, serd"]] <- c("fulvestrant", "vepdegestrant")
   classes[["chemotherapy"]] <- c("5fu", "gemcitabine", "methotrexate", "pemetrexed", "raltitrexed", "trifluridine") # antimetabolite
-  classes[["chemotherapy"]] <- c("bleomycin", "mitomycin", "temozolomide")
-  classes[["chemotherapy"]] <- c("cyclophosphamide", "lomustine") # alkylating
-  classes[["chemotherapy"]] <- c("eribulin")
-  classes[["chemotherapy"]] <- c("etoposide", "irinotecan") # topoisomerase
-  classes[["chemotherapy"]] <- c("vinorelbine") # vinca
-  classes[["chemotherapy, anthracycline"]] <- c("doxorubicin", "epirubicin", "liposomal doxorubicin")
+  classes[["chemotherapy"]] <- c(classes[["chemotherapy"]], "bleomycin", "mitomycin", "temozolomide")
+  classes[["chemotherapy"]] <- c(classes[["chemotherapy"]], "cyclophosphamide", "lomustine") # alkylating
+  classes[["chemotherapy"]] <- c(classes[["chemotherapy"]], "eribulin")
+  classes[["chemotherapy"]] <- c(classes[["chemotherapy"]], "etoposide", "irinotecan") # topoisomerase
+  classes[["chemotherapy"]] <- c(classes[["chemotherapy"]], "vinorelbine") # vinca
+  classes[["chemotherapy, anthracycline"]] <- c("doxorubicin", "epirubicin", "doxorubicin")
   classes[["chemotherapy, platinum"]] <- c("carboplatin", "cisplatin", "oxaliplatin")
   classes[["chemotherapy, taxane"]] <- c("cabazitaxel", "docetaxel", "nab-paclitaxel", "paclitaxel")
   classes[["chemotherapy, targeted, her2"]] <- c("trastuzumab emtansine")
@@ -259,8 +259,8 @@ OR.delim.txclass <- function(x, delimiter = ",") {
   classes[["immunotherapy, pd1"]] <- c("cemiplimab", "nivolumab", "pembrolizumab")
   classes[["immunotherapy, pdl1"]] <- c("atezolizumab", "durvalumab")
   classes[["targeted"]] <- c("axitinib", "cabozantinib", "lenvatinib", "pazopanib", "regorafenib", "sorafenib", "sunitinib")
-  classes[["targeted"]] <- c("bevacizumab")
-  classes[["targeted"]] <- c("capivasertib", "ipatasertib")
+  classes[["targeted"]] <- c(classes[["targeted"]], "bevacizumab")
+  classes[["targeted"]] <- c(classes[["targeted"]], "capivasertib", "ipatasertib")
   classes[["targeted, braf"]] <- c("dabrafenib", "encorafenib", "vemurafenib")
   classes[["targeted, cdk46"]] <- c("abemaciclib", "palbociclib", "ribociclib")
   classes[["targeted, egfr"]] <- c("cetuximab", "panitumumab")
@@ -296,6 +296,8 @@ OR.delim.txclass <- function(x, delimiter = ",") {
 #' @family delim
 #' @export
 OR.delim.txname <- function(x, delimiter = ",") {
+  x <- gsub("nanoliposomal ", "", x, fixed = TRUE)
+
   x <- gsub(" alone", "", x, fixed = TRUE)
   x <- gsub("bolus ", "", x, fixed = TRUE)
   x <- gsub(" bolus", "", x, fixed = TRUE)
@@ -305,6 +307,7 @@ OR.delim.txname <- function(x, delimiter = ",") {
   x <- gsub(" infusion", "", x, fixed = TRUE)
   x <- gsub("iv ", "", x, fixed = TRUE)
   x <- gsub(" iv", "", x, fixed = TRUE)
+  x <- gsub("liposomal ", "", x, fixed = TRUE)
   x <- gsub("modified ", "", x, fixed = TRUE)
   x <- gsub("(modified)", "", x, fixed = TRUE)
   x <- gsub(" modified", "", x, fixed = TRUE)
