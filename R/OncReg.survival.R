@@ -1,33 +1,42 @@
 #' Survival outcomes
 #'
 #' Computes event times and statuses from start, event, and review dates.
-#' @param date_start Vector of start dates.
-#' @param date_event Vector of event dates.
-#' @param date_follow Vector of last follow-up dates for censored cases.
+#' @param startdate Numeric vector of start dates.
+#' @param eventdate Numeric vector of event dates.
+#' @param reviewdate Numeric vector of latest follow-up dates.
 #' @param divisor Unit conversion factor for time. Default = `365.2425/12`.
-#' @return A numeric matrix with two columns: survival time and status (`1` =
-#' event, `0` = censored). Cases with missing start dates or with survival time
-#' ≤ 0 are returned as `NA` in both columns.
+#' @param zero Logical. If `TRUE`, survival times equal to zero are allowed. 
+#' Default = `FALSE`. 
+#' @return A data frame with columns:
+#' \describe{
+#'   \item{time}{Survival time.}
+#'   \item{status}{Event indicator (`1` = event, `0` = censored).}
+#' }
+#' Cases with missing start dates, or with invalid survival times (≤ `0`, or < `0`
+#' when `zero = TRUE`), are returned as `NA` in both columns.
 #' @family survival
 #' @export
-OR.survoutcome <- function(date_start, date_event, date_follow, divisor = 365.2425/12) {
-  n <- length(date_start)
-  output <- matrix(NA, n, 2)
+OR.survoutcome <- function(startdate, eventdate, reviewdate, 
+                           divisor = 365.2425/12, zero = FALSE) {
+  n <- length(startdate)
+  output <- data.frame("time" = rep(NA, n), "status" = rep(NA, n))
   for (i in 1:n) {
-    if (!is.na(date_start[i])) {
-      if (!is.na(date_event[i])) {
-        output[i, 1] <- (date_event[i] - date_start[i])/divisor
-        output[i, 2] <- 1
-        if (output[i, 1] <= 0) {
-          output[i, 1] <- NA
-          output[i, 2] <- NA
-        }
-      }
-      else if (!is.na(date_follow[i])) {
-        output[i, 1] <- (date_follow[i] - date_start[i])/divisor
-        output[i, 2] <- 0
+    if (!is.na(startdate[i])) {
+      if (!is.na(eventdate[i])) {
+        output$time[i] <- (eventdate[i] - startdate[i])/divisor
+        output$status[i] <- 1
+      } else if (!is.na(reviewdate[i])) {
+        output$time[i] <- (reviewdate[i] - startdate[i])/divisor
+        output$status[i] <- 0
       }
     }
+  }
+  if (zero) {
+    output$status[output$time < 0] <- NA
+    output$time[output$time < 0] <- NA
+  } else {
+    output$status[output$time <= 0] <- NA
+    output$time[output$time <= 0] <- NA
   }
   return(output)
 }

@@ -43,7 +43,9 @@ Other delim:
 \code{\link{OR.delim.merge}()},
 \code{\link{OR.delim.split}()},
 \code{\link{OR.delim.subset}()},
-\code{\link{OR.delim.table}()}
+\code{\link{OR.delim.table}()},
+\code{\link{OR.delim.txclass}()},
+\code{\link{OR.delim.txname}()}
 
 Other delim: 
 \code{\link{OR.delim.contains}()},
@@ -51,6 +53,8 @@ Other delim:
 \code{\link{OR.delim.merge}()},
 \code{\link{OR.delim.split}()},
 \code{\link{OR.delim.subset}()},
-\code{\link{OR.delim.table}()}
+\code{\link{OR.delim.table}()},
+\code{\link{OR.delim.txclass}()},
+\code{\link{OR.delim.txname}()}
 }
 \concept{delim}

@@ -35,6 +35,8 @@ Other delim:
 \code{\link{OR.delim.merge}()},
 \code{\link{OR.delim.replace}()},
 \code{\link{OR.delim.split}()},
-\code{\link{OR.delim.subset}()}
+\code{\link{OR.delim.subset}()},
+\code{\link{OR.delim.txclass}()},
+\code{\link{OR.delim.txname}()}
 }
 \concept{delim}

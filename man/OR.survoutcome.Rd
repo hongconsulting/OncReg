@@ -4,21 +4,34 @@
 \alias{OR.survoutcome}
 \title{Survival outcomes}
 \usage{
-OR.survoutcome(date_start, date_event, date_follow, divisor = 365.2425/12)
+OR.survoutcome(
+  startdate,
+  eventdate,
+  reviewdate,
+  divisor = 365.2425/12,
+  zero = FALSE
+)
 }
 \arguments{
-\item{date_start}{Vector of start dates.}
+\item{startdate}{Numeric vector of start dates.}
 
-\item{date_event}{Vector of event dates.}
+\item{eventdate}{Numeric vector of event dates.}
 
-\item{date_follow}{Vector of last follow-up dates for censored cases.}
+\item{reviewdate}{Numeric vector of latest follow-up dates.}
 
 \item{divisor}{Unit conversion factor for time. Default = \code{365.2425/12}.}
+
+\item{zero}{Logical. If \code{TRUE}, survival times equal to zero are allowed.
+Default = \code{FALSE}.}
 }
 \value{
-A numeric matrix with two columns: survival time and status (\code{1} =
-event, \code{0} = censored). Cases with missing start dates or with survival time
-≤ 0 are returned as \code{NA} in both columns.
+A data frame with columns:
+\describe{
+\item{time}{Survival time.}
+\item{status}{Event indicator (\code{1} = event, \code{0} = censored).}
+}
+Cases with missing start dates, or with invalid survival times (≤ \code{0}, or < \code{0}
+when \code{zero = TRUE}), are returned as \code{NA} in both columns.
 }
 \description{
 Computes event times and statuses from start, event, and review dates.
