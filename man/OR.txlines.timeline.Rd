@@ -11,7 +11,7 @@ OR.txlines.timeline(
   stopdates,
   stopreasons = NULL,
   eventdates = NULL,
-  echo = TRUE
+  echo = FALSE
 )
 }
 \arguments{
@@ -33,7 +33,7 @@ stop reasons (one row per \code{id}, one column per line of treatment).}
 row per \code{id}, one column per line of treatment).}
 
 \item{echo}{Logical. If \code{TRUE}, prints additional information to console.
-Default = \code{TRUE}.}
+Default = \code{FALSE}.}
 }
 \value{
 A data frame in long format with columns:

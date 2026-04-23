@@ -78,6 +78,25 @@ OR.rowmax <- function(input) {
   }))
 }
 
+#' Row-wise maxima below a threshold
+#'
+#' For each row of a matrix or data frame, returns the maximum value strictly
+#' less than a corresponding threshold, ignoring `NA`s. Returns `NA` if no
+#' values satisfy the condition.
+#' @param input Numeric matrix or data frame.
+#' @param threshold Numeric vector of thresholds of length equal to the number
+#' of `input` rows.
+#' @return Numeric vector of row-wise maxima below a threshold.
+#' @family summary
+#' @export
+OR.rowmax.threshold <- function(input, threshold) {
+  output <- apply(input, 1, function(x, t) {
+    x <- x[!is.na(x) & x < t]
+    if (length(x) == 0) NA else max(x)
+  }, t = threshold)
+  return(output)
+}
+
 #' Row-wise minima
 #'
 #' Computes the minimum value of each row in a matrix or data frame, ignoring
@@ -94,6 +113,25 @@ OR.rowmin <- function (input) {
     x <- x[!is.na(x)]
     if (length(x) == 0) NA else min(x)
   }))
+}
+
+#' Row-wise minima above a threshold
+#'
+#' For each row of a matrix or data frame, returns the minimum value strictly
+#' greater than a corresponding threshold, ignoring `NA`s. Returns `NA` if no
+#' values satisfy the condition.
+#' @param input Numeric matrix or data frame.
+#' @param threshold Numeric vector of thresholds of length equal to the number
+#' of `input` rows.
+#' @return Numeric vector of row-wise minima above a threshold.
+#' @family summary
+#' @export
+OR.rowmin.threshold <- function(input, threshold) {
+  output <- apply(input, 1, function(x, t) {
+    x <- x[!is.na(x) & x > t]
+    if (length(x) == 0) NA else min(x)
+  }, t = threshold)
+  return(output)
 }
 
 #' Sum with NA removal or NA if no valid entries

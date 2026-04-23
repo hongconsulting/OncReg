@@ -20,7 +20,7 @@
   output$event <- FALSE
   for (i in 1:nrow(output)) { # loop through all unique dates
     currentdate <- output$date[i]
-    cat("[OR.txlines.timeline] current date =", currentdate, "\n")
+    if (echo) cat("[OR.txlines.timeline] current date =", currentdate, "\n")
     if (!is.null(eventdates)) {
       for (j in 1:m) { # loop through all event dates
         if (OR.NA.to.F(currentdate == eventdates[j])) {
@@ -74,7 +74,7 @@
 #' @param eventdates Optional numeric matrix or data frame of event dates (one
 #' row per `id`, one column per line of treatment).
 #' @param echo Logical. If `TRUE`, prints additional information to console.
-#' Default = `TRUE`.
+#' Default = `FALSE`.
 #' @return A data frame in long format with columns:
 #' \describe{
 #'   \item{id}{Identifier.}
@@ -87,7 +87,7 @@
 #' @export
 OR.txlines.timeline <- function(id, regimens, startdates, stopdates,
                                 stopreasons = NULL, eventdates = NULL,
-                                echo = TRUE) {
+                                echo = FALSE) {
   output <- data.frame()
   if (length(id) != nrow(regimens)) stop("[OR.txlines.timeline] inconsistent regimens")
   if (length(id) != nrow(startdates)) stop("[OR.txlines.timeline] inconsistent startdates")

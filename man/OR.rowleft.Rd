@@ -28,7 +28,9 @@ Other summary:
 \code{\link{OR.mean}()},
 \code{\link{OR.min}()},
 \code{\link{OR.rowmax}()},
+\code{\link{OR.rowmax.threshold}()},
 \code{\link{OR.rowmin}()},
+\code{\link{OR.rowmin.threshold}()},
 \code{\link{OR.sum}()}
 }
 \concept{summary}

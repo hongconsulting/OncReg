@@ -23,6 +23,8 @@ Other summary:
 \code{\link{OR.min}()},
 \code{\link{OR.rowleft}()},
 \code{\link{OR.rowmax}()},
-\code{\link{OR.rowmin}()}
+\code{\link{OR.rowmax.threshold}()},
+\code{\link{OR.rowmin}()},
+\code{\link{OR.rowmin.threshold}()}
 }
 \concept{summary}
