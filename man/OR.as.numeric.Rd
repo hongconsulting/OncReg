@@ -2,7 +2,8 @@
 % Please edit documentation in R/OncReg.R
 \name{OR.as.numeric}
 \alias{OR.as.numeric}
-\title{Convert strings to numeric after stripping non-numeric characters}
+\title{Convert strings to numeric after normalising minus signs and stripping digit
+grouping separators}
 \usage{
 OR.as.numeric(x)
 }
@@ -13,9 +14,10 @@ OR.as.numeric(x)
 A numeric vector.
 }
 \description{
-Removes all characters except digits, decimal point, and minus sign, then
-converts the result to numeric. Non-convertible values return \code{NA} with
-warnings suppressed.
+Replaces Unicode minus signs (\code{"\\u2212"}) with ASCII \code{"-"}, removes either
+commas or spaces used as digit grouping (thousands) separators, then converts
+the result to numeric. Non-convertible values return \code{NA} with warnings
+suppressed.
 }
 \seealso{
 Other basic: 

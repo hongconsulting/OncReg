@@ -14,6 +14,9 @@ reference:
   - title: Microsoft Excel serial dates
     contents:
       - has_concept("Excelserialdates")
+  - title: Multiple lines of treatment
+    contents:
+      - has_concept("txlines")     
   - title: Outlier detection
     contents:
       - has_concept("outliers")
@@ -23,12 +26,9 @@ reference:
   - title: Treatment dosing
     contents:
       - has_concept("dose")
-  - title: Treatment lines
-    contents:
-      - has_concept("regimen")
   - title: Other
     contents:
       - has_concept("imputation")
       - has_concept("other")
-      - has_concept("rlm")
       - has_concept("survival")
+      - has_concept("rlm")

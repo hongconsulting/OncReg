@@ -22,13 +22,16 @@ A logical vector or matrix indicating whether each string contains a
 delimited element matching any of the specified strings.
 }
 \description{
-delimiter, trims whitespace, converts to lowercase, and checks whether any
+For each string in \code{x}, applies \code{OR.delim.split()} and checks whether any
 delimited element matches one or more specified strings.
 }
 \seealso{
 Other delim: 
+\code{\link{OR.delim.intersect}()},
 \code{\link{OR.delim.merge}()},
 \code{\link{OR.delim.replace}()},
+\code{\link{OR.delim.split}()},
+\code{\link{OR.delim.subset}()},
 \code{\link{OR.delim.table}()}
 }
 \concept{delim}

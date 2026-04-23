@@ -19,8 +19,7 @@ OR.delim.replace(x, match, replacement, delimiter = ",")
 A string vector or matrix with replaced delimited elements.
 }
 \description{
-Splits each string in a vector, matrix, or data frame by a specified
-delimiter, trims whitespace, converts to lowercase, and checks whether any
+For each string in \code{x}, applies \code{OR.delim.split()} and checks whether any
 delimited element matches one or more specified strings. Replaces any
 matching elements with a new string, removes duplicate elements, sorts
 elements alphabetically, and rejoins the elements using the same delimiter.
@@ -40,12 +39,18 @@ print(treatment)
 \seealso{
 Other delim: 
 \code{\link{OR.delim.contains}()},
+\code{\link{OR.delim.intersect}()},
 \code{\link{OR.delim.merge}()},
+\code{\link{OR.delim.split}()},
+\code{\link{OR.delim.subset}()},
 \code{\link{OR.delim.table}()}
 
 Other delim: 
 \code{\link{OR.delim.contains}()},
+\code{\link{OR.delim.intersect}()},
 \code{\link{OR.delim.merge}()},
+\code{\link{OR.delim.split}()},
+\code{\link{OR.delim.subset}()},
 \code{\link{OR.delim.table}()}
 }
 \concept{delim}

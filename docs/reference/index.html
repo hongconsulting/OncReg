@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">OncReg</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.16.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.17.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,7 +82,7 @@
           <code><a href="OR.as.numeric.html">OR.as.numeric()</a></code>
 
         </dt>
-        <dd>Convert strings to numeric after stripping non-numeric characters</dd>
+        <dd>Convert strings to numeric after normalising minus signs and stripping digit grouping separators</dd>
       </dl><dl><dt>
 
           <code><a href="OR.string.to.binary.html">OR.string.to.binary()</a></code>
@@ -108,6 +108,12 @@
         <dd>Detect delimited string elements (case-insensitive and whitespace-trimmed)</dd>
       </dl><dl><dt>
 
+          <code><a href="OR.delim.intersect.html">OR.delim.intersect()</a></code>
+
+        </dt>
+        <dd>Check if two delimited strings share any element (case-insensitive and whitespace-trimmed)</dd>
+      </dl><dl><dt>
+
           <code><a href="OR.delim.merge.html">OR.delim.merge()</a></code>
 
         </dt>
@@ -118,6 +124,18 @@
 
         </dt>
         <dd>Replace delimited string elements (case-insensitive and whitespace-trimmed)</dd>
+      </dl><dl><dt>
+
+          <code><a href="OR.delim.split.html">OR.delim.split()</a></code>
+
+        </dt>
+        <dd>Split delimited string elements (case-insensitive and whitespace-trimmed)</dd>
+      </dl><dl><dt>
+
+          <code><a href="OR.delim.subset.html">OR.delim.subset()</a></code>
+
+        </dt>
+        <dd>Check if one delimited string is a subset of another (case-insensitive and whitespace-trimmed)</dd>
       </dl><dl><dt>
 
           <code><a href="OR.delim.table.html">OR.delim.table()</a></code>
@@ -176,6 +194,29 @@
 
         </dt>
         <dd>Convert mixed format dates to Microsoft Excel serial dates</dd>
+      </dl></div><div class="section level2">
+      <h2 id="multiple-lines-of-treatment">Multiple lines of treatment<a class="anchor" aria-label="anchor" href="#multiple-lines-of-treatment"></a></h2>
+
+
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="OR.txlines.restart.html">OR.txlines.restart()</a></code>
+
+        </dt>
+        <dd>Identify treatment restart after a minimum treatment-free interval</dd>
+      </dl><dl><dt>
+
+          <code><a href="OR.txlines.truncate.html">OR.txlines.truncate()</a></code>
+
+        </dt>
+        <dd>Truncate stop dates by maximum duration</dd>
       </dl></div><div class="section level2">
       <h2 id="outlier-detection">Outlier detection<a class="anchor" aria-label="anchor" href="#outlier-detection"></a></h2>
 
@@ -288,35 +329,6 @@
         </dt>
         <dd>Stabilize and impute dosing weights within clusters</dd>
       </dl></div><div class="section level2">
-      <h2 id="treatment-lines">Treatment lines<a class="anchor" aria-label="anchor" href="#treatment-lines"></a></h2>
-
-
-
-
-    </div><div class="section level2">
-
-
-
-
-      <dl><dt>
-
-          <code><a href="OR.regimen.consolidate.html">OR.regimen.consolidate()</a></code>
-
-        </dt>
-        <dd>Consolidate overlapping regimens at event boundaries</dd>
-      </dl><dl><dt>
-
-          <code><a href="OR.regimen.restart.html">OR.regimen.restart()</a></code>
-
-        </dt>
-        <dd>Identify treatment restart after a minimum treatment-free interval</dd>
-      </dl><dl><dt>
-
-          <code><a href="OR.regimen.truncate.html">OR.regimen.truncate()</a></code>
-
-        </dt>
-        <dd>Truncate stop dates by maximum duration</dd>
-      </dl></div><div class="section level2">
       <h2 id="other">Other<a class="anchor" aria-label="anchor" href="#other"></a></h2>
 
 
@@ -347,6 +359,12 @@
         <dd>Enumerate permutations of k out of n items</dd>
       </dl><dl><dt>
 
+          <code><a href="OR.survoutcome.html">OR.survoutcome()</a></code>
+
+        </dt>
+        <dd>Survival outcomes</dd>
+      </dl><dl><dt>
+
           <code><a href="AICR.Huber.html">AICR.Huber()</a></code>
 
         </dt>
@@ -357,12 +375,6 @@
 
         </dt>
         <dd>Robust linear regression using Huber M-estimation</dd>
-      </dl><dl><dt>
-
-          <code><a href="OR.survoutcome.html">OR.survoutcome()</a></code>
-
-        </dt>
-        <dd>Survival outcomes</dd>
       </dl></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>

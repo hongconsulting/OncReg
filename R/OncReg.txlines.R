@@ -1,42 +1,4 @@
-#' Consolidate overlapping regimens at event boundaries
-#'
-#' For each unique date among `start_dates` and `stop_dates`, determines the set
-#' of active regimens by checking which regimen periods [`start_dates[i]`,
-#' `stop_dates[i]`) contain the date, and merges the corresponding delimited
-#' strings representing the treatments that comprise each regimen.
-#' @param start_dates Vector of start dates.
-#' @param stop_dates Vector of stop dates.
-#' @param sets Vector of delimited regimen strings.
-#' @return A data frame with:
-#' \describe{
-#'   \item{date}{Sorted unique dates from `start_dates` and `stop_dates`.}
-#'   \item{set}{Delimited string of treatments active at each date.}
-#' }
-#' @family regimen
-#' @export
-OR.regimen.consolidate <- function(start_dates, stop_dates, sets) {
-  n <- length(start_dates)
-  output <- data.frame("date" = sort(unique(c(start_dates, stop_dates))))
-  output$set <- ""
-  for (i in 1:nrow(output)) {
-    current_date <- output$date[i]
-    for (j in 1:n) {
-      if (OR.NA.to.empty(sets[j]) == "") next
-      if (is.na(start_dates[j])) {
-        cat("[OR.regimen.consolidate] i = ", i, ", j = ", j, sep = "")
-        next
-      }
-
-      if (current_date >= start_dates[j] & current_date < stop_dates[j]) {
-        output$set[i] <- OR.delim.merge(output$set[i], sets[j])
-      }
-
-    }
-  }
-  return(output)
-}
-
-.OR.regimen.restart.single <- function (date_start, date_stop, reason_stop,
+.OR.txlines.restart.single <- function (date_start, date_stop, reason_stop,
                                         date_prog, t_min, echo = FALSE) {
   t_duration <- date_stop - date_start
   t_interval <- rep(NA, length(date_start))
@@ -48,12 +10,12 @@ OR.regimen.consolidate <- function(start_dates, stop_dates, sets) {
   # OR.F.to.NA() needed for which.min()
   restart_line <- as.numeric(which.min(date_start[OR.F.to.NA(t_interval >= t_min)]))
   if (echo) {
-    cat("[OR.regimen.restart] date_start =", date_start, "\n")
-    cat("[OR.regimen.restart] t_duration =", t_duration, "\n")
-    cat("[OR.regimen.restart] date_stop =", date_stop, "\n")
-    cat("[OR.regimen.restart] reason_stop =", reason_stop, "\n")
-    cat("[OR.regimen.restart] t_interval =", t_interval, "\n")
-    cat("[OR.regimen.restart] OR.F.to.NA(t_interval >= t_min) =", OR.F.to.NA(t_interval >= t_min), "\n")
+    cat("[OR.txlines.restart] date_start =", date_start, "\n")
+    cat("[OR.txlines.restart] t_duration =", t_duration, "\n")
+    cat("[OR.txlines.restart] date_stop =", date_stop, "\n")
+    cat("[OR.txlines.restart] reason_stop =", reason_stop, "\n")
+    cat("[OR.txlines.restart] t_interval =", t_interval, "\n")
+    cat("[OR.txlines.restart] OR.F.to.NA(t_interval >= t_min) =", OR.F.to.NA(t_interval >= t_min), "\n")
   }
   if (length(restart_line) == 0) {
     prev_time <- OR.sum(t_duration)
@@ -65,8 +27,8 @@ OR.regimen.consolidate <- function(start_dates, stop_dates, sets) {
   stop_reason <- OR.max(reason_stop[date_stop < restart_date])
   reprog_date <- OR.min(date_prog[date_prog > restart_date])
   if (echo) {
-    cat("[OR.regimen.restart] date_stop < restart_date =", date_stop < restart_date, "\n")
-    cat("[OR.regimen.restart] date_prog > restart_date =", date_prog > restart_date, "\n")
+    cat("[OR.txlines.restart] date_stop < restart_date =", date_stop < restart_date, "\n")
+    cat("[OR.txlines.restart] date_prog > restart_date =", date_prog > restart_date, "\n")
   }
   return(c(prev_time, stop_reason, t_interval[restart_line],
            restart_line, restart_date, reprog_date))
@@ -98,14 +60,14 @@ OR.regimen.consolidate <- function(start_dates, stop_dates, sets) {
 #' If no restart satisfying `t_min` is found, `interval_time`, `restart_line`,
 #' `restart_date`, and `reprog_date` are returned as `NA`, while `prev_time`
 #' and `stop_reason` summarize the full observed treatment history.
-#' @family regimen
+#' @family txlines
 #' @export
-OR.regimen.restart <- function(date_start, date_stop, reason_stop, date_prog,
+OR.txlines.restart <- function(date_start, date_stop, reason_stop, date_prog,
                                t_min = 182.62125) {
   n <- nrow(date_start)
   output <- matrix(NA, n, 6)
   for (i in 1:n) {
-    output[i, ] <- .OR.regimen.restart.single(
+    output[i, ] <- .OR.txlines.restart.single(
       date_start[i, ],
       date_stop[i, ],
       reason_stop[i, ],
@@ -128,9 +90,9 @@ OR.regimen.restart <- function(date_start, date_stop, reason_stop, date_prog,
 #' @param t_max Maximum allowed duration.
 #' @return Numeric matrix of truncated stop dates where
 #' `date_stop - date_start` does not exceed `t_max`.
-#' @family regimen
+#' @family txlines
 #' @export
-OR.regimen.truncate <- function(date_start, date_stop, t_max) {
+OR.txlines.truncate <- function(date_start, date_stop, t_max) {
   output <- date_stop
   for (row in 1:nrow(date_start)) {
     for (col in 1:ncol(date_start)) {

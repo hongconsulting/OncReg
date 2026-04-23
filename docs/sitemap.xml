@@ -17,8 +17,11 @@
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.as.numeric.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.collapse.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.delim.contains.html</loc></url>
+<url><loc>https://hongconsulting.github.io/OncReg/reference/OR.delim.intersect.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.delim.merge.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.delim.replace.html</loc></url>
+<url><loc>https://hongconsulting.github.io/OncReg/reference/OR.delim.split.html</loc></url>
+<url><loc>https://hongconsulting.github.io/OncReg/reference/OR.delim.subset.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.delim.table.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.dmy.to.dmY.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.dmyY.to.Excel.html</loc></url>
@@ -46,6 +49,8 @@
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.string.to.binary.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.sum.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.survoutcome.html</loc></url>
+<url><loc>https://hongconsulting.github.io/OncReg/reference/OR.txlines.restart.html</loc></url>
+<url><loc>https://hongconsulting.github.io/OncReg/reference/OR.txlines.truncate.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/index.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/rlm.Huber.html</loc></url>
 </urlset>

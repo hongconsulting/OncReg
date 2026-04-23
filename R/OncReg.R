@@ -9,19 +9,26 @@ OR.0.rm <- function(x) {
   return(x[x != 0])
 }
 
-#' Convert strings to numeric after stripping non-numeric characters
+#' Convert strings to numeric after normalising minus signs and stripping digit 
+#' grouping separators
 #'
-#' Removes all characters except digits, decimal point, and minus sign, then
-#' converts the result to numeric. Non-convertible values return `NA` with
-#' warnings suppressed.
+#' Replaces Unicode minus signs (`"\u2212"`) with ASCII `"-"`, removes either 
+#' commas or spaces used as digit grouping (thousands) separators, then converts 
+#' the result to numeric. Non-convertible values return `NA` with warnings 
+#' suppressed.
 #' @param x A string vector.
 #' @return A numeric vector.
 #' @family basic
 #' @export
 OR.as.numeric <- function(x) {
-  x <- gsub("[^0-9.\\-]", "", x)
-  return(suppressWarnings(as.numeric(x)))
+  x <- gsub("\u2212", "-", x, fixed = TRUE)
+  x1 <- gsub("(?<=\\d),(?=\\d{3}(\\D|$))", "", x, perl = TRUE)
+  x2 <- gsub("(?<=\\d) (?=\\d{3}(\\D|$))", "", x, perl = TRUE)
+  x1 <- suppressWarnings(as.numeric(x1))
+  x2 <- suppressWarnings(as.numeric(x2))
+  return(OR.rowleft(cbind(x1, x2)))
 }
+
 
 # #' Standardize a numeric vector
 # #'
