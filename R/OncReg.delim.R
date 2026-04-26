@@ -239,7 +239,7 @@ OR.delim.table <- function(x, delimiter = ",") {
 OR.delim.txclass <- function(x, delimiter = ",") {
   x <- OR.delim.txname(x, delimiter)
   classes <- list()
-  classes[["endocrine"]] <- c("tamoxifen")
+  classes[["endocrine"]] <- c("tamoxifen", "unknown endocrine therapy")
   classes[["endocrine, androgen receptor"]] <- c("abiraterone", "apalutamide", "darolutamide", "enzalutamide")
   classes[["endocrine, aromatase"]] <- c("anastrozole", "exemestane", "letrozole")
   classes[["endocrine, gnrh"]] <- c("goserelin", "leuprorelin")
