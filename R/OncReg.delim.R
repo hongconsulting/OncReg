@@ -261,6 +261,7 @@ OR.delim.txclass <- function(x, delimiter = ",") {
   classes[["targeted"]] <- c("axitinib", "cabozantinib", "lenvatinib", "pazopanib", "regorafenib", "sorafenib", "sunitinib")
   classes[["targeted"]] <- c(classes[["targeted"]], "bevacizumab")
   classes[["targeted"]] <- c(classes[["targeted"]], "capivasertib", "ipatasertib")
+  classes[["targeted, bcl2"]] <- c("venetoclax")
   classes[["targeted, braf"]] <- c("dabrafenib", "encorafenib", "vemurafenib")
   classes[["targeted, cdk46"]] <- c("abemaciclib", "palbociclib", "ribociclib")
   classes[["targeted, egfr"]] <- c("cetuximab", "panitumumab")
