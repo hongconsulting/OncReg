@@ -253,7 +253,7 @@ OR.delim.txclass <- function(x, delimiter = ",") {
   classes[["chemotherapy, anthracycline"]] <- c("doxorubicin", "epirubicin", "doxorubicin")
   classes[["chemotherapy, platinum"]] <- c("carboplatin", "cisplatin", "oxaliplatin")
   classes[["chemotherapy, taxane"]] <- c("cabazitaxel", "docetaxel", "nab-paclitaxel", "paclitaxel")
-  classes[["chemotherapy, targeted, her2"]] <- c("trastuzumab emtansine")
+  classes[["chemotherapy, targeted, her2"]] <- c("trastuzumab deruxtecan", "trastuzumab emtansine")
   classes[["immunotherapy, ctla4"]] <- c("ipilimumab")
   classes[["immunotherapy, lag3"]] <- c("relatlimab")
   classes[["immunotherapy, pd1"]] <- c("cemiplimab", "nivolumab", "pembrolizumab")
