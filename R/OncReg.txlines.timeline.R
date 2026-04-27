@@ -133,9 +133,10 @@ OR.txlines.timeline <- function(id, regimens, startdates, stopdates,
 #' lines:
 #' \describe{
 #'   \item{id}{Identifier.}
-#'   \item{date.startL<k>}{Start date of line `k`.}
-#'   \item{regimenL<k>}{Regimens in line `k`.}
-#'   \item{date.eventL<k>}{Earliest event date for line `k`.}
+#'   \item{date.startL(k)}{Start date of line `k`.}
+#'   \item{regimenL(k)}{Regimens in line `k`.}
+#'   \item{date.eventL(k)}{Earliest event date (regardless of line label) after
+#'   the start date of line `k`.}
 #' }
 #' @family txlines
 #' @export
@@ -144,32 +145,50 @@ OR.txlines.wide <- function(id, date, regimen, event, line) {
   ulines <- OR.NA.rm(sort(unique(line)))
   input <- data.frame("id" = id, "date" = date, "regimen" = regimen,
                       "event" = event, "line" = line)
+  input$eventdate <- NA
+  input$eventdate[input$event] <- input$date[input$event]
   output <- data.frame("id" = unique(id))
-  for (line in 1:length(ulines)) {
-    output[[paste0("date.startL", ulines[line])]] <- NA
-    output[[paste0("regimenL", ulines[line])]] <- ""
-    # output[[paste0("stopdateL", ulines[line])]] <- NA
-    output[[paste0("date.eventL", ulines[line])]] <- NA
+  # setup whole dataset
+  for (uline in ulines) {
+       output[[paste0("date.startL", uline)]] <- NA
+       output[[paste0("regimenL", uline)]] <- ""
+       output[[paste0("date.eventL", uline)]] <- NA
   }
+  # loop through individual IDs
   for (uid in unique(id)) {
     subset <- input[input$id == uid,]
     subset$line <- OR.LOCF(subset$line)
-    for (i in 1:nrow(subset)) {
-      if (!is.na(subset$line[i])) {
-        output[[paste0("date.startL", subset$line[i])]][output$id == uid] <- subset$date[i]
-        # if (subset$line[i] > 1) {
-        #   output[[paste0("stopdate", subset$line[i] - 1)]][output$id == id] <- subset$date[i]
-        # }
-        output[[paste0("regimenL", subset$line[i])]][output$id == uid] <-
-          OR.delim.merge(output[[paste0("regimenL", subset$line[i])]][output$id == uid],
-                         subset$regimen[i])
-        if (subset$event[i]) {
-          output[[paste0("date.eventL", subset$line[i])]][output$id == uid] <-
-            OR.min(c(output[[paste0("date.eventL", subset$line[i])]][output$id == uid],
-                     subset$date[i]))
-        }
+    for (uline in unique(subset$line)) {
+      subsubset <- subset[subset$line == uline,]
+      subsubset.startdate <- OR.min(subsubset$date)
+      output[[paste0("date.startL", uline)]][output$id == uid] <- subsubset.startdate
+      # event dates need not be labelled under the current line
+      subsubset.eventdate <- subset$eventdate[subset$eventdate > subsubset.startdate]
+      output[[paste0("date.eventL", uline)]][output$id == uid] <- OR.min(subsubset.eventdate)
+      for (i in 1:nrow(subsubset)) {
+        output[[paste0("date.regimenL", uline)]][output$id == uid] <-
+          OR.delim.merge(output[[paste0("date.regimenL", uline)]][output$id == uid], subsubset$regimen[i])
       }
+
     }
+    # for (i in 1:nrow(subset)) {
+    #   if (!is.na(subset$line[i])) {
+    #     output[[paste0("date.startL", subset$line[i])]][output$id == uid] <- subset$date[i]
+    #     # calculate the event date
+    #
+    #     # if (subset$line[i] > 1) {
+    #     #   output[[paste0("stopdate", subset$line[i] - 1)]][output$id == id] <- subset$date[i]
+    #     # }
+    #     output[[paste0("regimenL", subset$line[i])]][output$id == uid] <-
+    #       OR.delim.merge(output[[paste0("regimenL", subset$line[i])]][output$id == uid],
+    #                      subset$regimen[i])
+    #     # if (subset$event[i]) { # event date needs to be the earliest event after date start
+    #     #   output[[paste0("date.eventL", subset$line[i])]][output$id == uid] <-
+    #     #     OR.min(c(output[[paste0("date.eventL", subset$line[i])]][output$id == uid],
+    #     #              subset$date[i]))
+    #     # }
+    #   }
+    # }
   }
   return(output)
 }

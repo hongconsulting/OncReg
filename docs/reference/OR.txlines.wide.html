@@ -13,7 +13,7 @@ line."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">OncReg</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.17.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.17.9</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,14 +80,15 @@ line.</p>
 lines:</p><dl><dt>id</dt>
 <dd><p>Identifier.</p></dd>
 
-<dt>date.startL<k></k></dt>
+<dt>date.startL(k)</dt>
 <dd><p>Start date of line <code>k</code>.</p></dd>
 
-<dt>regimenL<k></k></dt>
+<dt>regimenL(k)</dt>
 <dd><p>Regimens in line <code>k</code>.</p></dd>
 
-<dt>date.eventL<k></k></dt>
-<dd><p>Earliest event date for line <code>k</code>.</p></dd>
+<dt>date.eventL(k)</dt>
+<dd><p>Earliest event date (regardless of line label) after
+the start date of line <code>k</code>.</p></dd>
 
 
 </dl></div>
