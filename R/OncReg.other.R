@@ -96,3 +96,19 @@ OR.permutations <- function(n, k) {
   }
   return(output)
 }
+
+#' Read CSV files matching a path stub and combine by rows
+#'
+#' Reads all comma-separated values (CSV) files whose paths begin with `path.stub`
+#' and combines them by rows.
+#' @param path.stub String path prefix used to match CSV files.
+#' @param ... Additional arguments passed to `read.csv()`.
+#' @return A `data.frame` containing contents of all matched CSV files combined
+#' by rows.
+#' @family other
+#' @export
+OR.read.csv.stub <- function(path.stub, ...) {
+  files <- Sys.glob(paste0(path.stub, "*.csv"))
+  output <- do.call(rbind, lapply(files, utils::read.csv, ...))
+  return(output)
+}

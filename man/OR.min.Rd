@@ -20,6 +20,8 @@ if all elements are \code{NA}.
 Other summary: 
 \code{\link{OR.max}()},
 \code{\link{OR.mean}()},
+\code{\link{OR.mode}()},
+\code{\link{OR.modefreq}()},
 \code{\link{OR.rowleft}()},
 \code{\link{OR.rowmax}()},
 \code{\link{OR.rowmax.threshold}()},

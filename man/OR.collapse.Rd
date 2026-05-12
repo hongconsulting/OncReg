@@ -45,6 +45,7 @@ measurements for one patient are distributed across multiple event rows.
 }
 \seealso{
 Other other: 
-\code{\link{OR.permutations}()}
+\code{\link{OR.permutations}()},
+\code{\link{OR.read.csv.stub}()}
 }
 \concept{other}

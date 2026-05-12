@@ -20,6 +20,7 @@ lexicographic order.
 }
 \seealso{
 Other other: 
-\code{\link{OR.collapse}()}
+\code{\link{OR.collapse}()},
+\code{\link{OR.read.csv.stub}()}
 }
 \concept{other}

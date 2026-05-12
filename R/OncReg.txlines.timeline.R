@@ -140,7 +140,6 @@ OR.txlines.timeline <- function(id, regimens, startdates, stopdates,
 #' }
 #' @family txlines
 #' @export
-
 OR.txlines.wide <- function(id, date, regimen, event, line) {
   line <- OR.as.numeric(line)
   ulines <- OR.NA.rm(sort(unique(line)))

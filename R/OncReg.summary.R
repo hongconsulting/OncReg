@@ -40,6 +40,32 @@ OR.min <- function(x) {
   return(min(x))
 }
 
+#' Statistical mode
+#'
+#' Returns the most common value in `x`.
+#' @param x Vector.
+#' @return A scalar containing the mode of `x`.
+#' @family summary
+#' @export
+OR.mode <- function(x) {
+  ux <- unique(x)
+  output <- ux[which.max(tabulate(match(x, ux)))]
+  return(output)
+}
+
+#' Frequency of the mode
+#'
+#' Returns the number of occurrences of the most common value in `x`.
+#' @param x Vector.
+#' @return Integer scalar giving the frequency of the mode.
+#' @family summary
+#' @export
+OR.modefreq <- function(x) {
+  ux <- unique(x)
+  output <- max(tabulate(match(x, ux)))
+  return(output)
+}
+
 #' Row-wise leftmost non-missing value
 #'
 #' Returns the leftmost non-missing value in each row of a matrix or data frame.
