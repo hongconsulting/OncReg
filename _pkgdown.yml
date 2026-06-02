@@ -28,6 +28,7 @@ reference:
       - has_concept("dose")
   - title: Other
     contents:
+      - has_concept("distributions")
       - has_concept("imputation")
       - has_concept("other")
       - has_concept("survival")
