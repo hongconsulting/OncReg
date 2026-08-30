@@ -67,6 +67,26 @@ OR.collapse <- function(data, ID_varname, pattern, method = "single") {
   return(output)
 }
 
+#' Random hold-out allocation
+#'
+#' Randomly allocates `n` observations to a hold-out set of size
+#' `ceiling(n * proportion)`, with the remainder allocated to the training set.
+#' The number of hold-out observations is fixed by construction rather than
+#' binomially distributed and the output is reproducible for a given `seed`.
+#' @param n Integer giving the number of observations to allocate.
+#' @param proportion Numeric giving the proportion of observations allocated to
+#' the hold-out set, rounded up to the nearest whole observation.
+#' @param seed Integer seed for random number generation. Default = `24601`.
+#' @return Numeric vector of length `n` containing `1` for hold-out observations
+#' and `0` for training observations.
+#' @family other
+#' @export
+OR.holdout <- function(n, proportion, seed = 24601) {
+  set.seed(seed)
+  k <- ceiling(n * proportion)
+  return(sample(rep(c(1, 0), c(k, n - k))))
+}
+
 #' Enumerate permutations of k out of n items
 #'
 #' Returns all length-`k` permutations of the integers from 1 to `n`, in
