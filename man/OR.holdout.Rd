@@ -29,6 +29,7 @@ Other other:
 \code{\link{OR.collapse}()},
 \code{\link{OR.date.Excel}()},
 \code{\link{OR.permutations}()},
-\code{\link{OR.read.csv.stub}()}
+\code{\link{OR.read.csv.stub}()},
+\code{\link{OR.tdCox}()}
 }
 \concept{other}

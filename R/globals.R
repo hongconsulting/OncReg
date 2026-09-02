@@ -1,0 +1,1 @@
+utils::globalVariables(c("survtime", "survstatus", "time", "event", "tdc"))

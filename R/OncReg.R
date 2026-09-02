@@ -29,7 +29,6 @@ OR.as.numeric <- function(x) {
   return(OR.rowleft(cbind(x1, x2)))
 }
 
-
 # #' Standardize a numeric vector
 # #'
 # #' #' Returns *z*-scores by subtracting the sample mean and dividing by the
