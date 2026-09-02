@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">OncReg</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.20.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,11 +90,11 @@
 <span><span class="va">data1</span><span class="op">$</span><span class="va">treatment</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/OR.delim.replace.html">OR.delim.replace</a></span><span class="op">(</span><span class="va">data1</span><span class="op">$</span><span class="va">treatment</span>, <span class="st">"ribociclib"</span>, <span class="st">"cdk46i"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Microsoft Excel dates</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">diagnosis</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/OR.dmyY.to.Excel.html">OR.dmyY.to.Excel</a></span><span class="op">(</span><span class="va">data0</span><span class="op">$</span><span class="va">diagnosis</span>, <span class="fl">20</span>, <span class="fl">25</span><span class="op">)</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">progression</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/OR.dmyY.to.Excel.html">OR.dmyY.to.Excel</a></span><span class="op">(</span><span class="va">data0</span><span class="op">$</span><span class="va">progression</span>, <span class="fl">20</span>, <span class="fl">25</span><span class="op">)</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">review1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/OR.dmyY.to.Excel.html">OR.dmyY.to.Excel</a></span><span class="op">(</span><span class="va">data0</span><span class="op">$</span><span class="va">review1</span>, <span class="fl">20</span>, <span class="fl">25</span><span class="op">)</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">review2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/OR.dmyY.to.Excel.html">OR.dmyY.to.Excel</a></span><span class="op">(</span><span class="va">data0</span><span class="op">$</span><span class="va">review2</span>, <span class="fl">20</span>, <span class="fl">25</span><span class="op">)</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">death</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/OR.dmyY.to.Excel.html">OR.dmyY.to.Excel</a></span><span class="op">(</span><span class="va">data0</span><span class="op">$</span><span class="va">death</span>, <span class="fl">20</span>, <span class="fl">25</span><span class="op">)</span></span>
+<span><span class="va">data1</span><span class="op">$</span><span class="va">diagnosis</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/OR.date.Excel.html">OR.date.Excel</a></span><span class="op">(</span><span class="va">data0</span><span class="op">$</span><span class="va">diagnosis</span><span class="op">)</span></span>
+<span><span class="va">data1</span><span class="op">$</span><span class="va">progression</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/OR.date.Excel.html">OR.date.Excel</a></span><span class="op">(</span><span class="va">data0</span><span class="op">$</span><span class="va">progression</span><span class="op">)</span></span>
+<span><span class="va">data1</span><span class="op">$</span><span class="va">review1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/OR.date.Excel.html">OR.date.Excel</a></span><span class="op">(</span><span class="va">data0</span><span class="op">$</span><span class="va">review1</span><span class="op">)</span></span>
+<span><span class="va">data1</span><span class="op">$</span><span class="va">review2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/OR.date.Excel.html">OR.date.Excel</a></span><span class="op">(</span><span class="va">data0</span><span class="op">$</span><span class="va">review2</span><span class="op">)</span></span>
+<span><span class="va">data1</span><span class="op">$</span><span class="va">death</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/OR.date.Excel.html">OR.date.Excel</a></span><span class="op">(</span><span class="va">data0</span><span class="op">$</span><span class="va">death</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># progression-free survival and overall survival:</span></span>
 <span><span class="co"># - PFS date is the date of progression or death, whichever is earlier</span></span>

@@ -11,9 +11,6 @@ reference:
   - title: Google Maps Platform
     contents:
       - has_concept("GoogleMapsPlatform")
-  - title: Microsoft Excel serial dates
-    contents:
-      - has_concept("Excelserialdates")
   - title: Multiple lines of treatment
     contents:
       - has_concept("txlines")     

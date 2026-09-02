@@ -21,6 +21,7 @@ lexicographic order.
 \seealso{
 Other other: 
 \code{\link{OR.collapse}()},
+\code{\link{OR.date.Excel}()},
 \code{\link{OR.holdout}()},
 \code{\link{OR.read.csv.stub}()}
 }

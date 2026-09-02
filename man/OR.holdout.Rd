@@ -27,6 +27,7 @@ binomially distributed and the output is reproducible for a given \code{seed}.
 \seealso{
 Other other: 
 \code{\link{OR.collapse}()},
+\code{\link{OR.date.Excel}()},
 \code{\link{OR.permutations}()},
 \code{\link{OR.read.csv.stub}()}
 }

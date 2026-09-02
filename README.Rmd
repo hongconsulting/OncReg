@@ -53,11 +53,11 @@ data1$treatment <- OR.delim.replace(data1$treatment, "palbociclib", "cdk46i")
 data1$treatment <- OR.delim.replace(data1$treatment, "ribociclib", "cdk46i")
 
 # Microsoft Excel dates
-data1$diagnosis <- OR.dmyY.to.Excel(data0$diagnosis, 20, 25)
-data1$progression <- OR.dmyY.to.Excel(data0$progression, 20, 25)
-data1$review1 <- OR.dmyY.to.Excel(data0$review1, 20, 25)
-data1$review2 <- OR.dmyY.to.Excel(data0$review2, 20, 25)
-data1$death <- OR.dmyY.to.Excel(data0$death, 20, 25)
+data1$diagnosis <- OR.date.Excel(data0$diagnosis)
+data1$progression <- OR.date.Excel(data0$progression)
+data1$review1 <- OR.date.Excel(data0$review1)
+data1$review2 <- OR.date.Excel(data0$review2)
+data1$death <- OR.date.Excel(data0$death)
 
 # progression-free survival and overall survival:
 # - PFS date is the date of progression or death, whichever is earlier
