@@ -172,6 +172,8 @@ OR.outliers.rlm <- function(x, y, max.degree = 3, p = 0.05,
 #' @param x.title Title for the x-axis.
 #' @param y.breaks Numeric vector specifying y-axis tick locations. Horizontal
 #' gridlines are drawn at these values.
+#' @param y.labels Labels for the y-axis ticks. If `NA`, the values of `y.breaks`
+#' are used.
 #' @param y.title Title for the y-axis.
 #' @details
 #' For numerical stability, `x` and `y` are standardized before fitting and
@@ -188,7 +190,8 @@ OR.outliers.rlm.ggplot <- function(x, y, max.degree = 3, p = 0.05,
                                    tol.min = 0.0001, tol.target = 0.0001,
                                    col.in =  "#0072B5FF", col.out = "#BC3C29FF",
                                    echo = FALSE, x.breaks = NA, x.labels = NA,
-                                   x.title = "", y.breaks = NA, y.title = "") {
+                                   x.title = "", y.breaks = NA, y.labels = NA,
+                                   y.title = "") {
   n <- length(y)
   mx <- mean(x, na.rm = TRUE)
   sx <- stats::sd(x, na.rm = TRUE)
@@ -210,6 +213,7 @@ OR.outliers.rlm.ggplot <- function(x, y, max.degree = 3, p = 0.05,
   ymax <- max(c(df$y, df$upper, y.breaks), na.rm = T)
   if (length(x.breaks) == 1) if (is.na(x.breaks)) x.breaks <- x
   if (length(x.labels) == 1) if (is.na(x.labels)) x.labels <- x
+  if (length(y.labels) == 1) if (is.na(y.labels)) y.labels <- y.breaks
   g <- ggplot2::ggplot(df, ggplot2::aes(x = x)) +
     ggplot2::coord_cartesian(clip = "off") +
     ggplot2::geom_hline(yintercept = y.breaks, color = grDevices::rgb(0.95, 0.95, 0.95)) +
@@ -233,7 +237,8 @@ OR.outliers.rlm.ggplot <- function(x, y, max.degree = 3, p = 0.05,
     ) +
     ggplot2::theme_classic() +
     ggplot2::scale_x_continuous(breaks = x.breaks, labels = x.labels) +
-    ggplot2::scale_y_continuous(expand = c(0, 0),
+    ggplot2::scale_y_continuous(breaks = y.breaks, expand = c(0, 0),
+                                labels = y.labels,
                                 limits = c(floor(ymin), ceiling(ymax))) +
     ggplot2::labs(
       x = x.title,

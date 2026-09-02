@@ -18,6 +18,7 @@ OR.outliers.rlm.ggplot(
   x.labels = NA,
   x.title = "",
   y.breaks = NA,
+  y.labels = NA,
   y.title = ""
 )
 }
@@ -57,6 +58,9 @@ are used.}
 
 \item{y.breaks}{Numeric vector specifying y-axis tick locations. Horizontal
 gridlines are drawn at these values.}
+
+\item{y.labels}{Labels for the y-axis ticks. If \code{NA}, the values of \code{y.breaks}
+are used.}
 
 \item{y.title}{Title for the y-axis.}
 }

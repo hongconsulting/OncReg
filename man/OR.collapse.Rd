@@ -48,7 +48,6 @@ Other other:
 \code{\link{OR.date.Excel}()},
 \code{\link{OR.holdout}()},
 \code{\link{OR.permutations}()},
-\code{\link{OR.read.csv.stub}()},
-\code{\link{OR.tdCox}()}
+\code{\link{OR.read.csv.stub}()}
 }
 \concept{other}

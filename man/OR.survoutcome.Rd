@@ -36,4 +36,8 @@ when \code{zero = TRUE}), are returned as \code{NA} in both columns.
 \description{
 Computes event times and statuses from start, event, and review dates.
 }
+\seealso{
+Other survival: 
+\code{\link{OR.tdCox}()}
+}
 \concept{survival}

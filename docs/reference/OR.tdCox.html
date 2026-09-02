@@ -15,7 +15,7 @@ avoiding immortal time bias."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">OncReg</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.21.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.21.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +36,7 @@ avoiding immortal time bias."></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Cox regression with time-dependent covariates</h1>
-      <small class="dont-index">Source: <a href="https://github.com/hongconsulting/OncReg/blob/HEAD/R/OncReg.other.R" class="external-link"><code>R/OncReg.other.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/hongconsulting/OncReg/blob/HEAD/R/OncReg.survival.R" class="external-link"><code>R/OncReg.survival.R</code></a></small>
       <div class="d-none name"><code>OR.tdCox.Rd</code></div>
     </div>
 
@@ -86,12 +86,8 @@ used as covariate names.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other other:
-<code><a href="OR.collapse.html">OR.collapse</a>()</code>,
-<code><a href="OR.date.Excel.html">OR.date.Excel</a>()</code>,
-<code><a href="OR.holdout.html">OR.holdout</a>()</code>,
-<code><a href="OR.permutations.html">OR.permutations</a>()</code>,
-<code><a href="OR.read.csv.stub.html">OR.read.csv.stub</a>()</code></p></div>
+    <div class="dont-index"><p>Other survival:
+<code><a href="OR.survoutcome.html">OR.survoutcome</a>()</code></p></div>
     </div>
 
     <div class="section level2">
@@ -108,7 +104,8 @@ used as covariate names.</p></dd>
 <span class="r-in"><span><span class="va">data</span><span class="op">$</span><span class="va">date.cycle1</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">date.cycle1</span> <span class="op">&gt;</span> <span class="va">data</span><span class="op">$</span><span class="va">time</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span></span>
 <span class="r-in"><span><span class="fu">OR.tdCox</span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">id</span>, <span class="va">data</span><span class="op">$</span><span class="va">time</span>, <span class="va">data</span><span class="op">$</span><span class="va">status</span>, X.tdc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"cycle1"</span> <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">date.cycle1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> survival::coxph(formula = stats::as.formula(formula), data = data)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> survival::coxph(formula = stats::as.formula(formula), data = data, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     model = TRUE)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          coef exp(coef) se(coef)     z     p</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> cycle1 0.1164    1.1234   0.2446 0.476 0.634</span>
