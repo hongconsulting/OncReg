@@ -36,6 +36,46 @@ OR.days.per.month <- function(month, year) {
   return(n)
 }
 
+#' Convert mixed format times of day to Microsoft Excel serial times
+#'
+#' Converts string times of day that may be in serial (using the Microsoft
+#' Excel convention of a fraction of a 24-hour day) or 24-hour clock format
+#' with (e.g., "12:00:00") or without (e.g., "12:00") seconds into numeric
+#' serial times.
+#' @param x String vector of times of day in serial or 24-hour clock format.
+#' @return Numeric vector of serial times using the Microsoft Excel convention.
+#' @examples
+#' print(OR.time.Excel(c("0.5", "12:00", "12:00:00")))
+#' @family other
+#' @export
+OR.time.Excel <- function(x) {
+  x <- as.character(x)
+  seconds <- numeric(length(x))
+  is.clock <- grepl(":", x, fixed = TRUE)
+  if (sum(!is.clock) > 0) {
+    serial <- x[!is.clock]
+    if (sum(grepl("^[0-9]*\\.?[0-9]+$", serial)) < length(serial)) {
+      stop("[OR.time.Excel] invalid entry")
+    }
+    serial <- as.numeric(serial)
+    if (sum(serial >= 0 & serial < 1) < length(serial)) {
+      stop("[OR.time.Excel] Excel serial time outside [0, 1)")
+    }
+    seconds[!is.clock] <- round(serial * 86400)
+  }
+  if (sum(is.clock) > 0) {
+    clock <- x[is.clock]
+    is.short <- grepl("^[0-9]{1,2}:[0-9]{2}$", clock)
+    clock[is.short] <- paste0(clock[is.short], ":00")
+    parsed <- strptime(clock, format = "%H:%M:%S", tz = "UTC")
+    if (sum(is.na(parsed)) > 0) {
+      stop("[OR.time.Excel] unparseable clock time")
+    }
+    seconds[is.clock] <- parsed$hour * 3600 + parsed$min * 60 + parsed$sec
+  }
+  return(seconds/86400)
+}
+
 OR.y.to.Y <- function(input, century = 20, pivot = 50, order = "dmy", delimiters = c("-", ".")) {
   output <- input
   for (d in delimiters) {

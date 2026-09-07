@@ -4,7 +4,7 @@
 \alias{OR.Google.distance}
 \title{Road distance between two addresses using Google Routes API}
 \usage{
-OR.Google.distance(a, b, key)
+OR.Google.distance(a, b, key, cache)
 }
 \arguments{
 \item{a}{String address A.}
@@ -12,6 +12,8 @@ OR.Google.distance(a, b, key)
 \item{b}{String address B.}
 
 \item{key}{String Google API key.}
+
+\item{cache}{String path to a \code{cachem} disk cache directory.}
 }
 \value{
 Numeric distance in kilometres or \code{NA} if no route is found.
@@ -20,7 +22,7 @@ Numeric distance in kilometres or \code{NA} if no route is found.
 Returns the road distance in km between two addresses. To reduce API calls,
 addresses are case-insensitive and whitespace-trimmed, empty addresses after
 processing return \code{NA} early, processed addresses are internally sorted, and
-results are memoized.
+results are memoized to disk.
 }
 \details{
 If no route is found, input addresses are compared via Google Geocoding API;

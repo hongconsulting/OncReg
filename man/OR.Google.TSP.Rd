@@ -4,7 +4,7 @@
 \alias{OR.Google.TSP}
 \title{Travelling salesman distance via Google Routes API}
 \usage{
-OR.Google.TSP(origin, destinations, key, echo = FALSE)
+OR.Google.TSP(origin, destinations, key, cache, echo = FALSE)
 }
 \arguments{
 \item{origin}{String starting and ending address.}
@@ -12,6 +12,8 @@ OR.Google.TSP(origin, destinations, key, echo = FALSE)
 \item{destinations}{String vector of addresses to visit.}
 
 \item{key}{String Google API key.}
+
+\item{cache}{String path to a \code{cachem} disk cache directory.}
 
 \item{echo}{Boolean indicating whether to print progress and summary to
 console. Default = \code{FALSE}.}

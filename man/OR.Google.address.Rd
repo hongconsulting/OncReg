@@ -4,12 +4,14 @@
 \alias{OR.Google.address}
 \title{Resolve address using Google Geocoding API}
 \usage{
-OR.Google.address(address, key)
+OR.Google.address(address, key, cache)
 }
 \arguments{
 \item{address}{String input address.}
 
 \item{key}{String Google API key.}
+
+\item{cache}{String path to a \code{cachem} disk cache directory.}
 }
 \value{
 String formatted address or \code{NA} if no match is found.
@@ -17,7 +19,7 @@ String formatted address or \code{NA} if no match is found.
 \description{
 Returns the formatted address for a given input string. To reduce API calls,
 addresses are case-insensitive and whitespace-trimmed, empty addresses after
-processing return \code{NA} early, and results are memoized.
+processing return \code{NA} early, and results are memoized to disk.
 }
 \seealso{
 Other GoogleMapsPlatform: 
