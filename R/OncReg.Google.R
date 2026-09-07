@@ -29,7 +29,8 @@ OR.Google.address <- function(address, key, cache) {
   address <- tolower(trimws(address))
   if (address == "") return(NA)
   f <- memoise::memoise(.OR.Google.address,
-                        cache = cachem::cache_disk(cache, max_size = Inf, max_age = Inf))
+                        cache = cachem::cache_disk(cache, max_size = Inf,
+                                                   max_age = Inf, evict = "fifo"))
   return(f(address, key))
 }
 
@@ -79,7 +80,8 @@ OR.Google.distance <- function(a, b, key, cache) {
   if (b == "") return(NA)
   sorted <- sort(c(a, b))
   f <- memoise::memoise(.OR.Google.distance,
-                        cache = cachem::cache_disk(cache, max_size = Inf, max_age = Inf))
+                        cache = cachem::cache_disk(cache, max_size = Inf,
+                                                   max_age = Inf, evict = "fifo"))
   output <- f(sorted[1], sorted[2], key)
   if (is.na(output)) {
     if (OR.NA.to.F(OR.Google.address(a, key, cache) ==
