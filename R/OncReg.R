@@ -9,12 +9,12 @@ OR.0.rm <- function(x) {
   return(x[x != 0])
 }
 
-#' Convert strings to numeric after normalising minus signs and stripping digit 
+#' Convert strings to numeric after normalising minus signs and stripping digit
 #' grouping separators
 #'
-#' Replaces Unicode minus signs (`"\u2212"`) with ASCII `"-"`, removes either 
-#' commas or spaces used as digit grouping (thousands) separators, then converts 
-#' the result to numeric. Non-convertible values return `NA` with warnings 
+#' Replaces Unicode minus signs (`"\u2212"`) with ASCII `"-"`, removes either
+#' commas or spaces used as digit grouping (thousands) separators, then converts
+#' the result to numeric. Non-convertible values return `NA` with warnings
 #' suppressed.
 #' @param x A string vector.
 #' @return A numeric vector.
@@ -42,6 +42,23 @@ OR.as.numeric <- function(x) {
 #   sd <- stats::sd(x, na.rm = TRUE)
 #   return((x - mu) / sd)
 # }
+
+#' Identify element-wise mismatches between two vectors, treating NAs as equal to each other
+#'
+#' Returns the elements that differ between two vectors. Unlike `==`, which
+#' returns `NA` whenever either operand is `NA`, missing values are treated as
+#' equal to each other and unequal to everything else.
+#' @param a A vector.
+#' @param b A vector of the same length as `a`.
+#' @return A two-column matrix of the mismatching elements, with `a` in the
+#' first column and `b` in the second.
+#' @family basic
+#' @export
+OR.check.equal <- function(a, b) {
+  equal <- (is.na(a) & is.na(b)) |
+    (!is.na(a) & !is.na(b) & a == b)
+  return(cbind(a, b)[which(!equal), ])
+}
 
 #' Convert FALSE values to NA
 #'

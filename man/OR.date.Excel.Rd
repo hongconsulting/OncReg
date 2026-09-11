@@ -26,11 +26,12 @@ Numeric vector of serial dates using the Microsoft Excel offset.
 Converts string dates that may be in serial (using the Microsoft Excel
 offset) or delimited format with a two-digit (e.g., \code{"31/01/00"}) or four-digit
 (e.g., \code{"31/01/2000"}) year into numeric serial dates. Fields may be delimited
-by \code{"/"}, \code{"-"} or \code{"."}. Two-digit years are expanded using a specified century
-and pivot year.
+by \code{"/"}, \code{"-"} or \code{"."}. Months may be given as numbers or as three-letter
+English abbreviations (e.g., \code{"31-Jan-2000"}). Two-digit years are expanded
+using a specified century and pivot year.
 }
 \examples{
-print(OR.date.Excel(c("31/01/00", "31-01-2000", "36556")))
+print(OR.date.Excel(c("31/01/00", "31-Jan-2000", "36556", NA, "unknown")))
 }
 \seealso{
 Other other: 

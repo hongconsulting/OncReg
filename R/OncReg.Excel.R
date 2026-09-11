@@ -3,8 +3,9 @@
 #' Converts string dates that may be in serial (using the Microsoft Excel
 #' offset) or delimited format with a two-digit (e.g., `"31/01/00"`) or four-digit
 #' (e.g., `"31/01/2000"`) year into numeric serial dates. Fields may be delimited
-#' by `"/"`, `"-"` or `"."`. Two-digit years are expanded using a specified century
-#' and pivot year.
+#' by `"/"`, `"-"` or `"."`. Months may be given as numbers or as three-letter
+#' English abbreviations (e.g., `"31-Jan-2000"`). Two-digit years are expanded
+#' using a specified century and pivot year.
 #' @param input String vector of dates in serial or delimited format, where
 #' fields are separated by `"/"`, `"-"` or `"."`.
 #' @param century Numeric century used for expanding two-digit years. Default =
@@ -15,12 +16,24 @@
 #' Default = `"dmy"`.
 #' @return Numeric vector of serial dates using the Microsoft Excel offset.
 #' @examples
-#' print(OR.date.Excel(c("31/01/00", "31-01-2000", "36556")))
+#' print(OR.date.Excel(c("31/01/00", "31-Jan-2000", "36556", NA, "unknown")))
 #' @family other
 #' @export
-OR.date.Excel <- function (input, century = 20, pivot = 50, order = "dmy") {
-  output <- input
+OR.date.Excel <- function(input, century = 20, pivot = 50, order = "dmy") {
+  input <- gsub("Jan", "01", input, fixed = TRUE)
+  input <- gsub("Feb", "02", input, fixed = TRUE)
+  input <- gsub("Mar", "03", input, fixed = TRUE)
+  input <- gsub("Apr", "04", input, fixed = TRUE)
+  input <- gsub("May", "05", input, fixed = TRUE)
+  input <- gsub("Jun", "06", input, fixed = TRUE)
+  input <- gsub("Jul", "07", input, fixed = TRUE)
+  input <- gsub("Aug", "08", input, fixed = TRUE)
+  input <- gsub("Sep", "09", input, fixed = TRUE)
+  input <- gsub("Oct", "10", input, fixed = TRUE)
+  input <- gsub("Nov", "11", input, fixed = TRUE)
+  input <- gsub("Dec", "12", input, fixed = TRUE)
   x <- OR.y.to.Y(input, century, pivot, order)
+  output <- input
   o <- strsplit(order, "")[[1]]
   f <- paste0("%", ifelse(o == "y", "Y", o), collapse = "/")
   mask_n <- suppressWarnings(as.numeric(x))
