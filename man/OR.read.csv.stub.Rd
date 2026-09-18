@@ -22,9 +22,7 @@ and combines them by rows.
 \seealso{
 Other other: 
 \code{\link{OR.collapse}()},
-\code{\link{OR.date.Excel}()},
 \code{\link{OR.holdout}()},
-\code{\link{OR.permutations}()},
-\code{\link{OR.time.Excel}()}
+\code{\link{OR.permutations}()}
 }
 \concept{other}

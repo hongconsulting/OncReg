@@ -37,11 +37,8 @@ using a specified century and pivot year.
 print(OR.date.Excel(c("31/01/00", "31-Jan-2000", "36556", NA, "unknown")))
 }
 \seealso{
-Other other: 
-\code{\link{OR.collapse}()},
-\code{\link{OR.holdout}()},
-\code{\link{OR.permutations}()},
-\code{\link{OR.read.csv.stub}()},
+Other datetime: 
+\code{\link{OR.date.rebase}()},
 \code{\link{OR.time.Excel}()}
 }
-\concept{other}
+\concept{datetime}

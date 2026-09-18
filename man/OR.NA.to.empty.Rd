@@ -24,6 +24,7 @@ Other basic:
 \code{\link{OR.NA.to.F}()},
 \code{\link{OR.as.numeric}()},
 \code{\link{OR.check.equal}()},
+\code{\link{OR.colNA.rm}()},
 \code{\link{OR.string.to.binary}()}
 }
 \concept{basic}

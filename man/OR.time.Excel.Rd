@@ -22,11 +22,8 @@ serial times.
 print(OR.time.Excel(c("0.5", "12:00", "12:00:00")))
 }
 \seealso{
-Other other: 
-\code{\link{OR.collapse}()},
+Other datetime: 
 \code{\link{OR.date.Excel}()},
-\code{\link{OR.holdout}()},
-\code{\link{OR.permutations}()},
-\code{\link{OR.read.csv.stub}()}
+\code{\link{OR.date.rebase}()}
 }
-\concept{other}
+\concept{datetime}

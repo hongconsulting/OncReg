@@ -19,7 +19,7 @@
 #' @return Date vector, converted via the Microsoft Excel serial offset.
 #' @examples
 #' print(OR.date.Excel(c("31/01/00", "31-Jan-2000", "36556", NA, "unknown")))
-#' @family other
+#' @family datetime
 #' @export
 OR.date.Excel <- function(input, century = 20, pivot = 50, order = "dmy", as.Date = F) {
   input <- gsub("Jan", "01", input, fixed = TRUE)
@@ -63,7 +63,7 @@ OR.days.per.month <- function(month, year) {
 #' @return Numeric vector of serial times using the Microsoft Excel convention.
 #' @examples
 #' print(OR.time.Excel(c("0.5", "12:00", "12:00:00")))
-#' @family other
+#' @family datetime
 #' @export
 OR.time.Excel <- function(x) {
   x <- as.character(x)

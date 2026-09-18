@@ -45,10 +45,8 @@ measurements for one patient are distributed across multiple event rows.
 }
 \seealso{
 Other other: 
-\code{\link{OR.date.Excel}()},
 \code{\link{OR.holdout}()},
 \code{\link{OR.permutations}()},
-\code{\link{OR.read.csv.stub}()},
-\code{\link{OR.time.Excel}()}
+\code{\link{OR.read.csv.stub}()}
 }
 \concept{other}

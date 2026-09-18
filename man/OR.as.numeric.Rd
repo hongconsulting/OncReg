@@ -28,6 +28,7 @@ Other basic:
 \code{\link{OR.NA.to.F}()},
 \code{\link{OR.NA.to.empty}()},
 \code{\link{OR.check.equal}()},
+\code{\link{OR.colNA.rm}()},
 \code{\link{OR.string.to.binary}()}
 }
 \concept{basic}

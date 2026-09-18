@@ -60,6 +60,31 @@ OR.check.equal <- function(a, b) {
   return(cbind(a, b)[which(!equal), ])
 }
 
+#' Remove all-NA columns
+#'
+#' Removes any column from a `data.frame` where every value is `NA`.
+#' @param df A `data.frame`.
+#' @return A `data.frame` with all-`NA` columns removed.
+#' @family basic
+#' @export
+OR.colNA.rm <- function(df) {
+  return(df[, vapply(df, function(x) !all(is.na(x)), logical(1)), drop = FALSE])
+}
+
+#' Rebase dates within clusters
+#'
+#' Within each `id`, re-expresses `date` as elapsed time from that id's
+#' earliest value, so that measurements count from `0` onwards.
+#' @param id vector of cluster identifiers.
+#' @param date Numeric or `Date` vector of dates.
+#' @return Numeric vector of elapsed time from each `id`'s baseline (minimum)
+#' value.
+#' @family datetime
+#' @export
+OR.date.rebase <- function(id, date) {
+  return(as.numeric(ave(as.numeric(date), id, FUN = function(x) x - OR.min(x))))
+}
+
 #' Convert FALSE values to NA
 #'
 #' Converts all `FALSE` elements in a vector or matrix to `NA`.

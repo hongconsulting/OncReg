@@ -29,6 +29,7 @@ Other basic:
 \code{\link{OR.NA.to.F}()},
 \code{\link{OR.NA.to.empty}()},
 \code{\link{OR.as.numeric}()},
+\code{\link{OR.colNA.rm}()},
 \code{\link{OR.string.to.binary}()}
 }
 \concept{basic}

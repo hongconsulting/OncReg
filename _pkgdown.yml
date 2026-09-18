@@ -5,6 +5,9 @@ reference:
   - title: Basic data cleaning
     contents:
       - has_concept("basic")
+  - title: Date and time
+    contents:
+      - has_concept("datetime")
   - title: Delimited strings
     contents:
       - has_concept("delim")
