@@ -1,6 +1,6 @@
 Package: OncReg
 Title: Cancer Registry Tools
-Version: 0.21.4
+Version: 0.21.5
 Authors@R: 
     person("Wei", "Hong", , "wei.hong@hongconsulting.ai", role = c("aut", "cre"))
 Description: Tools for working with cancer registry data.
@@ -9,13 +9,13 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Imports:
-	cachem,
+    cachem,
     curl,
-	ggplot2,
-	jsonlite,
-	memoise,
-	stats,
-	survival
+    ggplot2,
+    jsonlite,
+    memoise,
+    stats,
+    survival
 URL: https://github.com/hongconsulting/OncReg,
     https://hongconsulting.github.io/OncReg
 BugReports: https://github.com/hongconsulting/OncReg/issues

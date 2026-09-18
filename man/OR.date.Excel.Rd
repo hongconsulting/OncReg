@@ -4,7 +4,7 @@
 \alias{OR.date.Excel}
 \title{Convert mixed format dates to Microsoft Excel serial dates}
 \usage{
-OR.date.Excel(input, century = 20, pivot = 50, order = "dmy")
+OR.date.Excel(input, century = 20, pivot = 50, order = "dmy", as.Date = F)
 }
 \arguments{
 \item{input}{String vector of dates in serial or delimited format, where
@@ -18,9 +18,12 @@ with \code{century - 1}. Default = \code{50}.}
 
 \item{order}{String specifying the field order, e.g., \code{"dmy"}, \code{"ymd"}, or \code{"mdy"}.
 Default = \code{"dmy"}.}
+
+\item{as.Date}{Logical. If \code{TRUE}, returns a \code{Date} vector. If \code{FALSE}, returns
+numeric serial dates using the Microsoft Excel offset. Default = \code{FALSE}.}
 }
 \value{
-Numeric vector of serial dates using the Microsoft Excel offset.
+Date vector, converted via the Microsoft Excel serial offset.
 }
 \description{
 Converts string dates that may be in serial (using the Microsoft Excel

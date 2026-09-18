@@ -14,12 +14,14 @@
 #' with `century - 1`. Default = `50`.
 #' @param order String specifying the field order, e.g., `"dmy"`, `"ymd"`, or `"mdy"`.
 #' Default = `"dmy"`.
-#' @return Numeric vector of serial dates using the Microsoft Excel offset.
+#' @param as.Date Logical. If `TRUE`, returns a `Date` vector. If `FALSE`, returns
+#' numeric serial dates using the Microsoft Excel offset. Default = `FALSE`.
+#' @return Date vector, converted via the Microsoft Excel serial offset.
 #' @examples
 #' print(OR.date.Excel(c("31/01/00", "31-Jan-2000", "36556", NA, "unknown")))
 #' @family other
 #' @export
-OR.date.Excel <- function(input, century = 20, pivot = 50, order = "dmy") {
+OR.date.Excel <- function(input, century = 20, pivot = 50, order = "dmy", as.Date = F) {
   input <- gsub("Jan", "01", input, fixed = TRUE)
   input <- gsub("Feb", "02", input, fixed = TRUE)
   input <- gsub("Mar", "03", input, fixed = TRUE)
@@ -40,7 +42,9 @@ OR.date.Excel <- function(input, century = 20, pivot = 50, order = "dmy") {
   mask_d <- as.numeric(as.Date(x, f)) - as.numeric(as.Date("1899-12-30"))
   output[!is.na(mask_n)] <- mask_n[!is.na(mask_n)]
   output[!is.na(mask_d)] <- mask_d[!is.na(mask_d)]
-  return(suppressWarnings(as.numeric(output)))
+  output <- suppressWarnings(as.numeric(output))
+  if (as.Date) output <- as.Date(output, origin = "1899-12-30")
+  return(output)
 }
 
 OR.days.per.month <- function(month, year) {
