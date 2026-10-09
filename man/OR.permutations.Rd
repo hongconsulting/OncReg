@@ -22,6 +22,7 @@ lexicographic order.
 Other other: 
 \code{\link{OR.collapse}()},
 \code{\link{OR.holdout}()},
+\code{\link{OR.rbind.fill}()},
 \code{\link{OR.read.csv.stub}()}
 }
 \concept{other}

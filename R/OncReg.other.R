@@ -14,7 +14,7 @@
 #' @param method Character string specifying how multiple values within each ID
 #' should be collapsed. Options include:
 #' \itemize{
-#'   \item `"left"`: Returns the first non-missing value in order of appearance.
+#'   \item `"firstnm"`: Returns the first non-missing value in order of appearance.
 #'   \item `"mean"`: Returns the mean of non-missing values.
 #'   \item `"max"`: Returns the maximum of non-missing values.
 #'   \item `"min"`: Returns the minimum of non-missing values.
@@ -23,6 +23,10 @@
 #'   \item `"sum"`: Returns the sum of non-missing values.
 #' }
 #' @details
+#' Analogous to Stata's "collapse" command. The data frame is reduced to one row
+#' per ID, each selected variable is summarised by `method`, and all other
+#' variables are dropped.
+#'
 #' An example use case is when working with REDCap exports, where the
 #' measurements for one patient are distributed across multiple event rows.
 #' @return A data frame with one row per unique ID and one column for each
@@ -115,6 +119,30 @@ OR.permutations <- function(n, k) {
     output[i, ] <- a[1:k]
   }
   return(output)
+}
+
+#' Row-bind data frames with different columns
+#'
+#' Combines two data frames by row, matching columns by name. Columns missing
+#' from one data frame are filled with `NA`.
+#' @param df.1 A data frame.
+#' @param df.2 A data frame.
+#' @return A data frame with the rows of `df.1` followed by the rows of `df.2`.
+#' @family other
+#' @export
+OR.rbind.fill <- function(df.1, df.2) {
+  if (!is.data.frame(df.1) || !is.data.frame(df.2)) {
+    stop("[OR.rbind.fill] both inputs must be data.frames")
+  }
+  # add the columns each input lacks, filled with NA of the other's type
+  for (current.name in setdiff(names(df.2), names(df.1))) {
+    df.1[[current.name]] <- df.2[[current.name]][rep(NA_integer_, nrow(df.1))]
+  }
+  for (current.name in setdiff(names(df.1), names(df.2))) {
+    df.2[[current.name]] <- df.1[[current.name]][rep(NA_integer_, nrow(df.2))]
+  }
+  # rbind matches columns by name and handles the types
+  return(rbind(df.1, df.2))
 }
 
 #' Read CSV files matching a path stub and combine by rows

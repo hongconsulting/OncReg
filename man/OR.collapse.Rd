@@ -19,7 +19,7 @@ collapsed.}
 \item{method}{Character string specifying how multiple values within each ID
 should be collapsed. Options include:
 \itemize{
-\item \code{"left"}: Returns the first non-missing value in order of appearance.
+\item \code{"firstnm"}: Returns the first non-missing value in order of appearance.
 \item \code{"mean"}: Returns the mean of non-missing values.
 \item \code{"max"}: Returns the maximum of non-missing values.
 \item \code{"min"}: Returns the minimum of non-missing values.
@@ -40,6 +40,10 @@ unique ID and one column per matched variable. Non-matching variables are
 ignored.
 }
 \details{
+Analogous to Stata's "collapse" command. The data frame is reduced to one row
+per ID, each selected variable is summarised by \code{method}, and all other
+variables are dropped.
+
 An example use case is when working with REDCap exports, where the
 measurements for one patient are distributed across multiple event rows.
 }
@@ -47,6 +51,7 @@ measurements for one patient are distributed across multiple event rows.
 Other other: 
 \code{\link{OR.holdout}()},
 \code{\link{OR.permutations}()},
+\code{\link{OR.rbind.fill}()},
 \code{\link{OR.read.csv.stub}()}
 }
 \concept{other}

@@ -23,6 +23,7 @@ and combines them by rows.
 Other other: 
 \code{\link{OR.collapse}()},
 \code{\link{OR.holdout}()},
-\code{\link{OR.permutations}()}
+\code{\link{OR.permutations}()},
+\code{\link{OR.rbind.fill}()}
 }
 \concept{other}

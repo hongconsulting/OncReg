@@ -15,7 +15,7 @@ ignored."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">OncReg</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.21.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.21.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +74,7 @@ collapsed.</p></dd>
 
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
 <dd><p>Character string specifying how multiple values within each ID
-should be collapsed. Options include:</p><ul><li><p><code>"left"</code>: Returns the first non-missing value in order of appearance.</p></li>
+should be collapsed. Options include:</p><ul><li><p><code>"firstnm"</code>: Returns the first non-missing value in order of appearance.</p></li>
 <li><p><code>"mean"</code>: Returns the mean of non-missing values.</p></li>
 <li><p><code>"max"</code>: Returns the maximum of non-missing values.</p></li>
 <li><p><code>"min"</code>: Returns the minimum of non-missing values.</p></li>
@@ -91,7 +91,10 @@ variable matching <code>pattern</code>, summarized according to <code>method</co
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>An example use case is when working with REDCap exports, where the
+    <p>Analogous to Stata's "collapse" command. The data frame is reduced to one row
+per ID, each selected variable is summarised by <code>method</code>, and all other
+variables are dropped.</p>
+<p>An example use case is when working with REDCap exports, where the
 measurements for one patient are distributed across multiple event rows.</p>
     </div>
     <div class="section level2">
@@ -99,6 +102,7 @@ measurements for one patient are distributed across multiple event rows.</p>
     <div class="dont-index"><p>Other other:
 <code><a href="OR.holdout.html">OR.holdout</a>()</code>,
 <code><a href="OR.permutations.html">OR.permutations</a>()</code>,
+<code><a href="OR.rbind.fill.html">OR.rbind.fill</a>()</code>,
 <code><a href="OR.read.csv.stub.html">OR.read.csv.stub</a>()</code></p></div>
     </div>
 
