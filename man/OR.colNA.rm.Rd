@@ -25,6 +25,12 @@ Other basic:
 \code{\link{OR.NA.to.empty}()},
 \code{\link{OR.as.numeric}()},
 \code{\link{OR.check.equal}()},
+\code{\link{OR.colconst.rm}()},
+\code{\link{OR.collapse}()},
+\code{\link{OR.merge.wide}()},
+\code{\link{OR.rbind.fill}()},
+\code{\link{OR.rowcoalesce}()},
+\code{\link{OR.rowsubsumed.rm}()},
 \code{\link{OR.string.to.binary}()}
 }
 \concept{basic}

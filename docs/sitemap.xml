@@ -18,6 +18,7 @@
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.as.numeric.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.check.equal.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.colNA.rm.html</loc></url>
+<url><loc>https://hongconsulting.github.io/OncReg/reference/OR.colconst.rm.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.collapse.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.date.Excel.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.date.rebase.html</loc></url>
@@ -41,6 +42,7 @@
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.max.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.mdyY.to.Excel.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.mean.html</loc></url>
+<url><loc>https://hongconsulting.github.io/OncReg/reference/OR.merge.wide.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.min.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.mode.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.modefreq.html</loc></url>
@@ -55,11 +57,13 @@
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.regimen.consolidate.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.regimen.restart.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.regimen.truncate.html</loc></url>
+<url><loc>https://hongconsulting.github.io/OncReg/reference/OR.rowcoalesce.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.rowleft.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.rowmax.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.rowmax.threshold.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.rowmin.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.rowmin.threshold.html</loc></url>
+<url><loc>https://hongconsulting.github.io/OncReg/reference/OR.rowsubsumed.rm.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.string.to.binary.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.sum.html</loc></url>
 <url><loc>https://hongconsulting.github.io/OncReg/reference/OR.survoutcome.html</loc></url>

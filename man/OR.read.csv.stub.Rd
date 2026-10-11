@@ -21,9 +21,7 @@ and combines them by rows.
 }
 \seealso{
 Other other: 
-\code{\link{OR.collapse}()},
 \code{\link{OR.holdout}()},
-\code{\link{OR.permutations}()},
-\code{\link{OR.rbind.fill}()}
+\code{\link{OR.permutations}()}
 }
 \concept{other}
