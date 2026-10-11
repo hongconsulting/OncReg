@@ -22,6 +22,7 @@ progression-free survival based on the dates of progression and death.
 }
 \seealso{
 Other summary: 
+\code{\link{OR.collapse}()},
 \code{\link{OR.max}()},
 \code{\link{OR.mean}()},
 \code{\link{OR.min}()},

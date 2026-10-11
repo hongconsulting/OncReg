@@ -18,6 +18,7 @@ all elements are \code{NA}.
 }
 \seealso{
 Other summary: 
+\code{\link{OR.collapse}()},
 \code{\link{OR.mean}()},
 \code{\link{OR.min}()},
 \code{\link{OR.mode}()},

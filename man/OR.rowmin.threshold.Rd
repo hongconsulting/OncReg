@@ -22,6 +22,7 @@ values satisfy the condition.
 }
 \seealso{
 Other summary: 
+\code{\link{OR.collapse}()},
 \code{\link{OR.max}()},
 \code{\link{OR.mean}()},
 \code{\link{OR.min}()},

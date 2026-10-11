@@ -22,6 +22,7 @@ follow-up from several dates when the patient was observed.
 }
 \seealso{
 Other summary: 
+\code{\link{OR.collapse}()},
 \code{\link{OR.max}()},
 \code{\link{OR.mean}()},
 \code{\link{OR.min}()},

@@ -28,7 +28,6 @@ Other basic:
 \code{\link{OR.as.numeric}()},
 \code{\link{OR.check.equal}()},
 \code{\link{OR.colNA.rm}()},
-\code{\link{OR.collapse}()},
 \code{\link{OR.merge.wide}()},
 \code{\link{OR.rbind.fill}()},
 \code{\link{OR.rowcoalesce}()},

@@ -17,6 +17,7 @@ Returns the number of occurrences of the most common value in \code{x}.
 }
 \seealso{
 Other summary: 
+\code{\link{OR.collapse}()},
 \code{\link{OR.max}()},
 \code{\link{OR.mean}()},
 \code{\link{OR.min}()},
