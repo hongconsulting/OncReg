@@ -45,6 +45,7 @@ OR.tdCox(data$id, data$time, data$status, X.tdc = data.frame("cycle1" = data$dat
 }
 \seealso{
 Other survival: 
+\code{\link{OR.KMdiff}()},
 \code{\link{OR.survoutcome}()}
 }
 \concept{survival}

@@ -1,3 +1,86 @@
+#' Difference in Kaplan–Meier survival at a fixed time point
+#'
+#' Compares Kaplan–Meier survival at a fixed time point between each arm and
+#' the baseline arm (the lowest value of `group`). Confidence intervals use
+#' unpooled Greenwood¹ variances on the identity scale and *p*-values use a Wald
+#' test on the complementary log–log scale².
+#' @param time Numeric vector of follow-up times.
+#' @param status Numeric vector of event indicators, where `1` denotes the event
+#' and `0` denotes censoring.
+#' @param group Numeric vector of arm indicators. The lowest value is the
+#' baseline arm.
+#' @param fixedt Numeric scalar time point at which survival is compared.
+#' @param conf.level Numeric confidence level. Default = `0.95`.
+#' @param LOCF Logical. If `TRUE`, survival beyond an arm's last observation is
+#' carried forward³. If `FALSE`, it is `NA` unless the Kaplan-Meier
+#' estimate has reached `0`. Default = `FALSE`.
+#' @return A numeric matrix with one row per non-baseline arm, named by its
+#' `group` value, and columns:
+#' \describe{
+#'   \item{diff}{Survival difference, arm minus baseline.}
+#'   \item{SE}{Standard error of the difference.}
+#'   \item{LL}{Lower confidence limit.}
+#'   \item{UL}{Upper confidence limit.}
+#'   \item{p}{Two-sided p-value.}
+#' }
+#' @details
+#' When survival reaches `0`, the standard error is set to `0` (whereas
+#' `survival::survfit()` returns `NaN`). When either arm's survival is `0` or
+#' `1`, the complementary log–log transform is undefined and the *p*-value falls
+#' back to an identity-scale Wald test. When both standard errors are `0`, the
+#' *p*-value is `1` if the arms are equal and `0` otherwise.
+#' @references
+#' 1. Greenwood, M., 1926. A report on the natural duration of cancer. In:
+#' *Reports on Public Health and Medical Subjects*, 33, pp. 1–26. London:
+#' Her Majesty’s Stationery Office, Ministry of Health.
+#' 2. Klein, J.P., Logan, B., Harhoff, M. and Andersen, P.K., 2007. Analyzing
+#' survival curves at a fixed point in time. *Statistics in Medicine*, 26(24),
+#' pp. 4505–4519.
+#' 3. Gill, R.D., 1983. Large sample behaviour of the product-limit estimator on
+#' the whole line. *The Annals of Statistics*, 11(1), pp. 49–58.
+#' @family survival
+#' @export
+OR.KMdiff <- function(time, status, group, fixedt, conf.level = 0.95,
+                      LOCF = FALSE) {
+  arms    <- sort(unique(group))
+  n.arms  <- length(arms)
+  surv    <- numeric(n.arms)
+  surv.SE <- numeric(n.arms)
+  for (i in 1:n.arms) {
+    in.arm <- group == arms[i]
+    fit    <- survival::survfit(survival::Surv(time[in.arm], status[in.arm]) ~ 1)
+    fit.t  <- summary(fit, times = fixedt, extend = TRUE)
+    surv[i]    <- fit.t$surv
+    surv.SE[i] <- fit.t$std.err
+    if (!LOCF && fixedt > max(time[in.arm]) && surv[i] > 0) { # undefined past a censored tail
+      surv[i]    <- NA
+      surv.SE[i] <- NA
+    }
+  }
+  surv.SE[surv == 0] <- 0 # survival::survfit gives SE = NaN at S = 0
+  surv.base    <- surv[1]
+  surv.comp    <- surv[-1]
+  surv.SE.base <- surv.SE[1]
+  surv.SE.comp <- surv.SE[-1]
+  diff    <- surv.comp - surv.base
+  diff.SE <- sqrt(surv.SE.comp^2 + surv.SE.base^2)
+  z       <- stats::qnorm(1 - (1 - conf.level) / 2)
+  # Wald chi-square on the cloglog scale
+  Wald.chisq <- numeric(n.arms - 1)
+  cloglog.mask <- !is.na(diff) & surv.base > 0 & surv.base < 1 & surv.comp > 0 & surv.comp < 1
+  var.cloglog.base <- surv.SE.base^2 / (surv.base * log(surv.base))^2
+  var.cloglog.comp <- surv.SE.comp[cloglog.mask]^2 / (surv.comp[cloglog.mask] * log(surv.comp[cloglog.mask]))^2
+  Wald.chisq[cloglog.mask] <- (log(-log(surv.comp[cloglog.mask])) - log(-log(surv.base)))^2 / (var.cloglog.base + var.cloglog.comp)
+  # fallback: identity-scale Wald where either arm is at 0 or 1 (cloglog undefined)
+  Wald.chisq[!cloglog.mask] <- diff[!cloglog.mask]^2 / diff.SE[!cloglog.mask]^2
+  p <- 2 * stats::pnorm(-sqrt(Wald.chisq))
+  p[diff.SE == 0 & diff == 0] <- 1   # fallback: both arms at the same boundary
+  p[diff.SE == 0 & diff != 0] <- 0   # fallback: arms at opposite boundaries
+  output <- cbind(diff, diff.SE, diff - z * diff.SE, diff + z * diff.SE, p)
+  dimnames(output) <- list(arms[-1], c("diff", "SE", "LL", "UL", "p"))
+  return(output)
+}
+
 #' Survival outcomes
 #'
 #' Computes event times and statuses from start, event, and review dates.
