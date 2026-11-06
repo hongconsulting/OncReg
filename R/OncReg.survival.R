@@ -9,11 +9,11 @@
 #' and `0` denotes censoring.
 #' @param group Numeric vector of arm indicators. The lowest value is the
 #' baseline arm.
-#' @param fixedt Numeric scalar time point at which survival is compared.
+#' @param fixedt Numeric time point at which survival is compared.
 #' @param conf.level Numeric confidence level. Default = `0.95`.
 #' @param LOCF Logical. If `TRUE`, survival beyond an arm's last observation is
-#' carried forward³. If `FALSE`, it is `NA` unless the Kaplan-Meier
-#' estimate has reached `0`. Default = `FALSE`.
+#' carried forward³. If `FALSE`, it is `NA` unless the Kaplan–Meier estimate has
+#' reached `0`. Default = `FALSE`.
 #' @return A numeric matrix with one row per non-baseline arm, named by its
 #' `group` value, and columns:
 #' \describe{
@@ -21,16 +21,16 @@
 #'   \item{SE}{Standard error of the difference.}
 #'   \item{LL}{Lower confidence limit.}
 #'   \item{UL}{Upper confidence limit.}
-#'   \item{p}{Two-sided p-value.}
+#'   \item{p}{Two-sided *p*-value.}
 #' }
 #' @details
 #' Where survival reaches `0`, the standard error is set to `0` (whereas
 #' `survival::survfit()` returns `NaN`). This keeps results usable in downstream
 #' pooling (e.g., multiple imputation), where a single `NaN` would propagate to
 #' the pooled estimate. When either arm's survival is `0` or `1`, the
-#' complementary log–log transform is undefined and the *p*-value falls back to an
-#' identity-scale Wald test. When both standard errors are `0`, the *p*-value is
-#' `1` if the arms are equal and `0` otherwise.
+#' complementary log–log transform is undefined and the *p*-value falls back to
+#' the identity-scale Wald test. When both standard errors are `0`, the *p*-value
+#' is `1` if the arms are equal and `0` otherwise.
 #' @references
 #' 1. Greenwood, M., 1926. A report on the natural duration of cancer. In:
 #' *Reports on Public Health and Medical Subjects*, 33, pp. 1–26. London:

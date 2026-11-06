@@ -15,13 +15,13 @@ and \code{0} denotes censoring.}
 \item{group}{Numeric vector of arm indicators. The lowest value is the
 baseline arm.}
 
-\item{fixedt}{Numeric scalar time point at which survival is compared.}
+\item{fixedt}{Numeric time point at which survival is compared.}
 
 \item{conf.level}{Numeric confidence level. Default = \code{0.95}.}
 
 \item{LOCF}{Logical. If \code{TRUE}, survival beyond an arm's last observation is
-carried forward³. If \code{FALSE}, it is \code{NA} unless the Kaplan-Meier
-estimate has reached \code{0}. Default = \code{FALSE}.}
+carried forward³. If \code{FALSE}, it is \code{NA} unless the Kaplan–Meier estimate has
+reached \code{0}. Default = \code{FALSE}.}
 }
 \value{
 A numeric matrix with one row per non-baseline arm, named by its
@@ -31,7 +31,7 @@ A numeric matrix with one row per non-baseline arm, named by its
 \item{SE}{Standard error of the difference.}
 \item{LL}{Lower confidence limit.}
 \item{UL}{Upper confidence limit.}
-\item{p}{Two-sided p-value.}
+\item{p}{Two-sided \emph{p}-value.}
 }
 }
 \description{
@@ -45,9 +45,9 @@ Where survival reaches \code{0}, the standard error is set to \code{0} (whereas
 \code{survival::survfit()} returns \code{NaN}). This keeps results usable in downstream
 pooling (e.g., multiple imputation), where a single \code{NaN} would propagate to
 the pooled estimate. When either arm's survival is \code{0} or \code{1}, the
-complementary log–log transform is undefined and the \emph{p}-value falls back to an
-identity-scale Wald test. When both standard errors are \code{0}, the \emph{p}-value is
-\code{1} if the arms are equal and \code{0} otherwise.
+complementary log–log transform is undefined and the \emph{p}-value falls back to
+the identity-scale Wald test. When both standard errors are \code{0}, the \emph{p}-value
+is \code{1} if the arms are equal and \code{0} otherwise.
 }
 \references{
 \enumerate{

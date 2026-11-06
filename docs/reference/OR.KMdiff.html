@@ -69,7 +69,7 @@ baseline arm.</p></dd>
 
 
 <dt id="arg-fixedt">fixedt<a class="anchor" aria-label="anchor" href="#arg-fixedt"></a></dt>
-<dd><p>Numeric scalar time point at which survival is compared.</p></dd>
+<dd><p>Numeric time point at which survival is compared.</p></dd>
 
 
 <dt id="arg-conf-level">conf.level<a class="anchor" aria-label="anchor" href="#arg-conf-level"></a></dt>
@@ -78,8 +78,8 @@ baseline arm.</p></dd>
 
 <dt id="arg-locf">LOCF<a class="anchor" aria-label="anchor" href="#arg-locf"></a></dt>
 <dd><p>Logical. If <code>TRUE</code>, survival beyond an arm's last observation is
-carried forward³. If <code>FALSE</code>, it is <code>NA</code> unless the Kaplan-Meier
-estimate has reached <code>0</code>. Default = <code>FALSE</code>.</p></dd>
+carried forward³. If <code>FALSE</code>, it is <code>NA</code> unless the Kaplan–Meier estimate has
+reached <code>0</code>. Default = <code>FALSE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -98,7 +98,7 @@ estimate has reached <code>0</code>. Default = <code>FALSE</code>.</p></dd>
 <dd><p>Upper confidence limit.</p></dd>
 
 <dt>p</dt>
-<dd><p>Two-sided p-value.</p></dd>
+<dd><p>Two-sided <em>p</em>-value.</p></dd>
 
 
 </dl></div>
@@ -108,9 +108,9 @@ estimate has reached <code>0</code>. Default = <code>FALSE</code>.</p></dd>
 <code><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survival::survfit()</a></code> returns <code>NaN</code>). This keeps results usable in downstream
 pooling (e.g., multiple imputation), where a single <code>NaN</code> would propagate to
 the pooled estimate. When either arm's survival is <code>0</code> or <code>1</code>, the
-complementary log–log transform is undefined and the <em>p</em>-value falls back to an
-identity-scale Wald test. When both standard errors are <code>0</code>, the <em>p</em>-value is
-<code>1</code> if the arms are equal and <code>0</code> otherwise.</p>
+complementary log–log transform is undefined and the <em>p</em>-value falls back to
+the identity-scale Wald test. When both standard errors are <code>0</code>, the <em>p</em>-value
+is <code>1</code> if the arms are equal and <code>0</code> otherwise.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
