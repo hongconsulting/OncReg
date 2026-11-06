@@ -37,15 +37,17 @@ A numeric matrix with one row per non-baseline arm, named by its
 \description{
 Compares Kaplan–Meier survival at a fixed time point between each arm and
 the baseline arm (the lowest value of \code{group}). Confidence intervals use
-unpooled Greenwood¹ variances on the identity scale and \emph{p}-values use a Wald
-test on the complementary log–log scale².
+unpooled Greenwood¹ variances on the identity scale and \emph{p}-values use Wald
+tests on the complementary log–log scale².
 }
 \details{
-When survival reaches \code{0}, the standard error is set to \code{0} (whereas
-\code{survival::survfit()} returns \code{NaN}). When either arm's survival is \code{0} or
-\code{1}, the complementary log–log transform is undefined and the \emph{p}-value falls
-back to an identity-scale Wald test. When both standard errors are \code{0}, the
-\emph{p}-value is \code{1} if the arms are equal and \code{0} otherwise.
+Where survival reaches \code{0}, the standard error is set to \code{0} (whereas
+\code{survival::survfit()} returns \code{NaN}). This keeps results usable in downstream
+pooling (e.g., multiple imputation), where a single \code{NaN} would propagate to
+the pooled estimate. When either arm's survival is \code{0} or \code{1}, the
+complementary log–log transform is undefined and the \emph{p}-value falls back to an
+identity-scale Wald test. When both standard errors are \code{0}, the \emph{p}-value is
+\code{1} if the arms are equal and \code{0} otherwise.
 }
 \references{
 \enumerate{

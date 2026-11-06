@@ -2,8 +2,8 @@
 #'
 #' Compares Kaplan–Meier survival at a fixed time point between each arm and
 #' the baseline arm (the lowest value of `group`). Confidence intervals use
-#' unpooled Greenwood¹ variances on the identity scale and *p*-values use a Wald
-#' test on the complementary log–log scale².
+#' unpooled Greenwood¹ variances on the identity scale and *p*-values use Wald
+#' tests on the complementary log–log scale².
 #' @param time Numeric vector of follow-up times.
 #' @param status Numeric vector of event indicators, where `1` denotes the event
 #' and `0` denotes censoring.
@@ -24,11 +24,13 @@
 #'   \item{p}{Two-sided p-value.}
 #' }
 #' @details
-#' When survival reaches `0`, the standard error is set to `0` (whereas
-#' `survival::survfit()` returns `NaN`). When either arm's survival is `0` or
-#' `1`, the complementary log–log transform is undefined and the *p*-value falls
-#' back to an identity-scale Wald test. When both standard errors are `0`, the
-#' *p*-value is `1` if the arms are equal and `0` otherwise.
+#' Where survival reaches `0`, the standard error is set to `0` (whereas
+#' `survival::survfit()` returns `NaN`). This keeps results usable in downstream
+#' pooling (e.g., multiple imputation), where a single `NaN` would propagate to
+#' the pooled estimate. When either arm's survival is `0` or `1`, the
+#' complementary log–log transform is undefined and the *p*-value falls back to an
+#' identity-scale Wald test. When both standard errors are `0`, the *p*-value is
+#' `1` if the arms are equal and `0` otherwise.
 #' @references
 #' 1. Greenwood, M., 1926. A report on the natural duration of cancer. In:
 #' *Reports on Public Health and Medical Subjects*, 33, pp. 1–26. London:
