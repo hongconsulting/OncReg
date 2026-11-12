@@ -23,28 +23,31 @@ otherwise ignored. Default = \code{NULL}.}
 }
 \value{
 Numeric matrix with \code{length(x)} rows and one column fewer than the
-number of knots (named \verb{_1}, \verb{_2}, ..., prefixed by \code{name}), plus a
-missing-indicator column (named \verb{_missing}, prefixed by \code{name}) if \code{x} has
-missing values. Knot locations are returned in the \code{"knots"} attribute.
+number of knots (named \code{1}, \code{2}, ...), plus a missing-indicator column (named
+\code{missing}) if \code{x} has missing values. Knot locations are returned in the
+\code{"knots"} attribute.
 }
 \description{
-Returns the restricted cubic spline basis of \code{x}. The first column is \code{x}
-itself and the next \code{k - 2} columns are the nonlinear terms, divided by the
-squared distance between the outer knots. If \code{x} has missing values, a final
-column indicates missingness.
+Returns the restricted cubic spline basis¹ of \code{x}. The first column is \code{x}
+itself and the next \code{k - 2} columns are the nonlinear terms. If \code{x} has
+missing values, an additional column indicates missingness.
 }
 \details{
-Knot locations and the basis are the same as \code{rms::rcs()}: by default,
-knots are placed at equally spaced quantiles of the non-missing values of
-\code{x}, with adjustments for small samples and ties. Unlike \code{rms::rcs()}, which
-may silently use fewer knots than requested, an error is thrown if the number
-of distinct knots differs from the number requested.
+Knot locations and the basis are the same as \code{rms::rcs()}, except an error is
+thrown if there are fewer distinct knots than requested.
 
 Missing values are handled differently; \code{rms::rcs()} returns \code{NA} rows, so
 observations with missing \code{x} are dropped from a subsequent regression. Here,
 missing observations are assigned the spline columns of \code{x} = \code{missing.ref}
 and a column indicating missingness is appended, so that these observations
 are retained and the indicator compares them with \code{x} = \code{missing.ref}.
+}
+\references{
+\enumerate{
+\item Gauthier, J., Wu, Q.V. and Gooley, T.A., 2020. Cubic splines to model
+relationships between continuous variables and outcomes: a guide for
+clinicians. \emph{Bone Marrow Transplantation}, 55(4), pp. 675–680.
+}
 }
 \seealso{
 Other other: 

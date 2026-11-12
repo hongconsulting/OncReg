@@ -50,10 +50,9 @@ OR.permutations <- function(n, k) {
 
 #' Restricted cubic spline basis
 #'
-#' Returns the restricted cubic spline basis of `x`. The first column is `x`
-#' itself and the next `k - 2` columns are the nonlinear terms, divided by the
-#' squared distance between the outer knots. If `x` has missing values, a final
-#' column indicates missingness.
+#' Returns the restricted cubic spline basis¹ of `x`. The first column is `x`
+#' itself and the next `k - 2` columns are the nonlinear terms. If `x` has
+#' missing values, an additional column indicates missingness.
 #' @param x Numeric vector.
 #' @param k Number of knots, where `k` ≥ `3`. Ignored if `knots` is specified.
 #' Default = `3`.
@@ -64,21 +63,22 @@ OR.permutations <- function(n, k) {
 #' otherwise ignored. Default = `NULL`.
 #' @param name Optional string prefixed to the column names. Default = `NULL`.
 #' @return Numeric matrix with `length(x)` rows and one column fewer than the
-#' number of knots (named `_1`, `_2`, ..., prefixed by `name`), plus a
-#' missing-indicator column (named `_missing`, prefixed by `name`) if `x` has
-#' missing values. Knot locations are returned in the `"knots"` attribute.
+#' number of knots (named `1`, `2`, ...), plus a missing-indicator column (named
+#' `missing`) if `x` has missing values. Knot locations are returned in the
+#' `"knots"` attribute.
 #' @details
-#' Knot locations and the basis are the same as `rms::rcs()`: by default,
-#' knots are placed at equally spaced quantiles of the non-missing values of
-#' `x`, with adjustments for small samples and ties. Unlike `rms::rcs()`, which
-#' may silently use fewer knots than requested, an error is thrown if the number
-#' of distinct knots differs from the number requested.
+#' Knot locations and the basis are the same as `rms::rcs()`, except an error is
+#' thrown if there are fewer distinct knots than requested.
 #'
 #' Missing values are handled differently; `rms::rcs()` returns `NA` rows, so
 #' observations with missing `x` are dropped from a subsequent regression. Here,
 #' missing observations are assigned the spline columns of `x` = `missing.ref`
 #' and a column indicating missingness is appended, so that these observations
 #' are retained and the indicator compares them with `x` = `missing.ref`.
+#' @references
+#' 1. Gauthier, J., Wu, Q.V. and Gooley, T.A., 2020. Cubic splines to model
+#' relationships between continuous variables and outcomes: a guide for
+#' clinicians. *Bone Marrow Transplantation*, 55(4), pp. 675–680.
 #' @family other
 #' @export
 OR.RCS <- function(x, k = 3, knots = NULL, missing.ref = NULL, name = NULL) {
@@ -149,11 +149,11 @@ OR.RCS <- function(x, k = 3, knots = NULL, missing.ref = NULL, name = NULL) {
          (knots[k] - knots[j]) * pmax((x - knots[k - 1]) / kd, 0)^3) /
       (knots[k] - knots[k - 1])
   }
-  colnames(output) <- paste0(name, "_", 1:(k - 1))
+  colnames(output) <- paste0(name, 1:(k - 1))
   # missing indicator
   if (sum(is.missing) > 0) {
     output <- cbind(output, as.numeric(is.missing))
-    colnames(output)[k] <- paste0(name, "_missing")
+    colnames(output)[k] <- paste0(name, "missing")
   }
   attr(output, "knots") <- knots
   return(output)
