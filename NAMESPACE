@@ -2,6 +2,7 @@
 
 export(AICR.Huber)
 export(OR.0.rm)
+export(OR.0.to.NA)
 export(OR.F.to.NA)
 export(OR.Google.TSP)
 export(OR.Google.address)

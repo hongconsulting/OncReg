@@ -18,6 +18,7 @@ Converts all \code{FALSE} elements in a vector or matrix to \code{NA}.
 \seealso{
 Other basic: 
 \code{\link{OR.0.rm}()},
+\code{\link{OR.0.to.NA}()},
 \code{\link{OR.NA.rm}()},
 \code{\link{OR.NA.to.0}()},
 \code{\link{OR.NA.to.F}()},

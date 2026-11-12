@@ -9,6 +9,18 @@ OR.0.rm <- function(x) {
   return(x[x != 0])
 }
 
+#' Convert zeros to missing values
+#'
+#' Converts all `0` elements in a vector or matrix to `NA`.
+#' @param x Numeric vector or matrix.
+#' @return The input object with all `0` values replaced by `NA`.
+#' @family basic
+#' @export
+OR.0.to.NA <- function(x) {
+  x[x == 0] <- NA
+  return(x)
+}
+
 #' Convert strings to numeric after normalising minus signs and stripping digit
 #' grouping separators
 #'

@@ -24,6 +24,7 @@ retained row they came from.
 \seealso{
 Other basic: 
 \code{\link{OR.0.rm}()},
+\code{\link{OR.0.to.NA}()},
 \code{\link{OR.F.to.NA}()},
 \code{\link{OR.NA.rm}()},
 \code{\link{OR.NA.to.0}()},

@@ -17,6 +17,7 @@ Removes elements equal to \code{0} from a numeric vector.
 }
 \seealso{
 Other basic: 
+\code{\link{OR.0.to.NA}()},
 \code{\link{OR.F.to.NA}()},
 \code{\link{OR.NA.rm}()},
 \code{\link{OR.NA.to.0}()},
