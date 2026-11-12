@@ -4,19 +4,20 @@
 \alias{OR.tdCox}
 \title{Cox regression with time-dependent covariates}
 \usage{
-OR.tdCox(time, status, X.tdc, X = NULL)
+OR.tdCox(time, status, X.tdc, X = NULL, strata = NULL)
 }
 \arguments{
-\item{time}{Numeric vector of follow-up times, one per subject.}
+\item{time}{Numeric vector of follow-up times.}
 
 \item{status}{Numeric vector of event indicators, where \code{1} denotes the event
 and \code{0} denotes censoring.}
 
 \item{X.tdc}{Data frame of transition times for each time-dependent
-covariate, with \code{NA} where the transition does not occur. Column names are
-used as covariate names.}
+covariate, with \code{NA} where the transition does not occur.}
 
 \item{X}{Optional data frame of time-independent covariates. Default = \code{NULL}.}
+
+\item{strata}{Optional vector of strata identifiers. Default = \code{NULL}.}
 }
 \value{
 An object of class \code{coxph}.

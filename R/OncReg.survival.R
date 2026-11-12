@@ -133,13 +133,13 @@ OR.survoutcome <- function(startdate, eventdate, reviewdate,
 #' thereafter. Follow-up is split at each transition time, so that time at risk
 #' preceding the transition is correctly assigned to the unexposed state,
 #' avoiding immortal time bias.
-#' @param time Numeric vector of follow-up times, one per subject.
+#' @param time Numeric vector of follow-up times.
 #' @param status Numeric vector of event indicators, where `1` denotes the event
 #' and `0` denotes censoring.
 #' @param X.tdc Data frame of transition times for each time-dependent
-#' covariate, with `NA` where the transition does not occur. Column names are
-#' used as covariate names.
+#' covariate, with `NA` where the transition does not occur.
 #' @param X Optional data frame of time-independent covariates. Default = `NULL`.
+#' @param strata Optional vector of strata identifiers. Default = `NULL`.
 #' @return An object of class `coxph`.
 #' @examples
 #' set.seed(24601)
@@ -154,7 +154,7 @@ OR.survoutcome <- function(startdate, eventdate, reviewdate,
 #' OR.tdCox(data$time, data$status, X.tdc = data.frame("cycle1" = data$date.cycle1))
 #' @family survival
 #' @export
-OR.tdCox <- function(time, status, X.tdc, X = NULL) {
+OR.tdCox <- function(time, status, X.tdc, X = NULL, strata = NULL) {
   # one subject per element of time
   id <- seq_along(time)
   data <- data.frame("id" = id, "survtime" = time, "survstatus" = status)
@@ -164,6 +164,7 @@ OR.tdCox <- function(time, status, X.tdc, X = NULL) {
     dataC <- data.frame(X)
     data <- cbind(data, dataC)
   }
+  if (!is.null(strata)) data$survstrata <- strata
   dataTDC <- data.frame(X.tdc)
   data <- survival::tmerge(data, data, id = id, event = event(survtime, survstatus))
   for (i in 1:ncol(dataTDC)) {
@@ -173,7 +174,8 @@ OR.tdCox <- function(time, status, X.tdc, X = NULL) {
   }
   formula <- paste0("survival::Surv(tstart, tstop, event) ~ ",
                     paste0(c(colnames(dataC), colnames(dataTDC)), collapse = " + "))
-  # cat(formula, "\n")
+  # survival::strata() is recognized by survival >= 3.8-1
+  if (!is.null(strata)) formula <- paste0(formula, " + survival::strata(survstrata)")
   fit <- survival::coxph(stats::as.formula(formula), data = data, model = TRUE)
   return(fit)
 }
