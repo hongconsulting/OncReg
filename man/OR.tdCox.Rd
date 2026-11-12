@@ -4,12 +4,10 @@
 \alias{OR.tdCox}
 \title{Cox regression with time-dependent covariates}
 \usage{
-OR.tdCox(id, time, status, X.tdc, X = NULL)
+OR.tdCox(time, status, X.tdc, X = NULL)
 }
 \arguments{
-\item{id}{Vector of subject identifiers.}
-
-\item{time}{Numeric vector of follow-up times.}
+\item{time}{Numeric vector of follow-up times, one per subject.}
 
 \item{status}{Numeric vector of event indicators, where \code{1} denotes the event
 and \code{0} denotes censoring.}
@@ -33,15 +31,14 @@ avoiding immortal time bias.
 \examples{
 set.seed(24601)
 n <- 500
-data <- data.frame("id" = 1:n)
-data$date.event <- rexp(n, rate = log(2)/6)
+data <- data.frame("date.event" = rexp(n, rate = log(2)/6))
 data$date.censor <- rexp(n, rate = log(2)/12)
 data$time <- pmin(data$date.event, data$date.censor)
 data$status <- as.numeric(data$date.event <= data$date.censor)
 data$date.cycle1 <- 1
 data$date.cycle1[runif(n) < 0.05] <- NA
 data$date.cycle1[data$date.cycle1 > data$time] <- NA
-OR.tdCox(data$id, data$time, data$status, X.tdc = data.frame("cycle1" = data$date.cycle1))
+OR.tdCox(data$time, data$status, X.tdc = data.frame("cycle1" = data$date.cycle1))
 }
 \seealso{
 Other survival: 

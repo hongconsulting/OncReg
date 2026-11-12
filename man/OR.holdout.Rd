@@ -26,7 +26,9 @@ binomially distributed and the output is reproducible for a given \code{seed}.
 }
 \seealso{
 Other other: 
+\code{\link{OR.RCS}()},
 \code{\link{OR.permutations}()},
-\code{\link{OR.read.csv.stub}()}
+\code{\link{OR.read.csv.stub}()},
+\code{\link{OR.standardize.agesex}()}
 }
 \concept{other}

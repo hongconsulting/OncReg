@@ -133,8 +133,7 @@ OR.survoutcome <- function(startdate, eventdate, reviewdate,
 #' thereafter. Follow-up is split at each transition time, so that time at risk
 #' preceding the transition is correctly assigned to the unexposed state,
 #' avoiding immortal time bias.
-#' @param id Vector of subject identifiers.
-#' @param time Numeric vector of follow-up times.
+#' @param time Numeric vector of follow-up times, one per subject.
 #' @param status Numeric vector of event indicators, where `1` denotes the event
 #' and `0` denotes censoring.
 #' @param X.tdc Data frame of transition times for each time-dependent
@@ -145,18 +144,19 @@ OR.survoutcome <- function(startdate, eventdate, reviewdate,
 #' @examples
 #' set.seed(24601)
 #' n <- 500
-#' data <- data.frame("id" = 1:n)
-#' data$date.event <- rexp(n, rate = log(2)/6)
+#' data <- data.frame("date.event" = rexp(n, rate = log(2)/6))
 #' data$date.censor <- rexp(n, rate = log(2)/12)
 #' data$time <- pmin(data$date.event, data$date.censor)
 #' data$status <- as.numeric(data$date.event <= data$date.censor)
 #' data$date.cycle1 <- 1
 #' data$date.cycle1[runif(n) < 0.05] <- NA
 #' data$date.cycle1[data$date.cycle1 > data$time] <- NA
-#' OR.tdCox(data$id, data$time, data$status, X.tdc = data.frame("cycle1" = data$date.cycle1))
+#' OR.tdCox(data$time, data$status, X.tdc = data.frame("cycle1" = data$date.cycle1))
 #' @family survival
 #' @export
-OR.tdCox <- function(id, time, status, X.tdc, X = NULL) {
+OR.tdCox <- function(time, status, X.tdc, X = NULL) {
+  # one subject per element of time
+  id <- seq_along(time)
   data <- data.frame("id" = id, "survtime" = time, "survstatus" = status)
   if (is.null(X)) {
     dataC <- NULL
@@ -171,9 +171,9 @@ OR.tdCox <- function(id, time, status, X.tdc, X = NULL) {
     data <- survival::tmerge(data, temp, id = id, tdc = tdc(time))
     names(data)[names(data) == "tdc"] <- names(dataTDC)[i]
   }
-  formula <- paste0("Surv(tstart, tstop, event) ~ ",
+  formula <- paste0("survival::Surv(tstart, tstop, event) ~ ",
                     paste0(c(colnames(dataC), colnames(dataTDC)), collapse = " + "))
   # cat(formula, "\n")
-  fit <- survival::coxph(stats::as.formula(formula), data = data, mode = TRUE)
+  fit <- survival::coxph(stats::as.formula(formula), data = data, model = TRUE)
   return(fit)
 }

@@ -21,7 +21,9 @@ and combines them by rows.
 }
 \seealso{
 Other other: 
+\code{\link{OR.RCS}()},
 \code{\link{OR.holdout}()},
-\code{\link{OR.permutations}()}
+\code{\link{OR.permutations}()},
+\code{\link{OR.standardize.agesex}()}
 }
 \concept{other}

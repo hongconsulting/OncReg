@@ -20,7 +20,9 @@ lexicographic order.
 }
 \seealso{
 Other other: 
+\code{\link{OR.RCS}()},
 \code{\link{OR.holdout}()},
-\code{\link{OR.read.csv.stub}()}
+\code{\link{OR.read.csv.stub}()},
+\code{\link{OR.standardize.agesex}()}
 }
 \concept{other}

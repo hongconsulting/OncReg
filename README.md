@@ -66,15 +66,18 @@ coxph(Surv(data$time, data$status) ~ data$binary.cycle1)
 
 # cycle 1 of placebo treatment as a time-dependent covariate recovers the null effect
 OR.tdCox(data$id, data$time, data$status, X.tdc = data.frame("cycle1" = data$date.cycle1))
+#> Warning in survival::Surv(tstart, tstop, event): Invalid status value,
+#> converted to NA
 #> Call:
 #> survival::coxph(formula = stats::as.formula(formula), data = data, 
 #>     model = TRUE)
 #> 
-#>          coef exp(coef) se(coef)     z     p
-#> cycle1 0.1164    1.1234   0.2446 0.476 0.634
+#>        coef exp(coef) se(coef)  z  p
+#> X        NA        NA        0 NA NA
+#> cycle1   NA        NA        0 NA NA
 #> 
-#> Likelihood ratio test=0.23  on 1 df, p=0.6286
-#> n= 897, number of events= 331
+#> Likelihood ratio test=0  on 0 df, p=1
+#> n= 396, number of events= 0
 ```
 
 ### Example: Microsoft Excel dates and survival analysis
