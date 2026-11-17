@@ -19,4 +19,8 @@ Vector of same length as \code{x} with LOCF applied within each \code{id}.
 Applies LOCF imputation to \code{x} within each \code{id}, assuming observations are
 already ordered within each \code{id}.
 }
+\seealso{
+Other imputation: 
+\code{\link{OR.Rubin}()}
+}
 \concept{imputation}
