@@ -4,12 +4,16 @@
 \alias{OR.ebal.ATE}
 \title{Entropy balancing weights for the average treatment effect}
 \usage{
-OR.ebal.ATE(X, arm)
+OR.ebal.ATE(X, arm, trim = TRUE)
 }
 \arguments{
 \item{X}{numeric covariate matrix.}
 
 \item{arm}{vector of arm assignments, one per row of \code{X}.}
+
+\item{trim}{logical; if \code{TRUE}, attempts to trim each arm's weights to
+minimise the maximum weight while keeping exact balance, keeping the
+untrimmed weights if trimming fails. Default = \code{TRUE}.}
 }
 \value{
 A numeric vector of weights, summing to the arm size within each arm.
@@ -27,6 +31,7 @@ studies. \emph{Political Analysis}, 20(1), pp. 25–46.
 }
 \seealso{
 Other ebal: 
+\code{\link{OR.ebal.ESS}()},
 \code{\link{OR.ebal.target}()}
 }
 \concept{ebal}

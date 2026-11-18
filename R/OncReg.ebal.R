@@ -4,6 +4,9 @@
 #' column of `X` in every arm equal those of the full sample.
 #' @param X numeric covariate matrix.
 #' @param arm vector of arm assignments, one per row of `X`.
+#' @param trim logical; if `TRUE`, attempts to trim each arm's weights to
+#' minimise the maximum weight while keeping exact balance, keeping the
+#' untrimmed weights if trimming fails. Default = `TRUE`.
 #' @return A numeric vector of weights, summing to the arm size within each arm.
 #' @references
 #' 1. Hainmueller, J., 2012. Entropy balancing for causal effects: a
@@ -11,8 +14,25 @@
 #' studies. *Political Analysis*, 20(1), pp. 25–46.
 #' @family ebal
 #' @export
-OR.ebal.ATE <- function(X, arm) {
-  OR.ebal.target(X, arm, colMeans(X)) # target is the full-sample mean of each column
+OR.ebal.ATE <- function(X, arm, trim = TRUE) {
+  OR.ebal.target(X, arm, colMeans(X), trim) # target is the full-sample mean of each column
+}
+
+#' Effective sample size of weights
+#'
+#' Computes Kish's effective sample size¹ of a vector of weights.
+#' @param x numeric vector of non-negative weights.
+#' @return The effective sample size.
+#' @references
+#' 1. Kish, L., 1965. *Survey Sampling*. New York: Wiley.
+#' @family ebal
+#' @export
+OR.ebal.ESS <- function(x) {
+  if (!is.numeric(x)) stop("[OR.ebal.ESS] x must be numeric")
+  if (sum(is.na(x)) > 0) stop("[OR.ebal.ESS] x must not contain missing values")
+  if (min(x) < 0) stop("[OR.ebal.ESS] x must be non-negative")
+  if (sum(x) == 0) stop("[OR.ebal.ESS] x must have at least one positive weight")
+  return(sum(x)^2 / sum(x^2))
 }
 
 #' Entropy balancing weights to external target means
@@ -22,6 +42,9 @@ OR.ebal.ATE <- function(X, arm) {
 #' @param X numeric covariate matrix.
 #' @param arm vector of arm assignments, one per row of `X`.
 #' @param target numeric vector of target means, one per column of `X`.
+#' @param trim logical; if `TRUE`, attempts to trim each arm's weights to
+#' minimise the maximum weight while keeping exact balance, keeping the
+#' untrimmed weights if trimming fails. Default = `TRUE`.
 #' @return A numeric vector of weights, summing to the arm size within each arm.
 #' @references
 #' 1. Hainmueller, J., 2012. Entropy balancing for causal effects: a
@@ -29,22 +52,32 @@ OR.ebal.ATE <- function(X, arm) {
 #' studies. *Political Analysis*, 20(1), pp. 25–46.
 #' @family ebal
 #' @export
-OR.ebal.target <- function(X, arm, target) {
+OR.ebal.target <- function(X, arm, target, trim = TRUE) {
   if (!is.matrix(X) || !is.numeric(X)) stop("[OR.ebal.target] X must be a numeric matrix")
   if (length(arm) != nrow(X)) stop("[OR.ebal.target] arm must have one element per row of X")
   if (length(target) != ncol(X)) stop("[OR.ebal.target] target must have one element per column of X")
   if (sum(is.na(X)) > 0) stop("[OR.ebal.target] X must not contain missing values")
   if (sum(is.na(arm)) > 0) stop("[OR.ebal.target] arm must not contain missing values")
   if (!is.numeric(target) || sum(!is.finite(target)) > 0) stop("[OR.ebal.target] target must be finite and numeric")
+  if (!is.logical(trim) || length(trim) != 1 || is.na(trim)) stop("[OR.ebal.target] trim must be TRUE or FALSE")
   w <- rep(NA_real_, nrow(X))
   for (a in unique(arm)) {
     is.arm <- arm == a
-    w[is.arm] <- ebal::ebalance( # current arm reweighted to a single-row target
+    fit <- ebal::ebalance( # current arm reweighted to a single-row target
       Treatment = c(1, rep(0, sum(is.arm))),
       X = rbind(target, X[is.arm, , drop = FALSE]),
       constraint.tolerance = 1e-8,
-      print.level = -1)$w * # suppress convergence message
-      sum(is.arm) # rescale to sum to arm size
+      print.level = -1) # suppress convergence message
+    w.arm <- fit$w
+    if (trim) {
+      fit$coefs[] <- 0 # restart coefficients from zero for improved convergence
+      fit.trim <- tryCatch(ebal::ebalance.trim(fit, print.level = -1),
+                           error = function(e) NULL)
+      if (!is.null(fit.trim) && fit.trim$converged) {
+        w.arm <- fit.trim$w
+      }
+    }
+    w[is.arm] <- w.arm * sum(is.arm) # rescale to sum to arm size
   }
   return(w)
 }

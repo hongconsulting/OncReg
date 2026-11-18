@@ -4,7 +4,7 @@
 \alias{OR.ebal.target}
 \title{Entropy balancing weights to external target means}
 \usage{
-OR.ebal.target(X, arm, target)
+OR.ebal.target(X, arm, target, trim = TRUE)
 }
 \arguments{
 \item{X}{numeric covariate matrix.}
@@ -12,6 +12,10 @@ OR.ebal.target(X, arm, target)
 \item{arm}{vector of arm assignments, one per row of \code{X}.}
 
 \item{target}{numeric vector of target means, one per column of \code{X}.}
+
+\item{trim}{logical; if \code{TRUE}, attempts to trim each arm's weights to
+minimise the maximum weight while keeping exact balance, keeping the
+untrimmed weights if trimming fails. Default = \code{TRUE}.}
 }
 \value{
 A numeric vector of weights, summing to the arm size within each arm.
@@ -29,6 +33,7 @@ studies. \emph{Political Analysis}, 20(1), pp. 25–46.
 }
 \seealso{
 Other ebal: 
-\code{\link{OR.ebal.ATE}()}
+\code{\link{OR.ebal.ATE}()},
+\code{\link{OR.ebal.ESS}()}
 }
 \concept{ebal}
