@@ -11,6 +11,9 @@ reference:
   - title: Delimited strings
     contents:
       - has_concept("delim")
+  - title: Entropy balancing
+    contents:
+      - has_concept("ebal")
   - title: Google Maps Platform
     contents:
       - has_concept("GoogleMapsPlatform")
