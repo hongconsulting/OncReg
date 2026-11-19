@@ -39,6 +39,7 @@ Computes event times and statuses from start, event, and review dates.
 \seealso{
 Other survival: 
 \code{\link{OR.KMdiff}()},
+\code{\link{OR.colselect}()},
 \code{\link{OR.tdCox}()}
 }
 \concept{survival}

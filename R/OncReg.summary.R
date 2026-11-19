@@ -66,6 +66,27 @@ OR.collapse <- function(data, ID_varname, pattern, method = "single") {
   return(output)
 }
 
+#' Select data frame columns by name
+#'
+#' Returns the columns of a data frame whose names contain a given string,
+#' ignoring case.
+#' @details
+#' An example use case in survival analysis is determining the date of last
+#' follow-up. A recorded review date may be stale, so the latest of all recorded
+#' dates (e.g., treatment start and progression dates for each line of therapy)
+#' is used instead: `date.last.followup <- OR.rowmax(OR.colselect(df, "date"))`.
+#' @param df A data frame.
+#' @param pattern A string to search for in column names. Default = `"date"`.
+#' @return A data frame of the matching columns.
+#' @family summary
+#' @family survival
+#' @export
+OR.colselect <- function(df, pattern = "date") {
+  if (!is.data.frame(df)) stop("[OR.colselect] df must be a data frame")
+  if (!is.character(pattern) || length(pattern) != 1 || is.na(pattern)) stop("[OR.colselect] pattern must be a single string")
+  return(df[, grepl(tolower(pattern), tolower(names(df)), fixed = TRUE), drop = FALSE]) # case-insensitive literal match
+}
+
 #' Maximum with NA removal or NA if no valid entries
 #'
 #' Equivalent to `max(x, na.rm = TRUE)` except returns `NA` (rather than `-Inf`) if

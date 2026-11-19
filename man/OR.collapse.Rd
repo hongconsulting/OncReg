@@ -44,6 +44,7 @@ measurements for one patient are distributed across multiple event rows.
 }
 \seealso{
 Other summary: 
+\code{\link{OR.colselect}()},
 \code{\link{OR.max}()},
 \code{\link{OR.mean}()},
 \code{\link{OR.min}()},

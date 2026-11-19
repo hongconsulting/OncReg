@@ -63,6 +63,7 @@ the whole line. \emph{The Annals of Statistics}, 11(1), pp. 49–58.
 }
 \seealso{
 Other survival: 
+\code{\link{OR.colselect}()},
 \code{\link{OR.survoutcome}()},
 \code{\link{OR.tdCox}()}
 }

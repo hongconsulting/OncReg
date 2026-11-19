@@ -19,6 +19,7 @@ if all elements are \code{NA}.
 \seealso{
 Other summary: 
 \code{\link{OR.collapse}()},
+\code{\link{OR.colselect}()},
 \code{\link{OR.max}()},
 \code{\link{OR.min}()},
 \code{\link{OR.mode}()},
